@@ -6,9 +6,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="float-left">Tenancies</h3>
-                        @can('create_update_delete', $tenancies[0])
-                            <a href="{{ route('tenancies.create')}}" class="float-lg-right">Create New</a>
-                        @endcan
+                        {{--@can('create_update_delete', $tenancies[0])--}}
+                        <a href="{{ route('tenancies.create')}}" class="float-lg-right">Create New</a>
+                        {{-- @endcan--}}
                         @if(session('success'))
                             <div class="alert alert-success mt-5">
                                 {{session('success')}}
@@ -23,9 +23,9 @@
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Monthly Rent</th>
-                                    @can('create_update_delete', $tenancies[0])
-                                        <th>Actions</th>
-                                    @endcan
+                                    {{--                                    @can('create_update_delete', $tenancies[0])--}}
+                                    <th>Actions</th>
+                                    {{--@endcan--}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -36,21 +36,24 @@
                                         <td>{{$tenancy->monthly_rent}}</td>
                                         <td>
                                             @can('create_update_delete', $tenancy)
-                                                <a href="{{route('tenancies.edit',$tenancy)}}" class="btn btn-warning float-left">Update</a>
+                                                <a href="{{route('tenancies.edit',$tenancy)}}"
+                                                   class="btn btn-warning float-left">Update</a>
                                                 <div class="float-right">
-                                                <form id="delete-form-{{ $tenancy->id }}" action="{{route('tenancies.destroy',$tenancy)}}" method="POST" class="form-delete">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <a href="" class="btn btn-danger" onclick="
-                                                        if(confirm('Are you sure? Do you want to delete this? :D')){
-                                                        event.preventDefault(); document.getElementById('delete-form-{{$tenancy -> id}}').submit();}
-                                                        else {
-                                                        event.preventDefault()
-                                                        }">
-                                                        Delete
-                                                    </a>
-                                                </form>
-                                            </div>
+                                                    <form id="delete-form-{{ $tenancy->id }}"
+                                                          action="{{route('tenancies.destroy',$tenancy)}}" method="POST"
+                                                          class="form-delete">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <a href="" class="btn btn-danger" onclick="
+                                                            if(confirm('Are you sure? Do you want to delete this? :D')){
+                                                            event.preventDefault(); document.getElementById('delete-form-{{$tenancy -> id}}').submit();}
+                                                            else {
+                                                            event.preventDefault()
+                                                            }">
+                                                            Delete
+                                                        </a>
+                                                    </form>
+                                                </div>
                                             @endcan
                                         </td>
                                     </tr>

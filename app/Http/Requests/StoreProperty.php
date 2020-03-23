@@ -24,10 +24,10 @@ class StoreProperty extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
-            'address'=>'required',
-            'description'=>'required',
-            'price'=>'required'
+            'name' => 'required',
+            'address' => 'required',
+            'description' => 'required',
+            'price' => 'required'
         ];
     }
 }

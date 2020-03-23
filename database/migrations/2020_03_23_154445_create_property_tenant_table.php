@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTenanciesTable extends Migration
+class CreatePropertyTenantTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateTenanciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tenancies', function (Blueprint $table) {
+        Schema::create('property_tenant', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('property_id');
             $table->unsignedBigInteger('tenant_id');
-            $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_date')->nullable();
-            $table->double('monthly_rent');
             $table->timestamps();
 
+            $table->unique(['property_id','tenant_id']);
 
             $table->foreign('property_id')
                 ->references('id')
@@ -32,12 +29,6 @@ class CreateTenanciesTable extends Migration
             $table->foreign('tenant_id')
                 ->references('id')
                 ->on('tenants')
-                ->onDelete('cascade');
-
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
                 ->onDelete('cascade');
         });
     }
@@ -49,6 +40,6 @@ class CreateTenanciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tenancies');
+        Schema::dropIfExists('property_tenant');
     }
 }

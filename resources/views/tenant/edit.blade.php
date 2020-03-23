@@ -20,21 +20,21 @@
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" name="name" value="{{$tenant->name}}">
                                 @error('name')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
                                 <input type="text" class="form-control" name="phone" value="{{$tenant->phone}}">
                                 @error('phone')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="image">Image</label>
                                 <input type="file" name="image">
                                 @error('image')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 23 2020 г., 09:31
+-- Время создания: Мар 23 2020 г., 17:12
 -- Версия сервера: 10.4.6-MariaDB
 -- Версия PHP: 7.3.9
 
@@ -60,10 +60,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2020_03_20_110418_create_properties_table', 1),
 (5, '2020_03_20_110500_create_tenants_table', 1),
 (6, '2020_03_20_110525_create_tenancies_table', 1),
-(7, '2020_03_20_111728_add_foreign_key_tenant_id_table', 1),
-(8, '2020_03_21_134209_add_foreign_key_user_id_into_properties_table', 2),
-(9, '2020_03_22_175430_add_foreign_key_user_id_into_tenants_table', 3),
-(10, '2020_03_23_074414_add_foreign_key_user_id_into_tenancies_table', 4);
+(7, '2020_03_23_111330_create_tenant_property_table', 1),
+(8, '2020_03_23_154445_create_property_tenant_table', 2);
 
 -- --------------------------------------------------------
 
@@ -85,28 +83,44 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `properties` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tenant_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `properties`
 --
 
-INSERT INTO `properties` (`id`, `tenant_id`, `name`, `address`, `description`, `price`, `created_at`, `updated_at`, `user_id`) VALUES
-(2, 3, 'Property 2', 'Address 2', 'Description 2', 1550.00, '2020-03-20 10:59:05', '2020-03-20 16:10:39', 1),
-(3, NULL, 'Property 3', 'Address 3', 'Description 3', 1700.00, '2020-03-20 10:59:17', '2020-03-20 10:59:17', 1),
-(4, 3, 'Property 4', 'Address 4', 'Description 4', 5000.00, '2020-03-20 10:59:29', '2020-03-20 15:07:02', 1),
-(5, 2, 'Property 5', 'Address 5', 'Description 5', 2000.00, '2020-03-20 10:59:39', '2020-03-20 16:11:02', 1),
-(8, NULL, 'Property 8', 'Address 8', 'Description 8', 12345.00, '2020-03-20 16:03:21', '2020-03-21 14:30:08', 1),
-(9, NULL, 'Property 9', 'Address 9', 'Description 9', 8000.00, '2020-03-20 16:03:56', '2020-03-20 16:03:56', 1),
-(11, 8, 'New Property', 'New Address', 'New Description', 15000.00, '2020-03-23 04:17:41', '2020-03-23 04:23:25', 1);
+INSERT INTO `properties` (`id`, `user_id`, `name`, `address`, `description`, `price`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Property 1', 'Address 1', 'Description 1', 2000.00, '2020-03-23 10:12:13', '2020-03-23 10:12:32'),
+(2, 1, 'Property 2', 'Address 2', 'Description 2', 5000.00, '2020-03-23 10:12:52', '2020-03-23 10:12:52');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `property_tenant`
+--
+
+CREATE TABLE `property_tenant` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `property_id` bigint(20) UNSIGNED NOT NULL,
+  `tenant_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `property_tenant`
+--
+
+INSERT INTO `property_tenant` (`id`, `property_id`, `tenant_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL),
+(2, 2, 12, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -116,24 +130,24 @@ INSERT INTO `properties` (`id`, `tenant_id`, `name`, `address`, `description`, `
 
 CREATE TABLE `tenancies` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `property_id` bigint(20) UNSIGNED NOT NULL,
   `tenant_id` bigint(20) UNSIGNED NOT NULL,
   `start_date` timestamp NULL DEFAULT NULL,
   `end_date` timestamp NULL DEFAULT NULL,
   `monthly_rent` double NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `tenancies`
 --
 
-INSERT INTO `tenancies` (`id`, `property_id`, `tenant_id`, `start_date`, `end_date`, `monthly_rent`, `created_at`, `updated_at`, `user_id`) VALUES
-(8, 2, 1, '2020-03-13 20:00:00', '2020-04-28 20:00:00', 2000, '2020-03-20 16:08:09', '2020-03-20 16:09:02', 1),
-(9, 5, 1, '2020-03-18 20:00:00', '2020-04-25 20:00:00', 200, '2020-03-20 16:08:52', '2020-03-20 16:09:12', 1),
-(10, 11, 8, '2020-03-22 20:00:00', '2020-04-22 20:00:00', 2000, '2020-03-23 04:23:25', '2020-03-23 04:23:25', 1);
+INSERT INTO `tenancies` (`id`, `user_id`, `property_id`, `tenant_id`, `start_date`, `end_date`, `monthly_rent`, `created_at`, `updated_at`) VALUES
+(8, 1, 1, 1, '2020-03-07 20:00:00', '2020-03-25 20:00:00', 200, '2020-03-23 11:59:04', '2020-03-23 11:59:04'),
+(9, 1, 1, 11, '2020-03-04 20:00:00', '2020-03-28 20:00:00', 500, '2020-03-23 11:59:34', '2020-03-23 11:59:34'),
+(10, 1, 1, 11, '2020-03-04 20:00:00', '2020-03-28 20:00:00', 500, '2020-03-23 12:00:54', '2020-03-23 12:00:54');
 
 -- --------------------------------------------------------
 
@@ -143,23 +157,22 @@ INSERT INTO `tenancies` (`id`, `property_id`, `tenant_id`, `start_date`, `end_da
 
 CREATE TABLE `tenants` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `tenants`
 --
 
-INSERT INTO `tenants` (`id`, `name`, `phone`, `image`, `created_at`, `updated_at`, `user_id`) VALUES
-(1, 'Tenant 1', '0771234567', '1584908610.jpg', '2020-03-20 11:01:28', '2020-03-22 16:23:30', 1),
-(2, 'Tenant 2', '0771234567552', '1584908781.gif', '2020-03-20 11:01:53', '2020-03-22 16:26:21', 1),
-(3, 'Tenant 3', '077123477777', '1584716523.png', '2020-03-20 11:02:03', '2020-03-20 11:02:03', 1),
-(8, 'New Tenant', '0123456789', '1584951752.jpg', '2020-03-23 04:21:16', '2020-03-23 04:22:32', 1);
+INSERT INTO `tenants` (`id`, `user_id`, `name`, `phone`, `image`, `created_at`, `updated_at`) VALUES
+(1, 1, 'New User', '07712345678', '1584972412.jpg', '2020-03-23 09:32:29', '2020-03-23 10:11:21'),
+(11, 1, 'New Tenant', '07712345678', '1584972384.jpg', '2020-03-23 10:02:45', '2020-03-23 10:09:52'),
+(12, 1, 'New Tenant 2', '0771234567', NULL, '2020-03-23 10:11:39', '2020-03-23 10:11:48');
 
 -- --------------------------------------------------------
 
@@ -184,8 +197,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `is_admin`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'User', 0, 'user@gmail.com', NULL, '$2y$10$4mYANCiSOmabIpExEPSlJu6SkhtM/cafyMY4UnI6Ek.3eG1Cj..Iu', NULL, '2020-03-20 10:54:45', '2020-03-20 10:54:45'),
-(2, 'Admin', 1, 'admin@gmail.com', NULL, '$2y$10$t4AEdoHIJJpU3dr1fdY67OzYeLgKk6KDagFkV.dtz/pQ6vKAD0Z16', NULL, '2020-03-20 10:55:10', '2020-03-20 10:55:10');
+(1, 'User', 0, 'user@gmail.com', NULL, '$2y$10$Vr/K84hbb6N.m0hLzSb/XOgoLPfOJuc5Nkiq8.uWH6AdI0L3KoE5G', NULL, '2020-03-23 09:31:27', '2020-03-23 09:31:27');
 
 --
 -- Индексы сохранённых таблиц
@@ -214,8 +226,15 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `properties`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `properties_tenant_id_foreign` (`tenant_id`),
   ADD KEY `properties_user_id_foreign` (`user_id`);
+
+--
+-- Индексы таблицы `property_tenant`
+--
+ALTER TABLE `property_tenant`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `property_tenant_property_id_tenant_id_unique` (`property_id`,`tenant_id`),
+  ADD KEY `property_tenant_tenant_id_foreign` (`tenant_id`);
 
 --
 -- Индексы таблицы `tenancies`
@@ -254,13 +273,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `property_tenant`
+--
+ALTER TABLE `property_tenant`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `tenancies`
@@ -272,13 +297,13 @@ ALTER TABLE `tenancies`
 -- AUTO_INCREMENT для таблицы `tenants`
 --
 ALTER TABLE `tenants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -288,8 +313,14 @@ ALTER TABLE `users`
 -- Ограничения внешнего ключа таблицы `properties`
 --
 ALTER TABLE `properties`
-  ADD CONSTRAINT `properties_tenant_id_foreign` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `properties_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `property_tenant`
+--
+ALTER TABLE `property_tenant`
+  ADD CONSTRAINT `property_tenant_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `property_tenant_tenant_id_foreign` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `tenancies`

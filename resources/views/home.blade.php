@@ -5,8 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                {{--@can('create_update_delete')--}}
-                @if(auth()->user()->is_admin === 0)
+                @if(!auth()->user()->is_admin)
                     <div class="card-header">
                         User Dashboard
                     </div>
@@ -25,15 +24,6 @@
                         <a href="{{route('tenancies.index')}}" class="btn btn-success">Show Tenancies</a>
                     </div>
                 @endif
-                {{--@endcan--}}
-                    {{--<div class="card-header">
-                       Admin dashboard
-                    </div>
-                    <div class="card-body">
-                        <a href= "{{route('properties.index')}}" class="btn btn-success">Show Properties</a>
-                        <a href="{{route('tenants.index')}}" class="btn btn-success">Show Tenants</a>
-                        <a href="{{route('tenancies.index')}}" class="btn btn-success">Show Tenancies</a>
-                    </div>--}}
             </div>
         </div>
     </div>

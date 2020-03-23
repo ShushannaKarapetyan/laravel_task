@@ -8,15 +8,18 @@ class Property extends Model
 {
     protected $guarded = [];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function tenant(){
-        return $this->belongsTo(Tenant::class);
+    public function tenants()
+    {
+        return $this->belongsToMany(Tenant::class);
     }
 
-    public function tenancies(){
+    public function tenancies()
+    {
         return $this->hasMany(Tenancy::class);
     }
 

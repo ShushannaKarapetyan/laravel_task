@@ -18,16 +18,16 @@
                             <div class="form-group">
                                 <label for="property">Select a property</label>
                                 <select name="property_id" class="form-control">
-                                    @foreach($properties as $property)
-                                        <option value="{{$property->id}}">{{$property->name}}</option>
+                                    @foreach($properties as $property=>$value)
+                                        <option value="{{$property}}">{{$value}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="tenant_id">Select a tenant</label>
                                 <select name="tenant_id" class="form-control">
-                                    @foreach($tenants as $tenant)
-                                        <option value="{{$tenant->id}}">{{$tenant->name}}</option>
+                                    @foreach($tenants as $tenant=>$value)
+                                        <option value="{{$tenant}}">{{$value}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -35,21 +35,21 @@
                                 <label for="start_date">Start Date</label>
                                 <input type="date" class="form-control" name="start_date">
                                 @error('start_date')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
                                 <input type="date" class="form-control" name="end_date">
                                 @error('end_date')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="monthly_rent">Monthly Rent</label>
                                 <input type="text" name="monthly_rent" class="form-control">
                                 @error('monthly_rent')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">

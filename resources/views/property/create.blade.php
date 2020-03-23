@@ -19,28 +19,28 @@
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" name="name">
                                 @error('name')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" name="address">
                                 @error('address')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <input type="text" class="form-control" name="description">
                                 @error('description')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
                                 <input type="text" class="form-control" name="price">
                                 @error('price')
-                                    <p style="color: red">{{$message}}</p>
+                                <p style="color: red">{{$message}}</p>
                                 @enderror
                             </div>
                             <div class="form-group">
