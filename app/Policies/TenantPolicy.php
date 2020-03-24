@@ -10,12 +10,66 @@ class TenantPolicy
 {
     use HandlesAuthorization;
 
-    public function create_update_delete(User $user, Tenant $tenant)
+    /**
+     * Determine whether the user can view any tenants.
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function viewAny(User $user)
     {
-        if(auth()->user()->is_admin === 0){
+        //
+    }
+
+    /**
+     * Determine whether the user can view the tenant.
+     *
+     * @param User $user
+     * @param Tenant $tenant
+     * @return mixed
+     */
+    public function view(User $user, Tenant $tenant)
+    {
+        return $tenant->user->is($user);
+    }
+
+    /**
+     * Determine whether the user can create tenants.
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function create(User $user)
+    {
+        if (!$user->is_admin) {
             return true;
         }
+
         return false;
+    }
+
+    /**
+     * Determine whether the user can update the tenant.
+     *
+     * @param User $user
+     * @param Tenant $tenant
+     * @return mixed
+     */
+    public function update(User $user, Tenant $tenant)
+    {
+        return $tenant->user->is($user);
+    }
+
+    /**
+     * Determine whether the user can delete the tenant.
+     *
+     * @param User $user
+     * @param Tenant $tenant
+     * @return mixed
+     */
+    public function delete(User $user, Tenant $tenant)
+    {
+        //
     }
 
 }

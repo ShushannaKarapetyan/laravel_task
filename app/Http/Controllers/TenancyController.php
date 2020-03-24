@@ -12,50 +12,49 @@ class TenancyController extends Controller
     public function index()
     {
         return view('tenancy.index', [
-            'tenancies' => Tenancy::all()
+            'tenancies' => auth()->user()->tenancies()->paginate(3)
         ]);
     }
 
     public function create(Tenancy $tenancy)
     {
-        if (auth()->user()->can('create_update_delete', $tenancy)) {
-            return view('tenancy.create', [
-                'properties' => auth()->user()->properties()->pluck('name', 'id'),
-                'tenants' => auth()->user()->tenants()->pluck('name', 'id')
-            ]);
-        }
+        $this->authorize('create', $tenancy);
 
-        return redirect(route('tenancies.index'));
+        return view('tenancy.create', [
+            'properties' => auth()->user()->properties()->pluck('name', 'id'),
+            'tenants' => auth()->user()->tenants()->pluck('name', 'id')
+        ]);
     }
 
     public function store(StoreTenancy $request)
     {
         $tenancyData = $request->only(['property_id', 'tenant_id', 'start_date', 'end_date', 'monthly_rent']);
         $tenancy = auth()->user()->tenancies()->create($tenancyData);
-        //dd(Property::find($request->property_id)->tenants());
-        //Property::find($request->property_id)->tenants()->attach(request('tenant_id'));
+        Property::find($request->property_id)->tenants()->attach($request->only(['tenant_id']));
+        //or
+        //Tenant::find($request->tenant_id)->properties()->attach($request->only(['property_id']));
 
         return redirect(route('tenancies.index'))->with('success', 'Tenancy saved successfully.');
     }
 
     public function show(Tenancy $tenancy)
     {
-        return view('tenancy.show-tenancy', [
+        $this->authorize('view', $tenancy);
+
+        return view('tenancy.show', [
             'tenancy' => $tenancy
         ]);
     }
 
     public function edit(Tenancy $tenancy)
     {
-        if (auth()->user()->can('create_update_delete', $tenancy)) {
-            return view('tenancy.edit', [
-                'tenancy' => $tenancy,
-                'properties' => auth()->user()->properties()->pluck('name', 'id'),
-                'tenants' => auth()->user()->tenants()->pluck('name', 'id')
-            ]);
-        }
+        $this->authorize('update', $tenancy);
 
-        return redirect(route('tenancies.index'));
+        return view('tenancy.edit', [
+            'tenancy' => $tenancy,
+            'properties' => auth()->user()->properties()->pluck('name', 'id'),
+            'tenants' => auth()->user()->tenants()->pluck('name', 'id')
+        ]);
     }
 
     public function update(StoreTenancy $request, Tenancy $tenancy)

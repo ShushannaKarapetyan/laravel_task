@@ -11,17 +11,15 @@ class PropertyController extends Controller
     public function index()
     {
         return view('property.index', [
-            'properties' => Property::paginate(5)
+            'properties' => auth()->user()->properties()->paginate(5)
         ]);
     }
 
     public function create(Property $property)
     {
-        if (auth()->user()->can('create_update_delete', $property)) {
-            return view('property.create');
-        }
+        $this->authorize('create', $property);
 
-        return redirect(route('properties.index'));
+        return view('property.create');
     }
 
     public function store(StoreProperty $request)
@@ -34,26 +32,26 @@ class PropertyController extends Controller
 
     public function show(Property $property)
     {
-        return view('property.show-property', [
+        $this->authorize('view', $property);
+
+        return view('property.show', [
             'property' => $property
         ]);
     }
 
     public function edit(Property $property)
     {
-        if (auth()->user()->can('create_update_delete', $property)) {
-            return view('property.edit', [
-                'property' => $property
-            ]);
-        }
+        $this->authorize('update', $property);
 
-        return redirect(route('properties.index'));
+        return view('property.edit', [
+            'property' => $property
+        ]);
     }
 
     public function update(StoreProperty $request, Property $property)
     {
         $propertyData = $request->only(['name', 'address', 'description', 'price']);
-        $property = auth()->user()->properties()->update($propertyData);
+        $property = $property->update($propertyData);
 
         return redirect(route('properties.index'))->with('success', 'Property updated successfully.');
     }

@@ -15,7 +15,7 @@ class Tenant extends Model
 
     public function properties()
     {
-        return $this->belongsToMany(Property::class);
+        return $this->belongsToMany(Property::class)->withTimestamps();
     }
 
     public function tenancies()

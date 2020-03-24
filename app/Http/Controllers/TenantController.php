@@ -11,17 +11,15 @@ class TenantController extends Controller
     public function index()
     {
         return view('tenant.index', [
-            'tenants' => Tenant::all()
+            'tenants' => auth()->user()->tenants()->paginate(5)
         ]);
     }
 
     public function create(Tenant $tenant)
     {
-        if (auth()->user()->can('create_update_delete', $tenant)) {
-            return view('tenant.create');
-        }
+        $this->authorize('create', $tenant);
 
-        return redirect(route('tenants.index'));
+        return view('tenant.create');
     }
 
     public function store(StoreTenant $request)
@@ -40,24 +38,24 @@ class TenantController extends Controller
 
     public function show(Tenant $tenant)
     {
-        return view('tenant.show-tenant', [
+        $this->authorize('view', $tenant);
+
+        return view('tenant.show', [
             'tenant' => $tenant
         ]);
     }
 
     public function edit(Tenant $tenant)
     {
-        if (auth()->user()->can('create_update_delete', $tenant)) {
-            return view('tenant.edit', [
-                'tenant' => $tenant
-            ]);
-        }
-        return redirect(route('tenants.index'));
+        $this->authorize('update', $tenant);
+
+        return view('tenant.edit', [
+            'tenant' => $tenant
+        ]);
     }
 
     public function update(StoreTenant $request, Tenant $tenant)
     {
-
         $tenantData = $request->only(['name', 'phone']);
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
