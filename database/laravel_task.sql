@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 24 2020 г., 07:53
+-- Время создания: Мар 24 2020 г., 16:26
 -- Версия сервера: 10.4.6-MariaDB
 -- Версия PHP: 7.3.9
 
@@ -59,9 +59,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2020_03_20_110418_create_properties_table', 1),
 (5, '2020_03_20_110500_create_tenants_table', 1),
-(6, '2020_03_20_110525_create_tenancies_table', 1),
-(7, '2020_03_23_111330_create_tenant_property_table', 1),
-(8, '2020_03_23_154445_create_property_tenant_table', 2);
+(6, '2020_03_20_110525_create_tenancies_table', 1);
 
 -- --------------------------------------------------------
 
@@ -97,31 +95,9 @@ CREATE TABLE `properties` (
 --
 
 INSERT INTO `properties` (`id`, `user_id`, `name`, `address`, `description`, `price`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Property 1', 'Address 1', 'Description 1', 100.00, '2020-03-23 10:12:13', '2020-03-23 17:55:18'),
+(1, 1, 'Property 1', 'Address 1', 'Description 1', 100.00, '2020-03-23 10:12:13', '2020-03-24 06:38:54'),
 (2, 1, 'Property 2', 'Address 2', 'Description 2', 200.00, '2020-03-23 10:12:52', '2020-03-23 17:55:33'),
-(4, 1, 'Property 3', 'Address 3', 'Description 3', 300.00, '2020-03-23 17:56:19', '2020-03-23 17:56:19');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `property_tenant`
---
-
-CREATE TABLE `property_tenant` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `property_id` bigint(20) UNSIGNED NOT NULL,
-  `tenant_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `property_tenant`
---
-
-INSERT INTO `property_tenant` (`id`, `property_id`, `tenant_id`, `created_at`, `updated_at`) VALUES
-(18, 1, 1, NULL, NULL),
-(20, 1, 11, NULL, NULL);
+(4, 1, 'Property 3', 'Address 3', 'Description 3', 300.00, '2020-03-23 17:56:19', '2020-03-24 07:15:57');
 
 -- --------------------------------------------------------
 
@@ -200,7 +176,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `is_admin`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'User', 0, 'user@gmail.com', NULL, '$2y$10$Vr/K84hbb6N.m0hLzSb/XOgoLPfOJuc5Nkiq8.uWH6AdI0L3KoE5G', NULL, '2020-03-23 09:31:27', '2020-03-23 09:31:27'),
 (2, 'New User', 0, 'new.user@gmail.com', NULL, '$2y$10$/EZ/azo.ZjNSm20IDyTJMePTeFAm29U.zaYjxM2CkyyeDX7mgNs4O', NULL, '2020-03-24 01:22:31', '2020-03-24 01:22:31'),
-(3, 'Admin', 0, 'admin@gmail.com', NULL, '$2y$10$HPeoS3cx/SfQlL4Kgu1MiOARYXBPlmi0t0FUwTve/wTfRBu0YBSkm', NULL, '2020-03-24 01:32:05', '2020-03-24 01:32:05');
+(3, 'Admin', 1, 'admin@gmail.com', NULL, '$2y$10$HPeoS3cx/SfQlL4Kgu1MiOARYXBPlmi0t0FUwTve/wTfRBu0YBSkm', NULL, '2020-03-24 01:32:05', '2020-03-24 01:32:05');
 
 --
 -- Индексы сохранённых таблиц
@@ -230,14 +206,6 @@ ALTER TABLE `password_resets`
 ALTER TABLE `properties`
   ADD PRIMARY KEY (`id`),
   ADD KEY `properties_user_id_foreign` (`user_id`);
-
---
--- Индексы таблицы `property_tenant`
---
-ALTER TABLE `property_tenant`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `property_tenant_property_id_tenant_id_unique` (`property_id`,`tenant_id`),
-  ADD KEY `property_tenant_tenant_id_foreign` (`tenant_id`);
 
 --
 -- Индексы таблицы `tenancies`
@@ -282,13 +250,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT для таблицы `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT для таблицы `property_tenant`
---
-ALTER TABLE `property_tenant`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `tenancies`
@@ -317,13 +279,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `properties`
   ADD CONSTRAINT `properties_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `property_tenant`
---
-ALTER TABLE `property_tenant`
-  ADD CONSTRAINT `property_tenant_property_id_foreign` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `property_tenant_tenant_id_foreign` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `tenancies`

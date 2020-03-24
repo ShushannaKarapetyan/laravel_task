@@ -30,7 +30,7 @@ class TenancyPolicy
      */
     public function view(User $user, Tenancy $tenancy)
     {
-        return $tenancy->user->is($user);
+        return $tenancy->user_id === $user->id;
     }
 
     /**
@@ -57,7 +57,7 @@ class TenancyPolicy
      */
     public function update(User $user, Tenancy $tenancy)
     {
-        return $tenancy->user->is($user);
+        return $tenancy->user_id === $user->id;
     }
 
     /**
@@ -69,7 +69,7 @@ class TenancyPolicy
      */
     public function delete(User $user, Tenancy $tenancy)
     {
-        //
+        return $tenancy->user_id === $user->id;
     }
 
 }

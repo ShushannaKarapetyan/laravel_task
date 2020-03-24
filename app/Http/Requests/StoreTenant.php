@@ -24,9 +24,9 @@ class StoreTenant extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'phone' => 'required|min:10',
-            'image' => 'image'
+            'name' => 'required|max:255',
+            'phone' => 'required|numeric|min:10',
+            'image' => 'image|max:2048' //kb
         ];
     }
 }

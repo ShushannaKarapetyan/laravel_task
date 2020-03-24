@@ -19,7 +19,7 @@ class PropertyPolicy
      */
     public function view(User $user, Property $property)
     {
-        return $property->user->is($user);
+        return $property->user_id === $user->id;
     }
 
     /**
@@ -46,7 +46,7 @@ class PropertyPolicy
      */
     public function update(User $user, Property $property)
     {
-        return $property->user->is($user);
+        return $property->user_id === $user->id;
     }
 
     /**
@@ -58,7 +58,7 @@ class PropertyPolicy
      */
     public function delete(User $user, Property $property)
     {
-        //return $property->user->is($user);
+        return $property->user_id === $user->id;
     }
 
 }

@@ -15,9 +15,9 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function create(Property $property)
+    public function create()
     {
-        $this->authorize('create', $property);
+        $this->authorize('create', Property::class);
 
         return view('property.create');
     }
@@ -58,6 +58,7 @@ class PropertyController extends Controller
 
     public function destroy(Property $property)
     {
+        $this->authorize('delete', $property);
         $property->delete();
 
         return redirect(route('properties.index'))->with('success', 'Property deleted successfully');

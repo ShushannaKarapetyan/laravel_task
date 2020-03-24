@@ -15,9 +15,9 @@ class TenantController extends Controller
         ]);
     }
 
-    public function create(Tenant $tenant)
+    public function create()
     {
-        $this->authorize('create', $tenant);
+        $this->authorize('create', Tenant::class);
 
         return view('tenant.create');
     }
@@ -70,6 +70,7 @@ class TenantController extends Controller
 
     public function destroy(Tenant $tenant)
     {
+        $this->authorize('delete', $tenant);
         $tenant->delete();
 
         return redirect(route('tenants.index'))->with('success', 'Tenant deleted successfully.');

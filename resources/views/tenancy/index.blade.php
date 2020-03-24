@@ -15,7 +15,7 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        @if(count($tenancies) > 0)
+                        @if(count($tenancies))
                             <table class="table hover table-striped">
                                 <thead>
                                 <tr>

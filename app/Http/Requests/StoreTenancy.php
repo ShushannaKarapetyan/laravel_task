@@ -25,8 +25,8 @@ class StoreTenancy extends FormRequest
     {
         return [
             'start_date' => 'required',
-            'end_date' => 'required',
-            'monthly_rent' => 'required'
+            'end_date' => 'required|after:start_date',
+            'monthly_rent' => 'required|numeric'
         ];
     }
 }

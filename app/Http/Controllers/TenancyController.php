@@ -16,9 +16,9 @@ class TenancyController extends Controller
         ]);
     }
 
-    public function create(Tenancy $tenancy)
+    public function create()
     {
-        $this->authorize('create', $tenancy);
+        $this->authorize('create', Tenancy::class);
 
         return view('tenancy.create', [
             'properties' => auth()->user()->properties()->pluck('name', 'id'),
@@ -30,9 +30,6 @@ class TenancyController extends Controller
     {
         $tenancyData = $request->only(['property_id', 'tenant_id', 'start_date', 'end_date', 'monthly_rent']);
         $tenancy = auth()->user()->tenancies()->create($tenancyData);
-        Property::find($request->property_id)->tenants()->attach($request->only(['tenant_id']));
-        //or
-        //Tenant::find($request->tenant_id)->properties()->attach($request->only(['property_id']));
 
         return redirect(route('tenancies.index'))->with('success', 'Tenancy saved successfully.');
     }
@@ -67,6 +64,7 @@ class TenancyController extends Controller
 
     public function destroy(Tenancy $tenancy)
     {
+        $this->authorize('delete', $tenancy);
         $tenancy->delete();
 
         return redirect(route('tenancies.index'))->with('success', 'Tenancy deleted successfully');

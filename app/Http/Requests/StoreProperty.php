@@ -24,10 +24,10 @@ class StoreProperty extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'address' => 'required',
+            'name' => 'required|string|max:255|unique:properties,name' . ($this->property ? "," . $this->property->id : ''),
+            'address' => 'required|string',
             'description' => 'required',
-            'price' => 'required'
+            'price' => 'required|numeric'
         ];
     }
 }
