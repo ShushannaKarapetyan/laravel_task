@@ -7,11 +7,6 @@
                 <div class="card">
                     <div class="card-header">
                         Create Tenancy
-                        @if(session('success'))
-                            <div class="alert alert-success">
-                                {{session('success')}}
-                            </div>
-                        @endif
                     </div>
                     <form action="{{route('tenancies.store')}}" method="POST">
                         @csrf
@@ -34,23 +29,44 @@
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
-                                <input type="date" class="form-control" name="start_date">
+                                <input type="date" class="form-control
+                                @if ($errors->has('start_date') || $errors->has('period'))
+                                    is-invalid
+                                @endif
+                                    " name="start_date" value="{{old('start_date')}}">
                                 @error('start_date')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
-                                <input type="date" class="form-control" name="end_date">
+                                <input type="date" class="form-control
+                                 @if ($errors->has('end_date') || $errors->has('period'))
+                                    is-invalid
+                                 @endif
+                                    " name="end_date" value="{{old('end_date')}}">
                                 @error('end_date')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                @error('period')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="monthly_rent">Monthly Rent</label>
-                                <input type="text" name="monthly_rent" class="form-control">
+                                <input type="text" name="monthly_rent"
+                                       class="form-control @error('monthly_rent') is-invalid @enderror"
+                                       value="{{old('monthly_rent')}}">
                                 @error('monthly_rent')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">

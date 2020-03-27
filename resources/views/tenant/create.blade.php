@@ -18,23 +18,30 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
                                 @error('name')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                                       name="phone">
                                 @error('phone')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="image">Image</label>
-                                <input type="file" name="image">
+                                <input type="file" name="image" class="@error('image') is-invalid @enderror">
                                 @error('image')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">

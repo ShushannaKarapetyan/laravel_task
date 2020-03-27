@@ -19,31 +19,43 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name" value="{{$property->name}}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                       value="{{$property->name}}">
                                 @error('name')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" value="{{$property->address}}">
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                       name="address" value="{{$property->address}}">
                                 @error('address')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" class="form-control" name="description"
+                                <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                       name="description"
                                        value="{{$property->description}}">
                                 @error('description')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control" name="price" value="{{$property->price}}">
+                                <input type="text" class="form-control @error('price') is-invalid @enderror"
+                                       name="price" value="{{$property->price}}">
                                 @error('price')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">

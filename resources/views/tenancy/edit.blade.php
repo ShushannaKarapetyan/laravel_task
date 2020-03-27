@@ -35,27 +35,40 @@
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
-                                <input type="date" class="form-control" name="start_date"
+                                <input type="date" class="form-control @error('period') is-invalid @enderror"
+                                       name="start_date"
                                        value="{{Carbon\Carbon::parse($tenancy->start_date)->format('Y-m-d')}}">
-
                                 @error('start_date')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
-                                <input type="date" class="form-control" name="end_date"
+                                <input type="date" class="form-control @error('period') is-invalid @enderror"
+                                       name="end_date"
                                        value="{{Carbon\Carbon::parse($tenancy->end_date)->format('Y-m-d')}}">
                                 @error('end_date')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                @error('period')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="monthly_rent">Monthly Rent</label>
-                                <input type="text" name="monthly_rent" class="form-control"
+                                <input type="text" name="monthly_rent"
+                                       class="form-control @error('monthly_rent') is-invalid @enderror"
                                        value="{{$tenancy->monthly_rent}}">
                                 @error('monthly_rent')
-                                <p style="color: red">{{$message}}</p>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
