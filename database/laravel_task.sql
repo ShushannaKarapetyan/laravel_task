@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 24 2020 г., 16:26
+-- Время создания: Мар 30 2020 г., 15:14
 -- Версия сервера: 10.4.6-MariaDB
 -- Версия PHP: 7.3.9
 
@@ -95,9 +95,9 @@ CREATE TABLE `properties` (
 --
 
 INSERT INTO `properties` (`id`, `user_id`, `name`, `address`, `description`, `price`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Property 1', 'Address 1', 'Description 1', 100.00, '2020-03-23 10:12:13', '2020-03-24 06:38:54'),
-(2, 1, 'Property 2', 'Address 2', 'Description 2', 200.00, '2020-03-23 10:12:52', '2020-03-23 17:55:33'),
-(4, 1, 'Property 3', 'Address 3', 'Description 3', 300.00, '2020-03-23 17:56:19', '2020-03-24 07:15:57');
+(1, 1, 'Property 1', 'Address 1', 'Description 1', 300.00, '2020-03-30 09:12:23', '2020-03-30 09:12:23'),
+(2, 1, 'Property 2', 'Address 2', 'Description 2', 500.00, '2020-03-30 09:12:23', '2020-03-30 09:12:23'),
+(3, 1, 'Property 3', 'Address 3', 'Description 3', 1000.00, '2020-03-30 09:12:23', '2020-03-30 09:12:23');
 
 -- --------------------------------------------------------
 
@@ -122,8 +122,9 @@ CREATE TABLE `tenancies` (
 --
 
 INSERT INTO `tenancies` (`id`, `user_id`, `property_id`, `tenant_id`, `start_date`, `end_date`, `monthly_rent`, `created_at`, `updated_at`) VALUES
-(29, 1, 1, 1, '2020-02-29 20:00:00', '2020-03-12 20:00:00', 500, '2020-03-24 02:43:19', '2020-03-24 02:52:27'),
-(30, 1, 1, 11, '2020-03-07 20:00:00', '2020-03-28 20:00:00', 200, '2020-03-24 02:44:19', '2020-03-24 02:52:11');
+(1, 1, 1, 2, '2020-03-01 20:00:00', '2020-05-15 20:00:00', 300, '2020-03-30 09:12:23', '2020-03-30 09:12:23'),
+(2, 1, 2, 3, '2020-03-07 20:00:00', '2020-05-28 20:00:00', 500, '2020-03-30 09:12:23', '2020-03-30 09:12:23'),
+(3, 1, 1, 1, '2020-05-16 20:00:00', '2020-06-27 20:00:00', 300, '2020-03-30 09:12:23', '2020-03-30 09:12:23');
 
 -- --------------------------------------------------------
 
@@ -146,10 +147,9 @@ CREATE TABLE `tenants` (
 --
 
 INSERT INTO `tenants` (`id`, `user_id`, `name`, `phone`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Tenant 1', '07712345678', '1584972412.jpg', '2020-03-23 09:32:29', '2020-03-23 10:11:21'),
-(11, 1, 'Tenant 2', '07712345678', '1584972384.jpg', '2020-03-23 10:02:45', '2020-03-23 10:09:52'),
-(12, 1, 'Tenant 3', '0771234567', '1584992453.jpg', '2020-03-23 10:11:39', '2020-03-23 15:40:53'),
-(13, 1, 'Tenant', '0123456789', NULL, '2020-03-23 15:41:31', '2020-03-23 15:41:31');
+(1, 1, 'Tenant 1', '0123456789', '1585574012.jpg', '2020-03-30 09:12:23', '2020-03-30 09:13:32'),
+(2, 1, 'Tenant 2', '0123456789', '', '2020-03-30 09:12:23', '2020-03-30 09:12:23'),
+(3, 1, 'Tenant 3', '0123456789', '', '2020-03-30 09:12:23', '2020-03-30 09:12:23');
 
 -- --------------------------------------------------------
 
@@ -174,9 +174,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `is_admin`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'User', 0, 'user@gmail.com', NULL, '$2y$10$Vr/K84hbb6N.m0hLzSb/XOgoLPfOJuc5Nkiq8.uWH6AdI0L3KoE5G', NULL, '2020-03-23 09:31:27', '2020-03-23 09:31:27'),
-(2, 'New User', 0, 'new.user@gmail.com', NULL, '$2y$10$/EZ/azo.ZjNSm20IDyTJMePTeFAm29U.zaYjxM2CkyyeDX7mgNs4O', NULL, '2020-03-24 01:22:31', '2020-03-24 01:22:31'),
-(3, 'Admin', 1, 'admin@gmail.com', NULL, '$2y$10$HPeoS3cx/SfQlL4Kgu1MiOARYXBPlmi0t0FUwTve/wTfRBu0YBSkm', NULL, '2020-03-24 01:32:05', '2020-03-24 01:32:05');
+(1, 'User', 0, 'user@gmail.com', NULL, '$2y$10$nNovDeNS/p8R1sutWrlRneYfC9szFn5BrSBXrmKHWjcJKRQFD8sGK', NULL, '2020-03-30 09:12:14', '2020-03-30 09:12:14'),
+(2, 'Admin', 0, 'admin@gmail.com', NULL, '$2y$10$yUmJgj3JxTgqNX0FXy/1xOXVatjBRezfLNFawP0/zvTdr6tEaUCGy', NULL, '2020-03-30 09:12:45', '2020-03-30 09:12:45');
 
 --
 -- Индексы сохранённых таблиц
@@ -244,31 +243,31 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `tenancies`
 --
 ALTER TABLE `tenancies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `tenants`
 --
 ALTER TABLE `tenants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
