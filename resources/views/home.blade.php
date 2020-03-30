@@ -9,9 +9,7 @@
                         User Dashboard
                     </div>
                     <div class="card-body">
-                        <a href="{{route('properties.index')}}" class="btn btn-success">Properties</a>
-                        <a href="{{route('tenants.index')}}" class="btn btn-success">Tenants</a>
-                        <a href="{{route('tenancies.index')}}" class="btn btn-success">Tenancies</a>
+                        You are logged in as a <strong>user</strong>.
                     </div>
                 </div>
             </div>

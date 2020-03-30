@@ -39,7 +39,7 @@
                                         <td>{{$property->price}}</td>
                                         <td>
                                             <a href="{{route('properties.edit',$property)}}"
-                                               class="btn btn-warning float-left">Update</a>
+                                               class="btn btn-warning float-left">Edit</a>
                                             <div class="float-right">
                                                 <form id="delete-form-{{$property->id}}"
                                                       action="{{route('properties.destroy',$property)}}"
@@ -47,7 +47,7 @@
                                                     @csrf
                                                     @method('delete')
                                                     <a href="" class="btn btn-danger" onclick="
-                                                        if(confirm('Are you sure? Do you want to delete this? :D')){
+                                                        if(confirm('Do you want to delete this?')){
                                                         event.preventDefault(); document.getElementById('delete-form-{{$property -> id}}').submit();}
                                                         else {
                                                         event.preventDefault()

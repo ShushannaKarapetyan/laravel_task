@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTenancy;
-use App\Property;
+use App\Http\Requests\TenancyRequest;
 use App\Tenancy;
-use App\Tenant;
-use Illuminate\Support\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class TenancyController extends Controller
 {
+    /**
+     * @return View
+     */
     public function index()
     {
         return view('tenancy.index', [
@@ -18,6 +21,10 @@ class TenancyController extends Controller
         ]);
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function create()
     {
         $this->authorize('create', Tenancy::class);
@@ -28,14 +35,19 @@ class TenancyController extends Controller
         ]);
     }
 
-    public function store(StoreTenancy $request)
+    /**
+     * @param TenancyRequest $request
+     * @return Redirector
+     * @throws ValidationException
+     */
+    public function store(TenancyRequest $request)
     {
         if (!$request->fallsIntoExistingTimePeriods($request)) {
             $tenancyData = $request->only(['property_id', 'tenant_id', 'start_date', 'end_date', 'monthly_rent']);
-            $tenancy = auth()->user()->tenancies()->create($tenancyData);
-            $message = 'Tenancy saved successfully.';
+            auth()->user()->tenancies()->create($tenancyData);
 
-            return redirect(route('tenancies.index'))->with('success', $message);
+            return redirect(route('tenancies.index'))
+                ->with('success', 'Tenancy saved successfully.');
         }
 
         throw ValidationException::withMessages([
@@ -44,6 +56,11 @@ class TenancyController extends Controller
 
     }
 
+    /**
+     * @param Tenancy $tenancy
+     * @return View
+     * @throws AuthorizationException
+     */
     public function show(Tenancy $tenancy)
     {
         $this->authorize('view', $tenancy);
@@ -53,6 +70,11 @@ class TenancyController extends Controller
         ]);
     }
 
+    /**
+     * @param Tenancy $tenancy
+     * @return View
+     * @throws AuthorizationException
+     */
     public function edit(Tenancy $tenancy)
     {
         $this->authorize('update', $tenancy);
@@ -64,20 +86,20 @@ class TenancyController extends Controller
         ]);
     }
 
-    public function update(StoreTenancy $request, Tenancy $tenancy)
+    /**
+     * @param TenancyRequest $request
+     * @param Tenancy $tenancy
+     * @return Redirector
+     * @throws ValidationException
+     */
+    public function update(TenancyRequest $request, Tenancy $tenancy)
     {
-        $route = redirect(route('tenancies.index'))
-            ->with('success', 'Tenancy updated successfully.');
-
         if (!$request->fallsIntoExistingTimePeriods($request)) {
             $tenancyData = $request->only(['property_id', 'tenant_id', 'start_date', 'end_date', 'monthly_rent']);
             $tenancy->update($tenancyData);
 
-            return $route;
-        } else {
-            if ($request->property_id == $tenancy->property_id) {
-                return $route;
-            }
+            return redirect(route('tenancies.index'))
+                ->with('success', 'Tenancy updated successfully.');
         }
 
         throw ValidationException::withMessages([
@@ -86,11 +108,18 @@ class TenancyController extends Controller
 
     }
 
+    /**
+     * @param Tenancy $tenancy
+     * @return Redirector
+     * @throws AuthorizationException
+     */
     public function destroy(Tenancy $tenancy)
     {
         $this->authorize('delete', $tenancy);
+
         $tenancy->delete();
 
-        return redirect(route('tenancies.index'))->with('success', 'Tenancy deleted successfully');
+        return redirect(route('tenancies.index'))
+            ->with('success', 'Tenancy deleted successfully.');
     }
 }

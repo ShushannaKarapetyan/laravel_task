@@ -7,19 +7,17 @@
                 <div class="card">
                     <div class="card-header">
                         Update Property
-                        @if(session('success'))
-                            <div class="alert alert-success mt-5">
-                                {{session('success')}}
-                            </div>
-                        @endif
                     </div>
                     <form action="{{route('properties.update',$property)}}" method="POST">
                         @csrf
-                        @method('put')
+                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                <input type="text"
+                                       placeholder="Name"
+                                       class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
+                                       name="name"
                                        value="{{$property->name}}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -29,8 +27,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                       name="address" value="{{$property->address}}">
+                                <input type="text"
+                                       placeholder="Address"
+                                       class="form-control {{$errors->has('address') ? 'is-invalid' : ''}}"
+                                       name="address"
+                                       value="{{$property->address}}">
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -39,7 +40,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                <input type="text"
+                                       placeholder="Description"
+                                       class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}"
                                        name="description"
                                        value="{{$property->description}}">
                                 @error('description')
@@ -50,8 +53,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control @error('price') is-invalid @enderror"
-                                       name="price" value="{{$property->price}}">
+                                <input type="text"
+                                       placeholder="Price"
+                                       class="form-control {{$errors->has('price') ? 'is-invalid' : ''}}"
+                                       name="price"
+                                       value="{{$property->price}}">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -59,7 +65,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="submit" class="btn btn-success">Update</button>
                             </div>
                         </div>
                     </form>

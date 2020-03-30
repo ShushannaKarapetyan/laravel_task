@@ -14,7 +14,7 @@
                 </h3>
                 <p>Image</p>
                 <h3>
-                    <img src="{{asset('storage/images')}}/{{$tenant->image}}" width="200" height="100">
+                    <img src="{{asset('storage/images')}}/{{$tenant->image}}" width="200" height="100" alt="Image">
                 </h3>
             </div>
         </div>

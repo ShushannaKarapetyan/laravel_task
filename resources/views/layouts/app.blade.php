@@ -51,6 +51,15 @@
                             </li>
                         @endif
                     @else
+                        <li class="nav-item">
+                            <a href="{{route('properties.index')}}" class="nav-link">Properties</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('tenants.index')}}" class="nav-link">Tenants</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('tenancies.index')}}" class="nav-link">Tenancies</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -58,6 +67,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('/home') }}">Home</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

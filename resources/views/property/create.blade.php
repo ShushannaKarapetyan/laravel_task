@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -6,18 +7,17 @@
                 <div class="card">
                     <div class="card-header">
                         Create Property
-                        @if(session('success'))
-                            <div class="alert alert-success mt-5">
-                                {{session('success')}}
-                            </div>
-                        @endif
                     </div>
                     <form action="{{route('properties.store')}}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                                <input type="text"
+                                       placeholder="Name"
+                                       value=" {{old('name')}}"
+                                       class="form-control {{$errors->has('name') ? 'is-invalid' :''}}"
+                                       name="name">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -26,7 +26,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                <input type="text"
+                                       placeholder="Address"
+                                       value=" {{old('address')}}"
+                                       class="form-control {{$errors->has('address') ? 'is-invalid' :''}}"
                                        name="address">
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
@@ -36,7 +39,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                <input type="text"
+                                       placeholder="Description"
+                                       value=" {{old('description')}}"
+                                       class="form-control {{$errors->has('description') ? 'is-invalid' :''}}"
                                        name="description">
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -46,7 +52,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control @error('price') is-invalid @enderror"
+                                <input type="text"
+                                       placeholder="Price"
+                                       value=" {{old('price')}}"
+                                       class="form-control {{$errors->has('price') ? 'is-invalid' :''}}"
                                        name="price">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">

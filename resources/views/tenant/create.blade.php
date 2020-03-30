@@ -7,18 +7,17 @@
                 <div class="card">
                     <div class="card-header">
                         Create Tenant
-                        @if(session('success'))
-                            <div class="alert alert-success mt-5">
-                                {{session('success')}}
-                            </div>
-                        @endif
                     </div>
                     <form action="{{route('tenants.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                                <input type="text"
+                                       placeholder="Name"
+                                       class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
+                                       name="name"
+                                       value="{{old('name')}}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -27,8 +26,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                                       name="phone">
+                                <input type="text"
+                                       placeholder="Phone"
+                                       class="form-control {{$errors->has('phone') ? 'is-invalid' : ''}}"
+                                       name="phone"
+                                       value="{{old('phone')}}">
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -37,7 +39,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="image">Image</label>
-                                <input type="file" name="image" class="@error('image') is-invalid @enderror">
+                                <input type="file"
+                                       name="image"
+                                       class="{{$errors->has('image') ? 'is-invalid' : ''}}">
                                 @error('image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

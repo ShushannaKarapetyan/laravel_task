@@ -29,11 +29,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
-                                <input type="date" class="form-control
-                                @if ($errors->has('start_date') || $errors->has('period'))
-                                    is-invalid
-                                @endif
-                                    " name="start_date" value="{{old('start_date')}}">
+                                <input type="date"
+                                       class="form-control {{($errors->has('period') or $errors->has('start_date')) ? 'is-invalid' : ''}}"
+                                       name="start_date"
+                                       value="{{old('start_date')}}">
                                 @error('start_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -42,11 +41,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
-                                <input type="date" class="form-control
-                                 @if ($errors->has('end_date') || $errors->has('period'))
-                                    is-invalid
-                                 @endif
-                                    " name="end_date" value="{{old('end_date')}}">
+                                <input type="date"
+                                       class="form-control {{($errors->has('period') or $errors->has('end_date')) ? 'is-invalid' : ''}}"
+                                       name="end_date"
+                                       value="{{old('end_date')}}">
                                 @error('end_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -60,8 +58,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="monthly_rent">Monthly Rent</label>
-                                <input type="text" name="monthly_rent"
-                                       class="form-control @error('monthly_rent') is-invalid @enderror"
+                                <input type="text"
+                                       name="monthly_rent"
+                                       placeholder="Monthly Rent"
+                                       class="form-control {{$errors->has('monthly_rent') ? 'is-invalid' : ''}}"
                                        value="{{old('monthly_rent')}}">
                                 @error('monthly_rent')
                                 <span class="invalid-feedback" role="alert">

@@ -44,14 +44,14 @@
                                         @endif
                                         <td>
                                             <a href="{{route('tenants.edit',$tenant)}}"
-                                               class="btn btn-warning float-left">Update</a>
+                                               class="btn btn-warning float-left">Edit</a>
                                             <div class="float-right">
                                                 <form id="delete-form-{{$tenant->id}}"
                                                       action="{{route('tenants.destroy',$tenant)}}" method="POST">
                                                     @csrf
                                                     @method('delete')
                                                     <a href="" class="btn btn-danger" onclick="
-                                                        if(confirm('Are you sure? Do you want to delete this? :D')){
+                                                        if(confirm('Do you want to delete this?')){
                                                         event.preventDefault(); document.getElementById('delete-form-{{$tenant -> id}}').submit();}
                                                         else {
                                                         event.preventDefault()

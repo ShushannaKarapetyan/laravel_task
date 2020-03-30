@@ -19,6 +19,8 @@
                             <table class="table hover table-striped">
                                 <thead>
                                 <tr>
+                                    <th>Tenant</th>
+                                    <th>Property</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Monthly Rent</th>
@@ -28,14 +30,16 @@
                                 <tbody>
                                 @foreach($tenancies as $tenancy)
                                     <tr>
-                                        <td>{{$tenancy->start_date}}</td>
-                                        <td>{{$tenancy->end_date}}</td>
+                                        <td>{{$tenancy->tenant->name}}</td>
+                                        <td>{{$tenancy->property->name}}</td>
+                                        <td>{{$tenancy->start_date->format('j,F,Y')}}</td>
+                                        <td>{{$tenancy->end_date->format('j,F,Y') }}</td>
                                         <td>{{$tenancy->monthly_rent}}</td>
-                                        <td style="display: flex;justify-content: space-between">
+                                        <td class="d-flex justify-content-between">
                                             <a href="{{route('tenancies.show',$tenancy)}}"
                                                class="btn btn-primary">Show</a>
                                             <a href="{{route('tenancies.edit',$tenancy)}}"
-                                               class="btn btn-warning float-left">Update</a>
+                                               class="btn btn-warning float-left">Edit</a>
                                             <div class="float-right">
                                                 <form id="delete-form-{{ $tenancy->id }}"
                                                       action="{{route('tenancies.destroy',$tenancy)}}" method="POST"
@@ -43,7 +47,7 @@
                                                     @csrf
                                                     @method('delete')
                                                     <a href="" class="btn btn-danger" onclick="
-                                                        if(confirm('Are you sure? Do you want to delete this? :D')){
+                                                        if(confirm('Do you want to delete this?')){
                                                         event.preventDefault(); document.getElementById('delete-form-{{$tenancy -> id}}').submit();}
                                                         else {
                                                         event.preventDefault()

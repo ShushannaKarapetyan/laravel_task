@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProperty extends FormRequest
+class TenantRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class StoreProperty extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:properties,name' . ($this->property ? "," . $this->property->id : ''),
-            'address' => 'required|string',
-            'description' => 'required',
-            'price' => 'required|numeric'
+            'name' => 'required|max:255',
+            'phone' => 'required|numeric|min:10',
+            'image' => 'image|max:2048' //kb
         ];
     }
 }
