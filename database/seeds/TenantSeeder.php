@@ -20,7 +20,6 @@ class TenantSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-
             ['user_id' => 1,
                 'name' => 'Tenant 2',
                 'phone' => '0123456789',
@@ -28,7 +27,6 @@ class TenantSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-
             ['user_id' => 1,
                 'name' => 'Tenant 3',
                 'phone' => '0123456789',

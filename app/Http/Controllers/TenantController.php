@@ -6,6 +6,7 @@ use App\Http\Requests\TenantRequest;
 use App\Tenant;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class TenantController extends Controller
@@ -36,15 +37,13 @@ class TenantController extends Controller
      * @param TenantRequest $request
      * @return array
      */
-    public function uploadTenantImage(TenantRequest $request)
+    public function prepareDataToSave(TenantRequest $request)
     {
         $tenantData = $request->only(['name', 'phone']);
 
         if ($request->hasFile('image')) {
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore = time() . '.' . $extension;
-            $request->file('image')->storeAs('public/images', $fileNameToStore);
-            $tenantData['image'] = $fileNameToStore;
+            $request->image->store('public/images');
+            $tenantData['image'] = $request->image->hashName();;
         }
 
         return $tenantData;
@@ -56,7 +55,7 @@ class TenantController extends Controller
      */
     public function store(TenantRequest $request)
     {
-        auth()->user()->tenants()->create($this->uploadTenantImage($request));
+        auth()->user()->tenants()->create($this->prepareDataToSave($request));
 
         return redirect(route('tenants.index'))
             ->with('success', 'Tenant saved successfully.');
@@ -97,7 +96,11 @@ class TenantController extends Controller
      */
     public function update(TenantRequest $request, Tenant $tenant)
     {
-        $tenant->update($this->uploadTenantImage($request));
+        if ($request->hasFile('image') && $request->image !== $tenant->image) {
+            Storage::disk('public')->delete("images/{$tenant->image}");
+        }
+
+        $tenant->update($this->prepareDataToSave($request));
 
         return redirect(route('tenants.index'))
             ->with('success', 'Tenant updated successfully.');

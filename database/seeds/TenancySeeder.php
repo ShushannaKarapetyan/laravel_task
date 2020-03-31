@@ -23,7 +23,6 @@ class TenancySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-
             [
                 'user_id' => 1,
                 'property_id' => 2,
@@ -45,6 +44,5 @@ class TenancySeeder extends Seeder
                 'updated_at' => now(),
             ]
         ]);
-
     }
 }
