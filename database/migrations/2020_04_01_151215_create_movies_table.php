@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataParsersTable extends Migration
+class CreateMoviesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateDataParsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_parsers', function (Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('coverImage')->nullable();
-            $table->timestamp('releaseDate')->nullable();
-            $table->double('rating');
+            $table->text('cover_image')->nullable();
+            $table->date('release_date')->nullable();
+            $table->string('release_date_country')->nullable();
+            $table->float('rating')->nullable();
             $table->json('category')->nullable();
-            $table->string('director');
+            $table->string('director')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateDataParsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_parsers');
+        Schema::dropIfExists('movies');
     }
 }
