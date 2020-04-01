@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de1ec9a18f1e47b1593e2515d8f3b96c",
+    "content-hash": "d5a9de01e527e586044a84706ff10db0",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -279,6 +279,50 @@
                 "validator"
             ],
             "time": "2020-02-13T22:36:52+00:00"
+        },
+        {
+            "name": "fabianbeiner/php-imdb-grabber",
+            "version": "v6.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FabianBeiner/PHP-IMDB-Grabber.git",
+                "reference": "46cf9863fad46668940c3a6161e8bbc9e18888f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FabianBeiner/PHP-IMDB-Grabber/zipball/46cf9863fad46668940c3a6161e8bbc9e18888f7",
+                "reference": "46cf9863fad46668940c3a6161e8bbc9e18888f7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "imdb.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabian Beiner",
+                    "email": "fb@fabianbeiner.de",
+                    "homepage": "https://fabianbeiner.de/"
+                }
+            ],
+            "description": "This PHP library enables you to scrape data from IMDB.com.",
+            "homepage": "https://github.com/FabianBeiner/PHP-IMDB-Grabber",
+            "keywords": [
+                "api",
+                "client",
+                "imdb"
+            ],
+            "time": "2020-02-19T11:09:56+00:00"
         },
         {
             "name": "fabpot/goutte",

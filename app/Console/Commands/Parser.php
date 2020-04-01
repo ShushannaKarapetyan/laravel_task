@@ -6,8 +6,8 @@ use Exception;
 use Illuminate\Console\Command;
 use App\DataParser;
 use Illuminate\Support\Carbon;
-use IMDB;
 use Illuminate\Support\Facades\Storage;
+use IMDB;
 
 class Parser extends Command
 {
@@ -23,7 +23,7 @@ class Parser extends Command
      *
      * @var string
      */
-    protected $description = 'Information parsing ';
+    protected $description = 'Information parsing';
 
     /**
      * Create a new command instance.
@@ -43,17 +43,16 @@ class Parser extends Command
      */
     public function handle()
     {
-        include 'imdb.class.php';
-
         $url = "https://www.imdb.com/title/{$this->option('id')}";
 
         $IMDB = new IMDB($url);
+
         if ($IMDB->isReady) {
 
-            $parsedData = [];
             $parsedData['title'] = $IMDB->getTitle();
             $parsedData['coverImage'] = $IMDB->getPoster($sSize = 'small', $bDownload = false);
 
+            //SAVING THE IMAGE IN STORAGE
             $url = $parsedData['coverImage'];
             $contents = file_get_contents($url);
             $name = substr($url, strrpos($url, '/') + 1);
