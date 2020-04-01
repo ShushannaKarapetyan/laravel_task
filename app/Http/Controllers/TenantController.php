@@ -43,7 +43,7 @@ class TenantController extends Controller
 
         if ($request->hasFile('image')) {
             $request->image->store('public/images');
-            $tenantData['image'] = $request->image->hashName();;
+            $tenantData['image'] = $request->image->hashName();
         }
 
         return $tenantData;
