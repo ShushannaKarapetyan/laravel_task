@@ -59,24 +59,18 @@ class Parser extends Command
             $name = substr($url, strrpos($url, '/') + 1);
             Storage::put($name, $contents);
 
-            $parsedData['releaseDate'] = $IMDB->getReleaseDate();
             $parsedData['rating'] = $IMDB->getRating();
             $parsedData['director'] = $IMDB->getDirector();
 
             //CATEGORIES
-            $parsedData['category'] = [];
-            foreach (explode(' / ', $IMDB->getGenre()) as $row) {
-                array_push($parsedData['category'], $row);
-            }
-            $parsedData['category'] = json_encode($parsedData['category']);
+            $parsedData['category'] = json_encode(explode(' / ', $IMDB->getGenre()));
 
             //RELEASEDATE
-            $parsedData['releaseDate'] = [];
-            foreach (explode(' ', $IMDB->getReleaseDate()) as $row) {
-                array_push($parsedData['releaseDate'], $row);
-            }
+            $parsedData['releaseDate'] = explode(' ', $IMDB->getReleaseDate());
+
             //REMOVE LAST ELEMENT-COUNTRY
             array_pop($parsedData['releaseDate']);
+
             //PARSE TO TIMESTAMP
             $parsedData['releaseDate'] = Carbon::parse(implode("-", $parsedData['releaseDate']));
 
