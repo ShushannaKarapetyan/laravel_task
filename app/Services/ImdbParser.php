@@ -46,8 +46,7 @@ class ImdbParser
 
         if ($url && $url !== '') {
             $contents = file_get_contents($url);
-            $name = substr($url, strrpos($url, '/') + 1);
-            $explodedImageName = explode('.', $name);
+            $explodedImageName = explode('.', substr($url, strrpos($url, '/')));
             $extension = end($explodedImageName);
             $path = "public/covers/" . Str::random(40) . ".{$extension}";
 
