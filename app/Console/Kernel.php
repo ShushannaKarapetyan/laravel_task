@@ -26,6 +26,11 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('get:rates')
             ->everyMinute();
+
+        $schedule->command('backup:run')
+            ->daily()
+            ->at('00:00');
+
     }
 
     /**

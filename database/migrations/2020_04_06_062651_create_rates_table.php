@@ -15,10 +15,10 @@ class CreateRatesTable extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('currency')->nullable();
-            $table->float('rate')->nullable();
-            $table->string('base')->nullable();
-            $table->date('date')->nullable();
+            $table->string('currency')->unique();
+            $table->float('rate');
+            $table->string('base');
+            $table->date('date');
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class GetRates extends Command
      *
      * @var string
      */
-    protected $signature = 'get:rates';
+    protected $signature = 'get:rates {base=USD}';
 
     /**
      * The console command description.
@@ -42,8 +42,9 @@ class GetRates extends Command
         $this->line("Getting rates...");
 
         try {
-            $currencyParser = new RateGetter();
-            $currencyParser->getRates();
+            $currencyGetter = new RateGetter($this->argument('base'));
+            $currencyGetter->getRates();
+
         } catch (Exception $exception) {
             $this->error('Something went wrong, ' . $exception->getMessage());
         }

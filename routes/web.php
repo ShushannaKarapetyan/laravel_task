@@ -45,5 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::put('tenancies/{tenancy}', 'TenancyController@update')->name('tenancies.update');
     Route::delete('tenancies/{tenancy}', 'TenancyController@destroy')->name('tenancies.destroy');
 
+    Route::get('currency/converter','ConverterController@index')->name('currency.converter');
+
 });
+
 
