@@ -1,0 +1,138 @@
+body {
+  font-family: "Nunito", sans-serif;
+  /* overflow-x: hidden;*/
+}
+
+.navbar-light .navbar-nav {
+  margin: auto;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #005092;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.banner-section {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.banner-section .banner {
+  background-image: url(/images/banner.jpg?279039acab30a0aa16305e9c939cd3d9);
+  min-width: 98vw;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+.banner-section .banner .banner-details {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  width: 80%;
+}
+
+.properties {
+  margin-top: 100px;
+  width: 100%;
+}
+
+.properties .featured-properties-title {
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.properties .featured-properties-title h3 {
+  color: #005092;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+.properties .featured-properties-title hr {
+  width: 6%;
+  background: dimgrey;
+}
+
+.properties .card {
+  color: white;
+  margin: 15px 0;
+}
+
+.properties .card .property-title {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.properties .card .card-body {
+  background: #1b3d58;
+}
+
+.properties .card .card-body strong {
+  font-size: 22px;
+  color: #967c63;
+}
+
+.reviews {
+  margin-top: 85px;
+  width: 100%;
+}
+
+.reviews .reviews-title {
+  margin-bottom: 65px;
+  width: 100%;
+}
+
+.reviews .reviews-title h3 {
+  color: #005092;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+.reviews .reviews-title hr {
+  width: 6%;
+  background: dimgrey;
+}
+
+.reviews .reviews-section-img img {
+  width: 100%;
+}
+
+.reviews .review {
+  /* display: flex;*/
+  margin-top: 50px;
+}
+
+.reviews .review .review-text {
+  padding-left: 15px;
+  vertical-align: top;
+}
+
+.reviews .review .user-image {
+  width: 85px;
+  float: left;
+}
+
+.reviews .review .user-name {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.reviews .review .user-name strong {
+  text-transform: uppercase;
+  color: #005092;
+}
+
+.reviews .review hr {
+  margin-top: 40px;
+}
+

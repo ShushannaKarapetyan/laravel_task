@@ -18,14 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
+
 </head>
 <body>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
@@ -35,9 +35,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item">
+                        <a href="{{route('properties.index')}}" class="nav-link">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('tenants.index')}}" class="nav-link">Tenants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('tenancies.index')}}" class="nav-link">Tenancies</a>
+                    </li>
                 </ul>
-
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{asset('images/logo.png')}}" alt="">
+                </a>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
@@ -51,15 +61,6 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item">
-                            <a href="{{route('properties.index')}}" class="nav-link">Properties</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('tenants.index')}}" class="nav-link">Tenants</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('tenancies.index')}}" class="nav-link">Tenancies</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -81,7 +82,8 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language{{--@lang('menu.language')--}}</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">Language{{--@lang('menu.language')--}}</a>
                             <div class="dropdown-menu" aria-labelledby="languageDropdown">
                                 <a href="{{url('locale/en')}}" class="dropdown-item">
                                     <img src="{{asset('lang-icons/en.png')}}" alt="english">
@@ -100,9 +102,13 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main>
         @yield('content')
     </main>
+
+    <footer>
+
+    </footer>
 </div>
 </body>
 </html>

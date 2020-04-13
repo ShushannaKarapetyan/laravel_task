@@ -16,9 +16,7 @@ Route::get('locale/{locale?}',
     ]);
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MainController@index' );
 
 
 Auth::routes();

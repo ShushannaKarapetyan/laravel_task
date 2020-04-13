@@ -1,3 +1,4 @@
+{{--
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,6 +9,10 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+        --}}
+{{--<link rel="stylesheet" href="{{asset('css/main.css')}}">--}}{{--
+
 
         <!-- Styles -->
         <style>
@@ -98,3 +103,106 @@
         </div>
     </body>
 </html>
+--}}
+@extends('layouts.app')
+
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="banner-section">
+                <div class="banner">
+                    <div class="container">
+                        <div class="banner-details">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Error, incidunt, placeat. Commodi
+                            eaque est exercitationem id magni odit optio quod!
+                            <hr>
+                            Lorem ipsum dolor sit amet.
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="properties">
+            <div class="featured-properties-title">
+                <h3>Featured Properties</h3>
+                <hr>
+            </div>
+            <div class="row">
+                @foreach($properties as $key=>$property)
+                    <div class="col-md-3 col-lg-4 col-sm-6">
+                        <div class="card">
+                            <a href="#">
+                                <img class="card-img-top property-image" src="{{asset('images/property2.jpg')}}"
+                                     alt="">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title property-title">{{$property['name']}}</h5>
+                                <p class="property-address">{{$property['address']}}</p>
+                                <p class="card-text property-description">{{$property['description']}}</p>
+                                <strong class="property-price">$ {{$property['price']}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="reviews">
+            <div class="reviews-title">
+                <h3>Reviews</h3>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="reviews-section-img">
+                        <img src="{{asset('images/write-notes.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="review">
+                        <div class="user-image">
+                            <img src="{{asset('images/user1.png')}}" alt="">
+                        </div>
+                        <div class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa ea eveniet modi neque
+                            nostrum omnis quia, quisquam quo quos sapiente, soluta tenetur. Eos illo in ipsa perferendis
+                            quas. Aliquid!
+                        </div>
+                        <div class="user-name">
+                            <strong>
+                                Some Name
+                            </strong>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="review">
+                        <div class="user-image">
+                            <img src="{{asset('images/user2.png')}}" alt="">
+                        </div>
+                        <div class="review-text">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa ea eveniet modi
+                                neque
+                                nostrum omnis quia, quisquam quo quos sapiente, soluta tenetur. Eos illo in ipsa
+                                perferendis
+                                quas. Aliquid!</p>
+
+                        </div>
+                        <div class="user-name">
+                            <strong>
+                                Some Name
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
