@@ -80,6 +80,20 @@
                                 </form>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language{{--@lang('menu.language')--}}</a>
+                            <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <a href="{{url('locale/en')}}" class="dropdown-item">
+                                    <img src="{{asset('lang-icons/en.png')}}" alt="english">
+                                    {{--@lang('menu.english')--}}English
+
+                                </a>
+                                <a href="{{url('locale/ru')}}" class="dropdown-item">
+                                    <img src="{{asset('lang-icons/ru.png')}}" alt="russian">
+                                    {{--@lang('menu.russian')--}} Russian
+                                </a>
+                            </div>
+                        </li>
                     @endguest
                 </ul>
             </div>

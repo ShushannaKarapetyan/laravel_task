@@ -1,19 +1,25 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+/*This link will add session of language when they click to change language*/
+
+//Route::get('locale/{locale}', function ($locale) {
+    /*Session::put('locale',$locale);*/
+
+   // return back();
+//});
+
+
+Route::get('locale/{locale?}',
+    [
+        'as' => 'locale.setlocale',
+        'uses' => 'LocaleController@setLocale'
+    ]);
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Auth::routes();
 
@@ -45,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::put('tenancies/{tenancy}', 'TenancyController@update')->name('tenancies.update');
     Route::delete('tenancies/{tenancy}', 'TenancyController@destroy')->name('tenancies.destroy');
 
-    Route::get('currency/converter','ConverterController@index')->name('currency.converter');
+    Route::get('currency/converter', 'ConverterController@index')->name('currency.converter');
 
 });
 

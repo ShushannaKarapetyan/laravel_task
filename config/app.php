@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Barryvdh\TranslationManager\TranslationServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -226,7 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        //'TranslationCache' => \Waavi\Translation\Facades\TranslationCache::class,
     ],
 
 ];

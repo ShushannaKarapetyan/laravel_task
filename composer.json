@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "backup-manager/backup-manager": "^3.0",
+        "barryvdh/laravel-translation-manager": "^0.5.8",
         "fabianbeiner/php-imdb-grabber": "^6.1",
         "fabpot/goutte": "^4.0",
         "fideloper/proxy": "^4.0",
