@@ -16,11 +16,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-
 </head>
 <body>
 <div id="app">
@@ -81,22 +83,22 @@
                                 </form>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">Language{{--@lang('menu.language')--}}</a>
-                            <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <a href="{{url('locale/en')}}" class="dropdown-item">
-                                    <img src="{{asset('lang-icons/en.png')}}" alt="english">
-                                    {{--@lang('menu.english')--}}English
-
-                                </a>
-                                <a href="{{url('locale/ru')}}" class="dropdown-item">
-                                    <img src="{{asset('lang-icons/ru.png')}}" alt="russian">
-                                    {{--@lang('menu.russian')--}} Russian
-                                </a>
-                            </div>
-                        </li>
                     @endguest
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Language{{--@lang('menu.language')--}}</a>
+                        <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <a href="{{url('locale/en')}}" class="dropdown-item">
+                                <img src="{{asset('lang-icons/en.png')}}" alt="english">
+                                English
+
+                            </a>
+                            <a href="{{url('locale/ru')}}" class="dropdown-item">
+                                <img src="{{asset('lang-icons/ru.png')}}" alt="russian">
+                                Russian
+                            </a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -107,7 +109,55 @@
     </main>
 
     <footer>
-
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="information">
+                        <h3 class="title">Information</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>+1 212-758-8877</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>1 E 57th St, New York</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <span>10AM - 9PM</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="features">
+                        <h3 class="title">Features</h3>
+                        <ul>
+                            <li>
+                                <a href="{{route('properties.index')}}">Properties</a>
+                            </li>
+                            <li>
+                                <a href="{{route('tenants.index')}}">Tenants</a>
+                            </li>
+                            <li>
+                                <a href="{{route('tenancies.index')}}">Tenancies</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="social-pages">
+                        <h3 class="title">Social Pages</h3>
+                        <ul>
+                            <li><i class="fab fa-facebook-f"></i></li>
+                            <li><i class="fab fa-instagram"></i></li>
+                            <li><i class="fab fa-twitter"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 </div>
 </body>

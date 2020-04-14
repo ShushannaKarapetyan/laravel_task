@@ -205,4 +205,168 @@
         </div>
     </div>
 
+    <div class="container-fluid">
+        <div class="resent-posts">
+            <div class="post-title">
+                <h3>Recent Posts</h3>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-image">
+                                    <img src="{{asset('images/posts/post1.jpg')}}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-info">
+                                    <h3>Properties in Beverly Hills</h3>
+                                    <p class="date">August 17, 2019</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-image">
+                                    <img src="{{asset('images/posts/post2.jpg')}}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-info">
+                                    <h3>Properties in Beverly Hills</h3>
+                                    <p class="date">August 17, 2019</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-info">
+                                    <h3>Properties in Beverly Hills</h3>
+                                    <p class="date">August 17, 2019</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-image">
+                                    <img src="{{asset('images/posts/post3.jpg')}}" alt="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-info">
+                                    <h3>Properties in Beverly Hills</h3>
+                                    <p class="date">August 17, 2019</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6-col-sm-12">
+                                <div class="post-image">
+                                    <img src="{{asset('images/posts/post4.jpg')}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="our-team">
+            <div class="team-title">
+                <h3>Our team</h3>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <div class="member-image">
+                            <a href="">
+                                <img class="card-img-top" src="{{asset('images/team-members/member1.jpeg')}}"
+                                     alt="">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title member-name">Member 1</h5>
+                            <p class="position">Douglas And Eleman Agency</p>
+                            <p class="card-text about-member">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Accusamus consectetur cupiditate, deserunt est ex modi.</p>
+                            <div class="view-profile-btn">
+                                <button class="btn">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <div class="member-image">
+                            <a href="">
+                                <img class="card-img-top" src="{{asset('images/team-members/member2.jpeg')}}"
+                                     alt="">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title member-name">Member 2</h5>
+                            <p class="position">Property Owner</p>
+                            <p class="card-text about-member">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Accusamus consectetur cupiditate, deserunt est ex modi.</p>
+                            <div class="view-profile-btn">
+                                <button class="btn">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <div class="member-image">
+                            <a href="">
+                                <img class="card-img-top" src="{{asset('images/team-members/member3.png')}}"
+                                     alt="">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title member-name">Member 3</h5>
+                            <p class="position">Douglas And Eleman Agency</p>
+                            <p class="card-text about-member">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Accusamus consectetur cupiditate, deserunt est ex modi.</p>
+                            <div class="view-profile-btn">
+                                <button class="btn">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
