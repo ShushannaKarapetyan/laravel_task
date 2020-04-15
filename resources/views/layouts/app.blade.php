@@ -38,13 +38,13 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="{{route('properties.index')}}" class="nav-link">Properties</a>
+                        <a href="{{route('properties.index')}}" class="nav-link">@lang('menu.properties')</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('tenants.index')}}" class="nav-link">Tenants</a>
+                        <a href="{{route('tenants.index')}}" class="nav-link">@lang('menu.tenants')</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('tenancies.index')}}" class="nav-link">Tenancies</a>
+                        <a href="{{route('tenancies.index')}}" class="nav-link">@lang('menu.tenancies')</a>
                     </li>
                 </ul>
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -55,11 +55,11 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">@lang('menu.login')</a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">@lang('menu.register')</a>
                             </li>
                         @endif
                     @else
@@ -70,11 +70,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('/home') }}">Home</a>
+                                <a class="dropdown-item" href="{{ url('/home') }}">@lang('menu.home')</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    @lang('menu.logout')
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -86,16 +86,16 @@
                     @endguest
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Language{{--@lang('menu.language')--}}</a>
+                           aria-haspopup="true" aria-expanded="false">@lang('menu.language')</a>
                         <div class="dropdown-menu" aria-labelledby="languageDropdown">
                             <a href="{{url('locale/en')}}" class="dropdown-item">
                                 <img src="{{asset('lang-icons/en.png')}}" alt="english">
-                                English
+                                @lang('menu.english')
 
                             </a>
                             <a href="{{url('locale/ru')}}" class="dropdown-item">
                                 <img src="{{asset('lang-icons/ru.png')}}" alt="russian">
-                                Russian
+                                @lang('menu.russian')
                             </a>
                         </div>
                     </li>
@@ -109,51 +109,53 @@
     </main>
 
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="information">
-                        <h3 class="title">Information</h3>
-                        <ul>
-                            <li>
-                                <i class="fas fa-phone"></i>
-                                <span>+1 212-758-8877</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>1 E 57th St, New York</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-clock"></i>
-                                <span>10AM - 9PM</span>
-                            </li>
-                        </ul>
+        <div class="footer-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="information">
+                            <h3 class="title">Information</h3>
+                            <ul>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <span>+1 212-758-8877</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>1 E 57th St, New York</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    <span>10AM - 9PM</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="features">
-                        <h3 class="title">Features</h3>
-                        <ul>
-                            <li>
-                                <a href="{{route('properties.index')}}">Properties</a>
-                            </li>
-                            <li>
-                                <a href="{{route('tenants.index')}}">Tenants</a>
-                            </li>
-                            <li>
-                                <a href="{{route('tenancies.index')}}">Tenancies</a>
-                            </li>
-                        </ul>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="features">
+                            <h3 class="title">Features</h3>
+                            <ul>
+                                <li>
+                                    <a href="{{route('properties.index')}}">Properties</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('tenants.index')}}">Tenants</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('tenancies.index')}}">Tenancies</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="social-pages">
-                        <h3 class="title">Social Pages</h3>
-                        <ul>
-                            <li><i class="fab fa-facebook-f"></i></li>
-                            <li><i class="fab fa-instagram"></i></li>
-                            <li><i class="fab fa-twitter"></i></li>
-                        </ul>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="social-pages">
+                            <h3 class="title">Social Pages</h3>
+                            <ul>
+                                <li><i class="fab fa-facebook-f"></i></li>
+                                <li><i class="fab fa-instagram"></i></li>
+                                <li><i class="fab fa-twitter"></i></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

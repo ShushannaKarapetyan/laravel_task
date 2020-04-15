@@ -1,10 +1,10 @@
-$font-family: 'Nunito', sans-serif;
 $tagsColor: #005092;
 $darkBlue: #1b3d58;
+$uppercase: uppercase;
 
 body {
-    font-family: $font-family;
-    /* overflow-x: hidden;*/
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
 }
 
 .navbar-light {
@@ -16,7 +16,7 @@ body {
             color: $tagsColor;
             font-weight: 700;
             font-size: 15px;
-            text-transform: uppercase;
+            text-transform: $uppercase;
         }
     }
 
@@ -51,6 +51,7 @@ body {
 .properties {
     margin-top: 100px;
     width: 100%;
+    padding-bottom: 85px;
 
     .featured-properties-title {
         margin-bottom: 50px;
@@ -59,7 +60,7 @@ body {
         h3 {
             color: $tagsColor;
             text-align: center;
-            text-transform: uppercase;
+            text-transform: $uppercase;
             font-size: 30px;
         }
 
@@ -75,7 +76,7 @@ body {
 
         .property-title {
             margin-bottom: 10px;
-            text-transform: uppercase;
+            text-transform: $uppercase;
             font-weight: 600;
         }
 
@@ -91,9 +92,9 @@ body {
 }
 
 .reviews {
-
-    margin-top: 85px;
+    padding: 85px 0;
     width: 100%;
+    background: white;
 
     .reviews-title {
         margin-bottom: 65px;
@@ -102,7 +103,7 @@ body {
         h3 {
             color: $tagsColor;
             text-align: center;
-            text-transform: uppercase;
+            text-transform: $uppercase;
             font-size: 30px;
         }
 
@@ -117,7 +118,6 @@ body {
     }
 
     .review {
-        /* display: flex;*/
         margin-top: 50px;
 
         .review-text {
@@ -135,7 +135,7 @@ body {
             text-align: center;
 
             strong {
-                text-transform: uppercase;
+                text-transform: $uppercase;
                 color: $tagsColor;
             }
         }
@@ -147,9 +147,60 @@ body {
     }
 }
 
-.our-team {
-    margin: 85px 0;
+.resent-posts {
     width: 100%;
+    padding: 85px 20px;
+
+    .resent-posts-title {
+        margin-bottom: 65px;
+        width: 100%;
+
+        h3 {
+            color: $tagsColor;
+            text-align: center;
+            text-transform: $uppercase;
+            font-size: 30px;
+        }
+
+        hr {
+            width: 6%;
+            background: dimgrey;
+        }
+    }
+
+    .post {
+
+        .post-image {
+            width: 100%;
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .post-info {
+            padding: 50px 30px 85px 30px;
+            background: white;
+
+            h3 {
+                color: $tagsColor;
+            }
+        }
+
+        .col-lg-6 {
+            padding: 0;
+        }
+    }
+
+}
+
+.our-team {
+    width: 100%;
+    padding: 85px 0;
+    background: white;
 
     .team-title {
         margin-bottom: 65px;
@@ -158,7 +209,7 @@ body {
         h3 {
             color: $tagsColor;
             text-align: center;
-            text-transform: uppercase;
+            text-transform: $uppercase;
             font-size: 30px;
         }
 
@@ -170,6 +221,7 @@ body {
 
     .card {
         padding: 25px;
+        margin-bottom: 30px;
 
         .member-image {
             max-height: 200px;
@@ -192,7 +244,7 @@ body {
 
                 button {
                     border: 1px solid #c5ad6f;
-                    text-transform: uppercase;
+                    text-transform: $uppercase;
                     font-size: 12px;
                     padding: 10px 20px;
 
@@ -210,132 +262,98 @@ body {
             text-align: center;
             color: $tagsColor;
             font-size: 15px;
-            text-transform: uppercase;
+            text-transform: $uppercase;
         }
     }
 }
-
-.resent-posts {
-
-    margin: 85px 0;
-    width: 100%;
-    padding: 0 20px;
-
-    .post-title {
-        margin-bottom: 65px;
-        width: 100%;
-
-        h3 {
-            color: $tagsColor;
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 30px;
-        }
-
-        hr {
-            width: 6%;
-            background: dimgrey;
-        }
-    }
-
-    .post-image {
-        width: 100%;
-        height: 100%;
-
-        img {
-            width: 100%;
-        }
-    }
-}
-
 
 footer {
     background: $darkBlue;
     color: white;
 
-    .information {
+    .footer-content {
+
         padding: 100px 0;
-        text-align: center;
-        font-size: 15px;
 
-        ul {
-            list-style: none;
-            padding: 0;
+        .information {
+            text-align: center;
+            font-size: 15px;
 
-            li {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 15px;
+            ul {
+                list-style: none;
+                padding: 0;
 
-                .fa-phone {
-                    transform: rotate(90deg);
-                }
+                li {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 15px;
 
-                .fas {
-                    margin-left: 110px;
-                }
+                    .fa-phone {
+                        transform: rotate(90deg);
+                    }
 
-                span {
-                    color: #8da4b7;
+                    .fas {
+                        margin-left: 110px;
+                    }
+
+                    span {
+                        color: #8da4b7;
+                        margin-left: 20px;
+                    }
                 }
             }
         }
-    }
 
-    .features {
-        padding: 100px 0;
-        text-align: center;
-        font-size: 15px;
+        .features {
+            text-align: center;
+            font-size: 15px;
 
-        ul {
-            list-style: none;
-            padding: 0;
+            ul {
+                list-style: none;
+                padding: 0;
 
-            li {
-                margin-bottom: 15px;
-                position: relative;
+                li {
+                    margin-bottom: 15px;
+                    position: relative;
 
-                a {
-                    color: #8da4b7;
-                    letter-spacing: 2px;
+                    a {
+                        color: #8da4b7;
+                        letter-spacing: 2px;
 
-                    &:hover {
-                        text-decoration: none;
+                        &:hover {
+                            text-decoration: none;
+                        }
+
                     }
 
                 }
-
             }
         }
-    }
 
-    .social-pages {
-        padding: 100px 0;
-        text-align: center;
-        font-size: 15px;
+        .social-pages {
+            text-align: center;
+            font-size: 15px;
 
-        ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
+            ul {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                padding: 0;
 
-            li {
-                margin: 0 20px;
+                li {
+                    margin: 0 20px;
+                }
             }
         }
+
+        .title {
+            font-size: 13px;
+            text-transform: $uppercase;
+            margin: 25px 0;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
     }
-
-    .title {
-        font-size: 13px;
-        text-transform: uppercase;
-        margin: 25px 0;
-        letter-spacing: 3px;
-        font-weight: 600;
-    }
-
-
 }
 
 

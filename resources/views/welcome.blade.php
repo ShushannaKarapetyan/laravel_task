@@ -126,8 +126,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="properties">
+    <div class="properties">
+        <div class="container">
             <div class="featured-properties-title">
                 <h3>Featured Properties</h3>
                 <hr>
@@ -141,9 +141,9 @@
                                      alt="">
                             </a>
                             <div class="card-body">
-                                <h5 class="card-title property-title">{{$property['name']}}</h5>
+                                <h5 class="card-title property-title">{{$property["name_{$locale}"]}}</h5>
                                 <p class="property-address">{{$property['address']}}</p>
-                                <p class="card-text property-description">{{$property['description']}}</p>
+                                <p class="card-text property-description">{{$property["description_{$locale}"]}}</p>
                                 <strong class="property-price">$ {{$property['price']}}</strong>
                             </div>
                         </div>
@@ -153,8 +153,9 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="reviews">
+
+    <div class="reviews">
+        <div class="container">
             <div class="reviews-title">
                 <h3>Reviews</h3>
                 <hr>
@@ -205,9 +206,10 @@
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="resent-posts">
-            <div class="post-title">
+
+    <div class="resent-posts">
+        <div class="container-fluid">
+            <div class="resent-posts-title">
                 <h3>Recent Posts</h3>
                 <hr>
             </div>
@@ -215,18 +217,21 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="post">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6-col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="post-image">
                                     <img src="{{asset('images/posts/post1.jpg')}}" alt="">
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6-col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="post-info">
-                                    <h3>Properties in Beverly Hills</h3>
+                                    <h3>Properties In Beverly Hills</h3>
                                     <p class="date">August 17, 2019</p>
-                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                        aut beatae blanditiis fugit molestias perspiciatis praesentium sapiente soluta
+                                        unde vel! Ab alias assumenda dolore facilis in labore nostrum quasi saepe vitae!
+                                        A accusamus aliquid at cupiditate ipsa iste minus molestiae nam, perspiciatis
+                                        quam quasi quo quod quos reprehenderit rerum velit!</p>
                                 </div>
                             </div>
                         </div>
@@ -246,8 +251,11 @@
                                 <div class="post-info">
                                     <h3>Properties in Beverly Hills</h3>
                                     <p class="date">August 17, 2019</p>
-                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                        aut beatae blanditiis fugit molestias perspiciatis praesentium sapiente soluta
+                                        unde vel! Ab alias assumenda dolore facilis in labore nostrum quasi saepe vitae!
+                                        A accusamus aliquid at cupiditate ipsa iste minus molestiae nam, perspiciatis
+                                        quam quasi quo quod quos reprehenderit rerum velit!</p>
                                 </div>
                             </div>
                         </div>
@@ -261,8 +269,11 @@
                                 <div class="post-info">
                                     <h3>Properties in Beverly Hills</h3>
                                     <p class="date">August 17, 2019</p>
-                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                        aut beatae blanditiis fugit molestias perspiciatis praesentium sapiente soluta
+                                        unde vel! Ab alias assumenda dolore facilis in labore nostrum quasi saepe vitae!
+                                        A accusamus aliquid at cupiditate ipsa iste minus molestiae nam, perspiciatis
+                                        quam quasi quo quod quos reprehenderit rerum velit!</p>
                                 </div>
                             </div>
 
@@ -282,8 +293,11 @@
                                 <div class="post-info">
                                     <h3>Properties in Beverly Hills</h3>
                                     <p class="date">August 17, 2019</p>
-                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Aliquid dolore expedita fuga rerum sit ullam!</p>
+                                    <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                                        aut beatae blanditiis fugit molestias perspiciatis praesentium sapiente soluta
+                                        unde vel! Ab alias assumenda dolore facilis in labore nostrum quasi saepe vitae!
+                                        A accusamus aliquid at cupiditate ipsa iste minus molestiae nam, perspiciatis
+                                        quam quasi quo quod quos reprehenderit rerum velit!</p>
                                 </div>
                             </div>
 
@@ -299,8 +313,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="our-team">
+    <div class="our-team">
+        <div class="container">
             <div class="team-title">
                 <h3>Our team</h3>
                 <hr>

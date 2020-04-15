@@ -1,6 +1,6 @@
 body {
   font-family: "Nunito", sans-serif;
-  /* overflow-x: hidden;*/
+  overflow-x: hidden;
 }
 
 .navbar-light .navbar-nav {
@@ -42,6 +42,7 @@ body {
 .properties {
   margin-top: 100px;
   width: 100%;
+  padding-bottom: 85px;
 }
 
 .properties .featured-properties-title {
@@ -82,8 +83,9 @@ body {
 }
 
 .reviews {
-  margin-top: 85px;
+  padding: 85px 0;
   width: 100%;
+  background: white;
 }
 
 .reviews .reviews-title {
@@ -108,7 +110,6 @@ body {
 }
 
 .reviews .review {
-  /* display: flex;*/
   margin-top: 50px;
 }
 
@@ -136,9 +137,57 @@ body {
   margin-top: 40px;
 }
 
-.our-team {
-  margin: 85px 0;
+.resent-posts {
   width: 100%;
+  padding: 85px 20px;
+}
+
+.resent-posts .resent-posts-title {
+  margin-bottom: 65px;
+  width: 100%;
+}
+
+.resent-posts .resent-posts-title h3 {
+  color: #005092;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+.resent-posts .resent-posts-title hr {
+  width: 6%;
+  background: dimgrey;
+}
+
+.resent-posts .post .post-image {
+  width: 100%;
+  height: 100%;
+}
+
+.resent-posts .post .post-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.resent-posts .post .post-info {
+  padding: 50px 30px 85px 30px;
+  background: white;
+}
+
+.resent-posts .post .post-info h3 {
+  color: #005092;
+}
+
+.resent-posts .post .col-lg-6 {
+  padding: 0;
+}
+
+.our-team {
+  width: 100%;
+  padding: 85px 0;
+  background: white;
 }
 
 .our-team .team-title {
@@ -160,6 +209,7 @@ body {
 
 .our-team .card {
   padding: 25px;
+  margin-bottom: 30px;
 }
 
 .our-team .card .member-image {
@@ -201,116 +251,85 @@ body {
   text-transform: uppercase;
 }
 
-.resent-posts {
-  margin: 85px 0;
-  width: 100%;
-  padding: 0 20px;
-}
-
-.resent-posts .post-title {
-  margin-bottom: 65px;
-  width: 100%;
-}
-
-.resent-posts .post-title h3 {
-  color: #005092;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 30px;
-}
-
-.resent-posts .post-title hr {
-  width: 6%;
-  background: dimgrey;
-}
-
-.resent-posts .post-image {
-  width: 100%;
-  height: 100%;
-}
-
-.resent-posts .post-image img {
-  width: 100%;
-}
-
 footer {
   background: #1b3d58;
   color: white;
 }
 
-footer .information {
+footer .footer-content {
   padding: 100px 0;
+}
+
+footer .footer-content .information {
   text-align: center;
   font-size: 15px;
 }
 
-footer .information ul {
+footer .footer-content .information ul {
   list-style: none;
   padding: 0;
 }
 
-footer .information ul li {
+footer .footer-content .information ul li {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
 
-footer .information ul li .fa-phone {
+footer .footer-content .information ul li .fa-phone {
   transform: rotate(90deg);
 }
 
-footer .information ul li .fas {
+footer .footer-content .information ul li .fas {
   margin-left: 110px;
 }
 
-footer .information ul li span {
+footer .footer-content .information ul li span {
   color: #8da4b7;
+  margin-left: 20px;
 }
 
-footer .features {
-  padding: 100px 0;
+footer .footer-content .features {
   text-align: center;
   font-size: 15px;
 }
 
-footer .features ul {
+footer .footer-content .features ul {
   list-style: none;
   padding: 0;
 }
 
-footer .features ul li {
+footer .footer-content .features ul li {
   margin-bottom: 15px;
   position: relative;
 }
 
-footer .features ul li a {
+footer .footer-content .features ul li a {
   color: #8da4b7;
   letter-spacing: 2px;
 }
 
-footer .features ul li a:hover {
+footer .footer-content .features ul li a:hover {
   text-decoration: none;
 }
 
-footer .social-pages {
-  padding: 100px 0;
+footer .footer-content .social-pages {
   text-align: center;
   font-size: 15px;
 }
 
-footer .social-pages ul {
+footer .footer-content .social-pages ul {
   list-style: none;
   display: flex;
   justify-content: center;
   padding: 0;
 }
 
-footer .social-pages ul li {
+footer .footer-content .social-pages ul li {
   margin: 0 20px;
 }
 
-footer .title {
+footer .footer-content .title {
   font-size: 13px;
   text-transform: uppercase;
   margin: 25px 0;
