@@ -3,9 +3,9 @@
 /*This link will add session of language when they click to change language*/
 
 //Route::get('locale/{locale}', function ($locale) {
-    /*Session::put('locale',$locale);*/
+/*Session::put('locale',$locale);*/
 
-   // return back();
+// return back();
 //});
 
 
@@ -16,7 +16,7 @@ Route::get('locale/{locale?}',
     ]);
 
 
-Route::get('/', 'MainController@index' );
+Route::get('/', 'MainController@index');
 
 
 Auth::routes();
@@ -53,4 +53,6 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::get('/excel/export', 'ExcelController@export');
+Route::get('/excel/import', 'ExcelController@import');
 

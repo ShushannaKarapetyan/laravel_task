@@ -11,10 +11,11 @@ class MainController extends Controller
     {
         $properties = Property::select('name_en', 'name_ru', 'address', 'description_en', 'description_ru', 'price')->get()->toArray();
 
+        $locale = Cookie::get('locale','en');
 
         return view('welcome', [
             'properties' => $properties,
-            'locale' => Cookie::get('locale')
+            'locale' => $locale
         ]);
     }
 
