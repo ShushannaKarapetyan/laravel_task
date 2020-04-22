@@ -164,6 +164,7 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         Barryvdh\TranslationManager\TranslationServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        TelegramNotifications\TelegramServiceProvider::class,
 
         /*
          * Package Service Providers...

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StoredTenProperties;
 use App\Http\Requests\PropertyRequest;
+use App\Notifications\LaravelTelegramNotification;
 use App\Property;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 
 class PropertyController extends Controller
@@ -16,8 +19,11 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        $locale = Cookie::get('locale', 'en');
+
         return view('property.index', [
-            'properties' => auth()->user()->properties()->paginate(5)
+            'properties' => auth()->user()->properties()->paginate(5),
+            'locale' => $locale
         ]);
     }
 
@@ -38,8 +44,15 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
-        $propertyData = $request->only(['name', 'address', 'description', 'price']);
+        $propertyData = $request->only(['name_en', 'name_ru', 'address', 'description_en', 'description_ru', 'price']);
         auth()->user()->properties()->create($propertyData);
+
+        if (Property::count() % 10 === 0) {
+
+            StoredTenProperties::dispatch();
+
+            auth()->user()->notify(new LaravelTelegramNotification());
+        }
 
         return redirect(route('properties.index'))
             ->with('success', 'Property saved successfully.');
@@ -54,8 +67,11 @@ class PropertyController extends Controller
     {
         $this->authorize('view', $property);
 
+        $locale = Cookie::get('locale', 'en');
+
         return view('property.show', [
-            'property' => $property
+            'property' => $property,
+            'locale' => $locale
         ]);
     }
 
@@ -80,7 +96,7 @@ class PropertyController extends Controller
      */
     public function update(PropertyRequest $request, Property $property)
     {
-        $propertyData = $request->only(['name', 'address', 'description', 'price']);
+        $propertyData = $request->only(['name_en', 'name_ru', 'address', 'description_en', 'description_ru', 'price']);
         $property->update($propertyData);
 
         return redirect(route('properties.index'))

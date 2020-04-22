@@ -31,11 +31,11 @@
                                     <tr>
                                         <td>
                                             <a href="{{route('properties.show',$property)}}" style="color: black">
-                                                {{$property->name}}
+                                                {{$property["name_{$locale}"]}}
                                             </a>
                                         </td>
                                         <td>{{$property->address}}</td>
-                                        <td>{{$property->description}}</td>
+                                        <td>{{Str::limit($property["description_{$locale}"],20, '...')}}</td>
                                         <td>{{$property->price}}</td>
                                         <td>
                                             <a href="{{route('properties.edit',$property)}}"

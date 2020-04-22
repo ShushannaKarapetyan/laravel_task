@@ -62,4 +62,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tenancy::class);
     }
+
+
+    /**
+     * Return Telegram user_id of the user
+     *
+     * @return mixed
+     */
+    public function routeNotificationForTelegram()
+    {
+        return 669738190;
+    }
 }

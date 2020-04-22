@@ -27,9 +27,11 @@ class PropertyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:properties,name' . ($this->property ? ",{$this->property->id}" : ''),
+            'name_en' => 'required|string|max:255|unique:properties,name_en' . ($this->property ? ",{$this->property->id}" : ''),
+            'name_ru' => 'required|string|max:255|unique:properties,name_ru' . ($this->property ? ",{$this->property->id}" : ''),
             'address' => 'required|string',
-            'description' => 'required',
+            'description_en' => 'required',
+            'description_ru' => 'required',
             'price' => 'required|numeric'
         ];
     }

@@ -13,13 +13,26 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">Name in English</label>
                                 <input type="text"
                                        placeholder="Name"
-                                       class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
-                                       name="name"
-                                       value="{{$property->name}}">
-                                @error('name')
+                                       class="form-control {{$errors->has('name_en') ? 'is-invalid' : ''}}"
+                                       name="name_en"
+                                       value="{{$property->name_en}}">
+                                @error('name_en')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name in Russian</label>
+                                <input type="text"
+                                       placeholder="Name"
+                                       class="form-control {{$errors->has('name_ru') ? 'is-invalid' : ''}}"
+                                       name="name_ru"
+                                       value="{{$property->name_ru}}">
+                                @error('name_ru')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -39,13 +52,26 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="description">Description</label>
+                                <label for="description">Description in English</label>
                                 <input type="text"
                                        placeholder="Description"
-                                       class="form-control {{$errors->has('description') ? 'is-invalid' : ''}}"
-                                       name="description"
-                                       value="{{$property->description}}">
-                                @error('description')
+                                       class="form-control {{$errors->has('description_en') ? 'is-invalid' : ''}}"
+                                       name="description_en"
+                                       value="{{$property->description_en}}">
+                                @error('description_en')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description in Russian</label>
+                                <input type="text"
+                                       placeholder="Description"
+                                       class="form-control {{$errors->has('description_ru') ? 'is-invalid' : ''}}"
+                                       name="description_ru"
+                                       value="{{$property->description_ru}}">
+                                @error('description_ru')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

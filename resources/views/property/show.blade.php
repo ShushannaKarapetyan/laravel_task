@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <p>Name</p>
                 <h3>
-                    {{$property->name}}
+                    {{$property["name_{$locale}"]}}
                 </h3>
                 <p>Address</p>
                 <h3>
@@ -14,7 +14,7 @@
                 </h3>
                 <p>Description</p>
                 <h3>
-                    {{$property->description}}
+                    {{$property["description_$locale"]}}
                 </h3>
                 <p>Price</p>
                 <h3>
