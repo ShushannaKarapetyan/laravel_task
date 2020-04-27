@@ -9,15 +9,15 @@ class StoredTenProperties
 {
     use Dispatchable, SerializesModels;
 
+    public $mailingList = [];
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param array $mailingList
      */
-    public function __construct()
+    public function __construct(array $mailingList)
     {
-        //
+        $this->mailingList = $mailingList;
     }
-
-
 }

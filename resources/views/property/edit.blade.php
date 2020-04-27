@@ -8,7 +8,7 @@
                     <div class="card-header">
                         Update Property
                     </div>
-                    <form action="{{route('properties.update',$property)}}" method="POST">
+                    <form action="{{ route('properties.update', $property) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -16,9 +16,9 @@
                                 <label for="name">Name in English</label>
                                 <input type="text"
                                        placeholder="Name"
-                                       class="form-control {{$errors->has('name_en') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('name_en') ? 'is-invalid' : '' }}"
                                        name="name_en"
-                                       value="{{$property->name_en}}">
+                                       value="{{ $property->name_en }}">
                                 @error('name_en')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -29,9 +29,9 @@
                                 <label for="name">Name in Russian</label>
                                 <input type="text"
                                        placeholder="Name"
-                                       class="form-control {{$errors->has('name_ru') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('name_ru') ? 'is-invalid' : '' }}"
                                        name="name_ru"
-                                       value="{{$property->name_ru}}">
+                                       value="{{ $property->name_ru }}">
                                 @error('name_ru')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -42,9 +42,9 @@
                                 <label for="address">Address</label>
                                 <input type="text"
                                        placeholder="Address"
-                                       class="form-control {{$errors->has('address') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
                                        name="address"
-                                       value="{{$property->address}}">
+                                       value="{{ $property->address }}">
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -55,9 +55,9 @@
                                 <label for="description">Description in English</label>
                                 <input type="text"
                                        placeholder="Description"
-                                       class="form-control {{$errors->has('description_en') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('description_en') ? 'is-invalid' : '' }}"
                                        name="description_en"
-                                       value="{{$property->description_en}}">
+                                       value="{{ $property->description_en }}">
                                 @error('description_en')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -68,9 +68,9 @@
                                 <label for="description">Description in Russian</label>
                                 <input type="text"
                                        placeholder="Description"
-                                       class="form-control {{$errors->has('description_ru') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('description_ru') ? 'is-invalid' : '' }}"
                                        name="description_ru"
-                                       value="{{$property->description_ru}}">
+                                       value="{{ $property->description_ru }}">
                                 @error('description_ru')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -81,9 +81,9 @@
                                 <label for="price">Price</label>
                                 <input type="text"
                                        placeholder="Price"
-                                       class="form-control {{$errors->has('price') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}"
                                        name="price"
-                                       value="{{$property->price}}">
+                                       value="{{ $property->price }}">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

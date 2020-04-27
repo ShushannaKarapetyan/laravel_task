@@ -3,11 +3,9 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use TelegramNotifications\Messages\TelegramMessage;
 use TelegramNotifications\TelegramChannel;
-
 
 class LaravelTelegramNotification extends Notification
 {
@@ -33,10 +31,12 @@ class LaravelTelegramNotification extends Notification
         return [TelegramChannel::class];
     }
 
+    /**
+     * @return mixed
+     */
     public function toTelegram()
     {
         return (new TelegramMessage())
             ->text('Hello, Telegram!');
     }
-
 }

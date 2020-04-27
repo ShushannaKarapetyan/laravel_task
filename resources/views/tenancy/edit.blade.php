@@ -8,7 +8,7 @@
                     <div class="card-header">
                         Update Tenancy
                     </div>
-                    <form action="{{route('tenancies.update',$tenancy)}}" method="POST">
+                    <form action="{{ route('tenancies.update', $tenancy) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -17,10 +17,10 @@
                                 <select name="property_id" class="form-control">
                                     @foreach($properties as $property=>$value)
                                         <option
-                                            value="{{$property}}"
-                                            {{($property === $tenancy->property_id) ? 'selected' : ''}}
+                                            value="{{ $property }}"
+                                            {{ ($property === $tenancy->property_id) ? 'selected' : '' }}
                                         >
-                                            {{$value}}
+                                            {{ $value }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -30,10 +30,10 @@
                                 <select name="tenant_id" class="form-control">
                                     @foreach($tenants as $tenant=>$value)
                                         <option
-                                            value="{{$tenant}}"
-                                            {{($tenant === $tenancy->tenant_id) ? 'selected' : ''}}
+                                            value="{{ $tenant }}"
+                                            {{ ($tenant === $tenancy->tenant_id) ? 'selected' : '' }}
                                         >
-                                            {{$value}}
+                                            {{ $value }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -41,9 +41,9 @@
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
                                 <input type="date"
-                                       class="form-control {{($errors->has('start_date') or $errors->has('period')) ? 'is-invalid' : ''}}"
+                                       class="form-control {{ ($errors->has('start_date') or $errors->has('period')) ? 'is-invalid' : '' }}"
                                        name="start_date"
-                                       value="{{Carbon\Carbon::parse($tenancy->start_date)->format('Y-m-d')}}">
+                                       value="{{ Carbon\Carbon::parse($tenancy->start_date)->format('Y-m-d') }}">
                                 @error('start_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -53,9 +53,9 @@
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
                                 <input type="date"
-                                       class="form-control {{($errors->has('end_date') or $errors->has('period')) ? 'is-invalid' : ''}}"
+                                       class="form-control {{ ($errors->has('end_date') or $errors->has('period')) ? 'is-invalid' : '' }}"
                                        name="end_date"
-                                       value="{{Carbon\Carbon::parse($tenancy->end_date)->format('Y-m-d')}}">
+                                       value="{{ Carbon\Carbon::parse($tenancy->end_date)->format('Y-m-d') }}">
                                 @error('end_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -72,8 +72,8 @@
                                 <input type="text"
                                        name="monthly_rent"
                                        placeholder="Monthly Rent"
-                                       class="form-control {{$errors->has('monthly_rent') ? 'is-invalid' : ''}}"
-                                       value="{{$tenancy->monthly_rent}}">
+                                       class="form-control {{ $errors->has('monthly_rent') ? 'is-invalid' : '' }}"
+                                       value="{{ $tenancy->monthly_rent }}">
                                 @error('monthly_rent')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

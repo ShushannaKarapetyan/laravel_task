@@ -15,9 +15,9 @@ class PropertyPolicy
      *
      * @param User $user
      * @param Property $property
-     * @return mixed
+     * @return bool
      */
-    public function view(User $user, Property $property)
+    public function view(User $user, Property $property): bool
     {
         return $property->user_id === $user->id;
     }
@@ -26,15 +26,12 @@ class PropertyPolicy
      * Determine whether the user can create properties.
      *
      * @param User $user
-     * @return mixed
+     *
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if (!$user->is_admin) {
-            return true;
-        }
-
-        return false;
+        return !$user->is_admin;
     }
 
     /**
@@ -42,9 +39,9 @@ class PropertyPolicy
      *
      * @param User $user
      * @param Property $property
-     * @return mixed
+     * @return bool
      */
-    public function update(User $user, Property $property)
+    public function update(User $user, Property $property): bool
     {
         return $property->user_id === $user->id;
     }
@@ -54,11 +51,10 @@ class PropertyPolicy
      *
      * @param User $user
      * @param Property $property
-     * @return mixed
+     * @return bool
      */
-    public function delete(User $user, Property $property)
+    public function delete(User $user, Property $property): bool
     {
         return $property->user_id === $user->id;
     }
-
 }

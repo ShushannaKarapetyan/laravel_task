@@ -49,5 +49,4 @@ class GetRates extends Command
             $this->error('Something went wrong, ' . $exception->getMessage());
         }
     }
-
 }

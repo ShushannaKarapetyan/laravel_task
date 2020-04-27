@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TenantRequest;
+use App\Services\TenantDataPreparer;
 use App\Tenant;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class TenantController extends Controller
 {
-
     /**
      * @return View
      */
     public function index()
     {
-        return view('tenant.index', [
-            'tenants' => auth()->user()->tenants()->paginate(5)
-        ]);
+        $tenants = Tenant::where('user_id', auth()->id())->paginate(5);
+
+        return view('tenant.index', compact('tenants'));
     }
 
     /**
@@ -35,27 +34,12 @@ class TenantController extends Controller
 
     /**
      * @param TenantRequest $request
-     * @return array
-     */
-    public function prepareDataToSave(TenantRequest $request)
-    {
-        $tenantData = $request->only(['name', 'phone']);
-
-        if ($request->hasFile('image')) {
-            $request->image->store('public/images');
-            $tenantData['image'] = $request->image->hashName();
-        }
-
-        return $tenantData;
-    }
-
-    /**
-     * @param TenantRequest $request
      * @return Redirector
      */
     public function store(TenantRequest $request)
     {
-        auth()->user()->tenants()->create($this->prepareDataToSave($request));
+        Tenant::where('user_id', auth()->id())
+            ->create(TenantDataPreparer::prepareDataToSave($request));
 
         return redirect(route('tenants.index'))
             ->with('success', 'Tenant saved successfully.');
@@ -70,9 +54,7 @@ class TenantController extends Controller
     {
         $this->authorize('view', $tenant);
 
-        return view('tenant.show', [
-            'tenant' => $tenant
-        ]);
+        return view('tenant.show', compact('tenant'));
     }
 
     /**
@@ -84,9 +66,7 @@ class TenantController extends Controller
     {
         $this->authorize('update', $tenant);
 
-        return view('tenant.edit', [
-            'tenant' => $tenant
-        ]);
+        return view('tenant.edit', compact('tenant'));
     }
 
     /**
@@ -96,11 +76,7 @@ class TenantController extends Controller
      */
     public function update(TenantRequest $request, Tenant $tenant)
     {
-        if ($request->hasFile('image') && $request->image !== $tenant->image) {
-            Storage::disk('public')->delete("images/{$tenant->image}");
-        }
-
-        $tenant->update($this->prepareDataToSave($request));
+        $tenant->update(TenantDataPreparer::prepareDataToSave($request));
 
         return redirect(route('tenants.index'))
             ->with('success', 'Tenant updated successfully.');
@@ -120,5 +96,4 @@ class TenantController extends Controller
         return redirect(route('tenants.index'))
             ->with('success', 'Tenant deleted successfully.');
     }
-
 }

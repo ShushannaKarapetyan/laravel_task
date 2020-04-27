@@ -26,7 +26,7 @@ class TenantRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'phone' => 'required|numeric|min:10',
-            'image' => 'image|max:2048' //kb
+            'image' => 'image|max:2048',
         ];
     }
 }

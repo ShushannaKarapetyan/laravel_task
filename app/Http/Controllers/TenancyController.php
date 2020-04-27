@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TenancyRequest;
+use App\Property;
 use App\Tenancy;
+use App\Tenant;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
@@ -16,9 +18,9 @@ class TenancyController extends Controller
      */
     public function index()
     {
-        return view('tenancy.index', [
-            'tenancies' => auth()->user()->tenancies()->paginate(5)
-        ]);
+        $tenancies = Tenancy::where('user_id', auth()->id())->paginate(5);
+
+        return view('tenancy.index', compact('tenancies'));
     }
 
     /**
@@ -29,10 +31,10 @@ class TenancyController extends Controller
     {
         $this->authorize('create', Tenancy::class);
 
-        return view('tenancy.create', [
-            'properties' => auth()->user()->properties()->pluck('name', 'id'),
-            'tenants' => auth()->user()->tenants()->pluck('name', 'id')
-        ]);
+        $properties = Property::where('user_id', auth()->id())->pluck('name_en', 'id');
+        $tenants = Tenant::where('user_id', auth()->id())->pluck('name', 'id');
+
+        return view('tenancy.create', compact(['properties', 'tenants']));
     }
 
     /**
@@ -42,18 +44,20 @@ class TenancyController extends Controller
      */
     public function store(TenancyRequest $request)
     {
-        if (!$request->fallsIntoExistingTimePeriods($request)) {
-            $tenancyData = $request->only(['property_id', 'tenant_id', 'start_date', 'end_date', 'monthly_rent']);
-            auth()->user()->tenancies()->create($tenancyData);
+        $request->fallsIntoExistingTimePeriods($request);
 
-            return redirect(route('tenancies.index'))
-                ->with('success', 'Tenancy saved successfully.');
-        }
+        $tenancyData = $request->only([
+                'property_id',
+                'tenant_id',
+                'start_date',
+                'end_date',
+                'monthly_rent',
+            ]) + ['user_id' => $request->user()->id];
 
-        throw ValidationException::withMessages([
-            'period' => ['Please change date.'],
-        ]);
+        Tenancy::create($tenancyData);
 
+        return redirect(route('tenancies.index'))
+            ->with('success', 'Tenancy saved successfully.');
     }
 
     /**
@@ -65,9 +69,7 @@ class TenancyController extends Controller
     {
         $this->authorize('view', $tenancy);
 
-        return view('tenancy.show', [
-            'tenancy' => $tenancy
-        ]);
+        return view('tenancy.show', compact('tenancy'));
     }
 
     /**
@@ -79,11 +81,10 @@ class TenancyController extends Controller
     {
         $this->authorize('update', $tenancy);
 
-        return view('tenancy.edit', [
-            'tenancy' => $tenancy,
-            'properties' => auth()->user()->properties()->pluck('name', 'id'),
-            'tenants' => auth()->user()->tenants()->pluck('name', 'id')
-        ]);
+        $properties = Property::where('user_id', $tenancy->user_id)->pluck('name_en', 'id');
+        $tenants = Tenant::where('user_id', $tenancy->user_id)->pluck('name', 'id');
+
+        return view('tenancy.edit', compact(['tenancy', 'properties', 'tenants']));
     }
 
     /**
@@ -94,18 +95,20 @@ class TenancyController extends Controller
      */
     public function update(TenancyRequest $request, Tenancy $tenancy)
     {
-        if (!$request->fallsIntoExistingTimePeriods($request)) {
-            $tenancyData = $request->only(['property_id', 'tenant_id', 'start_date', 'end_date', 'monthly_rent']);
-            $tenancy->update($tenancyData);
+        $request->fallsIntoExistingTimePeriods($request);
 
-            return redirect(route('tenancies.index'))
-                ->with('success', 'Tenancy updated successfully.');
-        }
-
-        throw ValidationException::withMessages([
-            'period' => ['Please change date.'],
+        $tenancyData = $request->only([
+            'property_id',
+            'tenant_id',
+            'start_date',
+            'end_date',
+            'monthly_rent',
         ]);
 
+        $tenancy->update($tenancyData);
+
+        return redirect(route('tenancies.index'))
+            ->with('success', 'Tenancy updated successfully.');
     }
 
     /**

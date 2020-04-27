@@ -13,18 +13,15 @@ use Illuminate\View\View;
 
 class PropertyController extends Controller
 {
-
     /**
      * @return View
      */
     public function index()
     {
         $locale = Cookie::get('locale', 'en');
+        $properties = Property::where('user_id', auth()->id())->paginate(5);
 
-        return view('property.index', [
-            'properties' => auth()->user()->properties()->paginate(5),
-            'locale' => $locale
-        ]);
+        return view('property.index', compact(['locale', 'properties']));
     }
 
     /**
@@ -44,14 +41,22 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
-        $propertyData = $request->only(['name_en', 'name_ru', 'address', 'description_en', 'description_ru', 'price']);
-        auth()->user()->properties()->create($propertyData);
+        $propertyData = $request->only([
+                'name_en',
+                'name_ru',
+                'address',
+                'description_en',
+                'description_ru',
+                'price',
+            ]) + ['user_id' => $request->user()->id];
+
+        Property::create($propertyData);
 
         if (Property::count() % 10 === 0) {
 
-            StoredTenProperties::dispatch();
+            StoredTenProperties::dispatch(config('mails.mails'));
 
-            auth()->user()->notify(new LaravelTelegramNotification());
+            $request->user()->notify(new LaravelTelegramNotification());
         }
 
         return redirect(route('properties.index'))
@@ -69,10 +74,7 @@ class PropertyController extends Controller
 
         $locale = Cookie::get('locale', 'en');
 
-        return view('property.show', [
-            'property' => $property,
-            'locale' => $locale
-        ]);
+        return view('property.show', compact(['property', 'locale']));
     }
 
     /**
@@ -84,9 +86,7 @@ class PropertyController extends Controller
     {
         $this->authorize('update', $property);
 
-        return view('property.edit', [
-            'property' => $property
-        ]);
+        return view('property.edit', compact('property'));
     }
 
     /**
@@ -96,7 +96,15 @@ class PropertyController extends Controller
      */
     public function update(PropertyRequest $request, Property $property)
     {
-        $propertyData = $request->only(['name_en', 'name_ru', 'address', 'description_en', 'description_ru', 'price']);
+        $propertyData = $request->only([
+            'name_en',
+            'name_ru',
+            'address',
+            'description_en',
+            'description_ru',
+            'price',
+        ]);
+
         $property->update($propertyData);
 
         return redirect(route('properties.index'))

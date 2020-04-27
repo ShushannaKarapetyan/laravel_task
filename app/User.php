@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +18,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
 
     /**
      * The attributes that should be hidden for arrays.
@@ -62,7 +60,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tenancy::class);
     }
-
 
     /**
      * Return Telegram user_id of the user

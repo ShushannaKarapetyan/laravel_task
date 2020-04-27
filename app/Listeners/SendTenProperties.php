@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Mail;
 
 class SendTenProperties implements ShouldQueue
 {
-
     /**
      * Create the event listener.
      *
@@ -28,10 +27,6 @@ class SendTenProperties implements ShouldQueue
      */
     public function handle(StoredTenProperties $event)
     {
-        $emailList = ['example@gmail.com', 'laravel@gmail.com', 'laracasts@gmail.com', 'mail@mail.com'];
-
-        Mail::bcc($emailList)
-            ->queue(new LastTenProperties());
-
+        Mail::bcc($event->mailingList)->queue(new LastTenProperties());
     }
 }

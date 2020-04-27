@@ -1,109 +1,3 @@
-{{--
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        --}}
-{{--<link rel="stylesheet" href="{{asset('css/main.css')}}">--}}{{--
-
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
---}}
 @extends('layouts.app')
 
 @section('content')
@@ -119,13 +13,11 @@
                             <hr>
                             Lorem ipsum dolor sit amet.
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="properties">
         <div class="container">
             <div class="featured-properties-title">
@@ -137,14 +29,14 @@
                     <div class="col-md-3 col-lg-4 col-sm-6">
                         <div class="card">
                             <a href="#">
-                                <img class="card-img-top property-image" src="{{asset('images/property2.jpg')}}"
+                                <img class="card-img-top property-image" src="{{ asset('images/property2.jpg') }}"
                                      alt="">
                             </a>
                             <div class="card-body">
-                                <h5 class="card-title property-title">{{$property["name_{$locale}"]}}</h5>
-                                <p class="property-address">{{$property['address']}}</p>
-                                <p class="card-text property-description">{{$property["description_{$locale}"]}}</p>
-                                <strong class="property-price">$ {{$property['price']}}</strong>
+                                <h5 class="card-title property-title">{{ $property["name_{$locale}"] }}</h5>
+                                <p class="property-address">{{ $property['address'] }}</p>
+                                <p class="card-text property-description">{{$property["description_{$locale}"] }}</p>
+                                <strong class="property-price">$ {{ $property['price'] }}</strong>
                             </div>
                         </div>
                     </div>
@@ -152,8 +44,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="reviews">
         <div class="container">
             <div class="reviews-title">
@@ -163,13 +53,13 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="reviews-section-img">
-                        <img src="{{asset('images/write-notes.jpg')}}" alt="">
+                        <img src="{{ asset('images/write-notes.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="review">
                         <div class="user-image">
-                            <img src="{{asset('images/user1.png')}}" alt="">
+                            <img src="{{ asset('images/user1.png') }}" alt="">
                         </div>
                         <div class="review-text">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa ea eveniet modi neque
@@ -185,7 +75,7 @@
                     <hr>
                     <div class="review">
                         <div class="user-image">
-                            <img src="{{asset('images/user2.png')}}" alt="">
+                            <img src="{{ asset('images/user2.png') }}" alt="">
                         </div>
                         <div class="review-text">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa ea eveniet modi
@@ -193,7 +83,6 @@
                                 nostrum omnis quia, quisquam quo quos sapiente, soluta tenetur. Eos illo in ipsa
                                 perferendis
                                 quas. Aliquid!</p>
-
                         </div>
                         <div class="user-name">
                             <strong>
@@ -205,8 +94,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="resent-posts">
         <div class="container-fluid">
             <div class="resent-posts-title">
@@ -219,10 +106,9 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="post-image">
-                                    <img src="{{asset('images/posts/post1.jpg')}}" alt="">
+                                    <img src="{{ asset('images/posts/post1.jpg') }}" alt="">
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="post-info">
                                     <h3>Properties In Beverly Hills</h3>
@@ -237,16 +123,14 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="post">
                         <div class="row">
                             <div class="col-lg-6 col-md-6-col-sm-12">
                                 <div class="post-image">
-                                    <img src="{{asset('images/posts/post2.jpg')}}" alt="">
+                                    <img src="{{ asset('images/posts/post2.jpg') }}" alt="">
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6-col-sm-12">
                                 <div class="post-info">
                                     <h3>Properties in Beverly Hills</h3>
@@ -261,7 +145,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="post">
                         <div class="row">
@@ -276,13 +159,11 @@
                                         quam quasi quo quod quos reprehenderit rerum velit!</p>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6-col-sm-12">
                                 <div class="post-image">
-                                    <img src="{{asset('images/posts/post3.jpg')}}" alt="">
+                                    <img src="{{ asset('images/posts/post3.jpg') }}" alt="">
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -300,10 +181,9 @@
                                         quam quasi quo quod quos reprehenderit rerum velit!</p>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6-col-sm-12">
                                 <div class="post-image">
-                                    <img src="{{asset('images/posts/post4.jpg')}}" alt="">
+                                    <img src="{{ asset('images/posts/post4.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -312,7 +192,6 @@
             </div>
         </div>
     </div>
-
     <div class="our-team">
         <div class="container">
             <div class="team-title">
@@ -324,7 +203,7 @@
                     <div class="card">
                         <div class="member-image">
                             <a href="">
-                                <img class="card-img-top" src="{{asset('images/team-members/member1.jpeg')}}"
+                                <img class="card-img-top" src="{{ asset('images/team-members/member1.jpeg') }}"
                                      alt="">
                             </a>
                         </div>
@@ -339,12 +218,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4 col-lg-4 col-sm-6">
                     <div class="card">
                         <div class="member-image">
                             <a href="">
-                                <img class="card-img-top" src="{{asset('images/team-members/member2.jpeg')}}"
+                                <img class="card-img-top" src="{{ asset('images/team-members/member2.jpeg') }}"
                                      alt="">
                             </a>
                         </div>
@@ -359,12 +237,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4 col-lg-4 col-sm-6">
                     <div class="card">
                         <div class="member-image">
                             <a href="">
-                                <img class="card-img-top" src="{{asset('images/team-members/member3.png')}}"
+                                <img class="card-img-top" src="{{ asset('images/team-members/member3.png') }}"
                                      alt="">
                             </a>
                         </div>
@@ -382,5 +259,4 @@
             </div>
         </div>
     </div>
-
 @endsection

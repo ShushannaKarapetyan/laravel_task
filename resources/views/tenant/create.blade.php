@@ -8,16 +8,16 @@
                     <div class="card-header">
                         Create Tenant
                     </div>
-                    <form action="{{route('tenants.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('tenants.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text"
                                        placeholder="Name"
-                                       class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                        name="name"
-                                       value="{{old('name')}}">
+                                       value="{{ old('name') }}">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -28,9 +28,9 @@
                                 <label for="phone">Phone</label>
                                 <input type="text"
                                        placeholder="Phone"
-                                       class="form-control {{$errors->has('phone') ? 'is-invalid' : ''}}"
+                                       class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
                                        name="phone"
-                                       value="{{old('phone')}}">
+                                       value="{{ old('phone') }}">
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
                                 <label for="image">Image</label>
                                 <input type="file"
                                        name="image"
-                                       class="{{$errors->has('image') ? 'is-invalid' : ''}}">
+                                       class="{{ $errors->has('image') ? 'is-invalid' : '' }}">
                                 @error('image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

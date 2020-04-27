@@ -30,7 +30,7 @@ class LastTenProperties extends Mailable
     {
         $properties = Property::orderBy('created_at', 'desc')->limit(10)->get();
 
-        return $this->from('me@example.com')
-            ->view('last_ten_properties', compact('properties'));
+        return $this->from('example@example.com')
+            ->view('last-ten-properties', compact('properties'));
     }
 }

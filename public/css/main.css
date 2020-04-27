@@ -3,6 +3,10 @@ body {
   overflow-x: hidden;
 }
 
+.navbar-brand img {
+  width: 60%;
+}
+
 .navbar-light .navbar-nav {
   margin: auto;
 }
@@ -12,6 +16,38 @@ body {
   font-weight: 700;
   font-size: 15px;
   text-transform: uppercase;
+}
+
+.navbar-light .dropdown-content {
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 200px;
+  overflow: auto;
+  z-index: 1;
+}
+
+.navbar-light .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.navbar-light .dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.navbar-light .dropdown-content button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background: transparent;
+  border: none;
+  color: gray;
+}
+
+.navbar-light .dropdown-content .form-control:focus {
+  box-shadow: none;
 }
 
 .banner-section {

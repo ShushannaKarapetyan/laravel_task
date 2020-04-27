@@ -11,24 +11,13 @@ class TenantPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any tenants.
-     *
-     * @param User $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can view the tenant.
      *
      * @param User $user
      * @param Tenant $tenant
-     * @return mixed
+     * @return bool
      */
-    public function view(User $user, Tenant $tenant)
+    public function view(User $user, Tenant $tenant): bool
     {
         return $tenant->user_id === $user->id;
     }
@@ -37,15 +26,11 @@ class TenantPolicy
      * Determine whether the user can create tenants.
      *
      * @param User $user
-     * @return mixed
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        if (!$user->is_admin) {
-            return true;
-        }
-
-        return false;
+        return !$user->is_admin;
     }
 
     /**
@@ -53,9 +38,9 @@ class TenantPolicy
      *
      * @param User $user
      * @param Tenant $tenant
-     * @return mixed
+     * @return bool
      */
-    public function update(User $user, Tenant $tenant)
+    public function update(User $user, Tenant $tenant): bool
     {
         return $tenant->user_id === $user->id;
     }
@@ -65,11 +50,10 @@ class TenantPolicy
      *
      * @param User $user
      * @param Tenant $tenant
-     * @return mixed
+     * @return bool
      */
-    public function delete(User $user, Tenant $tenant)
+    public function delete(User $user, Tenant $tenant): bool
     {
         return $tenant->user_id === $user->id;
     }
-
 }

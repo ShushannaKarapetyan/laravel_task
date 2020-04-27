@@ -66,7 +66,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ auth()->user()->name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -88,26 +88,37 @@
                         <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">@lang('menu.language')</a>
                         <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                            <a href="{{url('locale/en')}}" class="dropdown-item">
-                                <img src="{{asset('lang-icons/en.png')}}" alt="english">
+                            <a href="{{ url('locale/en') }}" class="dropdown-item">
+                                <img src="{{ asset('lang-icons/en.png') }}" alt="english">
                                 @lang('menu.english')
 
                             </a>
-                            <a href="{{url('locale/ru')}}" class="dropdown-item">
-                                <img src="{{asset('lang-icons/ru.png')}}" alt="russian">
+                            <a href="{{ url('locale/ru') }}" class="dropdown-item">
+                                <img src="{{ asset('lang-icons/ru.png') }}" alt="russian">
                                 @lang('menu.russian')
                             </a>
                         </div>
                     </li>
+                    <form action="/search" method="GET">
+                        @csrf
+                        <div class="dropdown">
+                            <div class="dropdown-content">
+                                <input type="text" name="search" id="search" class="form-control"
+                                       placeholder="Search ...">
+                                <button type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <div class="content"></div>
+                            </div>
+                        </div>
+                    </form>
                 </ul>
             </div>
         </div>
     </nav>
-
     <main>
         @yield('content')
     </main>
-
     <footer>
         <div class="footer-content">
             <div class="container">
@@ -162,5 +173,35 @@
         </div>
     </footer>
 </div>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#search').keyup(function () {
+
+            $('.content').empty();
+
+            if (this.value.length >= 3) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/search',
+                    data: {
+                        search: $('#search').val(),
+                    },
+                    success: function (result) {
+                        for (let index = 0; index < result.data.length; index++) {
+                            $('.content').append("<a>" + result.data[index]['name_en'] + "</a>");
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        })
+    })
+</script>
+
 </body>
 </html>

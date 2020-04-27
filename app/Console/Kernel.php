@@ -30,7 +30,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:run')
             ->daily()
             ->at('00:00');
-
     }
 
     /**

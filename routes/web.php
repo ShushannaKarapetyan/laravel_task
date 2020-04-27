@@ -1,29 +1,16 @@
 <?php
 
-/*This link will add session of language when they click to change language*/
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-//Route::get('locale/{locale}', function ($locale) {
-/*Session::put('locale',$locale);*/
+Route::get('locale/{locale?}', 'LocaleController@setLocale')->name('locale.setlocale');
 
-// return back();
-//});
-
-
-Route::get('locale/{locale?}',
-    [
-        'as' => 'locale.setlocale',
-        'uses' => 'LocaleController@setLocale'
-    ]);
-
-
-Route::get('/', 'MainController@index');
-
+Route::get('/', 'LandingController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::middleware('auth')->group(function () {
+    Route::get('home', 'HomeController@index')->name('home');
 
     Route::get('properties', 'PropertyController@index')->name('properties.index');
     Route::get('properties/create', 'PropertyController@create')->name('properties.create');
@@ -51,9 +38,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('currency/converter', 'ConverterController@index')->name('currency.converter');
 
+    Route::get('excel/export', 'ExcelController@export');
+    Route::get('excel/import', 'ExcelController@import');
+
+    Route::any('search', 'LandingController@search');
 });
 
-Route::get('/excel/export', 'ExcelController@export');
-Route::get('/excel/import', 'ExcelController@import');
 
-/*Route::get('/send/lastTenProperties', 'PropertyController@sendLastTenProperties');*/
+

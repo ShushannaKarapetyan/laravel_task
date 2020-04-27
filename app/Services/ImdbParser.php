@@ -11,7 +11,6 @@ use Exception;
 
 class ImdbParser
 {
-
     protected $imdb;
 
     /**
@@ -35,7 +34,10 @@ class ImdbParser
         $this->imdb = $imdb;
     }
 
-    public function parse()
+    /**
+     * @return bool
+     */
+    public function parse(): bool
     {
         $releaseDateData = explode(' (', $this->imdb->getReleaseDate());
         $releaseDate = isset($releaseDateData[0]) ? Carbon::createFromFormat('d M Y', $releaseDateData[0]) : null;
@@ -53,7 +55,7 @@ class ImdbParser
             Storage::put($path, $contents);
         }
 
-        $movie = Movie::create([
+        return Movie::create([
             'title' => $this->imdb->getTitle(true),
             'cover_image' => @$path,
             'release_date' => $releaseDate,
@@ -62,7 +64,5 @@ class ImdbParser
             'category' => $categories,
             'director' => $this->imdb->getDirector(),
         ]);
-
-        return $movie;
     }
 }

@@ -8,14 +8,14 @@
                     <div class="card-header">
                         Create Tenancy
                     </div>
-                    <form action="{{route('tenancies.store')}}" method="POST">
+                    <form action="{{ route('tenancies.store') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="property">Select a property</label>
                                 <select name="property_id" class="form-control">
                                     @foreach($properties as $property=>$value)
-                                        <option value="{{$property}}">{{$value}}</option>
+                                        <option value="{{ $property }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -23,16 +23,16 @@
                                 <label for="tenant_id">Select a tenant</label>
                                 <select name="tenant_id" class="form-control">
                                     @foreach($tenants as $tenant=>$value)
-                                        <option value="{{$tenant}}">{{$value}}</option>
+                                        <option value="{{ $tenant}} ">{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
                                 <input type="date"
-                                       class="form-control {{($errors->has('period') or $errors->has('start_date')) ? 'is-invalid' : ''}}"
+                                       class="form-control {{ ($errors->has('period') or $errors->has('start_date')) ? 'is-invalid' : '' }}"
                                        name="start_date"
-                                       value="{{old('start_date')}}">
+                                       value="{{ old('start_date') }}">
                                 @error('start_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -42,9 +42,9 @@
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
                                 <input type="date"
-                                       class="form-control {{($errors->has('period') or $errors->has('end_date')) ? 'is-invalid' : ''}}"
+                                       class="form-control {{ ($errors->has('period') or $errors->has('end_date')) ? 'is-invalid' : '' }}"
                                        name="end_date"
-                                       value="{{old('end_date')}}">
+                                       value="{{ old('end_date') }}">
                                 @error('end_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -61,8 +61,8 @@
                                 <input type="text"
                                        name="monthly_rent"
                                        placeholder="Monthly Rent"
-                                       class="form-control {{$errors->has('monthly_rent') ? 'is-invalid' : ''}}"
-                                       value="{{old('monthly_rent')}}">
+                                       class="form-control {{ $errors->has('monthly_rent') ? 'is-invalid' : '' }}"
+                                       value="{{ old('monthly_rent') }}">
                                 @error('monthly_rent')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
