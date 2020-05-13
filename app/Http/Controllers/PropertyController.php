@@ -7,21 +7,30 @@ use App\Http\Requests\PropertyRequest;
 use App\Notifications\LaravelTelegramNotification;
 use App\Property;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Routing\Redirector;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 
 class PropertyController extends Controller
 {
     /**
-     * @return View
+     * @return JsonResponse|View
      */
     public function index()
     {
         $locale = Cookie::get('locale', 'en');
         $properties = Property::where('user_id', auth()->id())->paginate(5);
 
-        return view('property.index', compact(['locale', 'properties']));
+        if (request()->ajax()) {
+            return Response::json([
+                'locale' => $locale,
+                'properties' => $properties,
+            ]);
+        }
+
+        return view('property.index');
     }
 
     /**
@@ -37,7 +46,7 @@ class PropertyController extends Controller
 
     /**
      * @param PropertyRequest $request
-     * @return Redirector
+     * @return array
      */
     public function store(PropertyRequest $request)
     {
@@ -59,13 +68,12 @@ class PropertyController extends Controller
             $request->user()->notify(new LaravelTelegramNotification());
         }
 
-        return redirect(route('properties.index'))
-            ->with('success', 'Property saved successfully.');
+        return ["message" => 'Property Created'];
     }
 
     /**
      * @param Property $property
-     * @return View
+     * @return JsonResponse|View
      * @throws AuthorizationException
      */
     public function show(Property $property)
@@ -74,25 +82,36 @@ class PropertyController extends Controller
 
         $locale = Cookie::get('locale', 'en');
 
-        return view('property.show', compact(['property', 'locale']));
+        if (request()->ajax()) {
+            return Response::json([
+                'locale' => $locale,
+                'property' => $property,
+            ]);
+        }
+
+        return view('property.show');
     }
 
     /**
      * @param Property $property
-     * @return View
+     * @return Factory|JsonResponse|View
      * @throws AuthorizationException
      */
     public function edit(Property $property)
     {
         $this->authorize('update', $property);
 
-        return view('property.edit', compact('property'));
+        if (request()->ajax()) {
+            return Response::json(["property" => $property]);
+        }
+
+        return view('property.edit');
     }
 
     /**
      * @param PropertyRequest $request
      * @param Property $property
-     * @return Redirector
+     * @return array
      */
     public function update(PropertyRequest $request, Property $property)
     {
@@ -107,13 +126,12 @@ class PropertyController extends Controller
 
         $property->update($propertyData);
 
-        return redirect(route('properties.index'))
-            ->with('success', 'Property updated successfully.');
+        return ["message" => 'Property Updated'];
     }
 
     /**
      * @param Property $property
-     * @return Redirector
+     * @return array
      * @throws AuthorizationException
      */
     public function destroy(Property $property)
@@ -122,7 +140,6 @@ class PropertyController extends Controller
 
         $property->delete();
 
-        return redirect(route('properties.index'))
-            ->with('success', 'Property deleted successfully');
+        return ["message" => 'Property Deleted'];
     }
 }

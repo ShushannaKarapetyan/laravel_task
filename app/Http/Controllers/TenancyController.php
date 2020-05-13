@@ -7,24 +7,34 @@ use App\Property;
 use App\Tenancy;
 use App\Tenant;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class TenancyController extends Controller
 {
     /**
-     * @return View
+     * @return JsonResponse|View
      */
     public function index()
     {
-        $tenancies = Tenancy::where('user_id', auth()->id())->paginate(5);
+        $locale = Cookie::get('locale', 'en');
+        $tenancies = Tenancy::where('user_id', auth()->id())->with('tenant', 'property')->paginate(3);
 
-        return view('tenancy.index', compact('tenancies'));
+        if (request()->ajax()) {
+            return Response::json([
+                'locale' => $locale,
+                'tenancies' => $tenancies,
+            ]);
+        }
+
+        return view('tenancy.index');
     }
 
     /**
-     * @return View
+     * @return JsonResponse|View
      * @throws AuthorizationException
      */
     public function create()
@@ -34,12 +44,19 @@ class TenancyController extends Controller
         $properties = Property::where('user_id', auth()->id())->pluck('name_en', 'id');
         $tenants = Tenant::where('user_id', auth()->id())->pluck('name', 'id');
 
-        return view('tenancy.create', compact(['properties', 'tenants']));
+        if (request()->ajax()) {
+            return Response::json([
+                'properties' => $properties,
+                'tenants' => $tenants
+            ]);
+        }
+
+        return view('tenancy.create');
     }
 
     /**
      * @param TenancyRequest $request
-     * @return Redirector
+     * @return array
      * @throws ValidationException
      */
     public function store(TenancyRequest $request)
@@ -56,25 +73,35 @@ class TenancyController extends Controller
 
         Tenancy::create($tenancyData);
 
-        return redirect(route('tenancies.index'))
-            ->with('success', 'Tenancy saved successfully.');
+        return ["message" => 'Property Created'];
     }
 
     /**
      * @param Tenancy $tenancy
-     * @return View
+     * @return JsonResponse|View
      * @throws AuthorizationException
      */
     public function show(Tenancy $tenancy)
     {
         $this->authorize('view', $tenancy);
 
-        return view('tenancy.show', compact('tenancy'));
+        $locale = Cookie::get('locale', 'en');
+
+        $tenancy = Tenancy::where('id', $tenancy->id)->with('property', 'tenant')->get();
+
+        if (request()->ajax()) {
+            return Response::json([
+                'locale' => $locale,
+                'tenancy' => $tenancy,
+            ]);
+        }
+
+        return view('tenancy.show');
     }
 
     /**
      * @param Tenancy $tenancy
-     * @return View
+     * @return JsonResponse|View
      * @throws AuthorizationException
      */
     public function edit(Tenancy $tenancy)
@@ -84,13 +111,21 @@ class TenancyController extends Controller
         $properties = Property::where('user_id', $tenancy->user_id)->pluck('name_en', 'id');
         $tenants = Tenant::where('user_id', $tenancy->user_id)->pluck('name', 'id');
 
-        return view('tenancy.edit', compact(['tenancy', 'properties', 'tenants']));
+        if (request()->ajax()) {
+            return Response::json([
+                'properties' => $properties,
+                'tenants' => $tenants,
+                'tenancy' => $tenancy
+            ]);
+        }
+
+        return view('tenancy.edit');
     }
 
     /**
      * @param TenancyRequest $request
      * @param Tenancy $tenancy
-     * @return Redirector
+     * @return array
      * @throws ValidationException
      */
     public function update(TenancyRequest $request, Tenancy $tenancy)
@@ -107,13 +142,12 @@ class TenancyController extends Controller
 
         $tenancy->update($tenancyData);
 
-        return redirect(route('tenancies.index'))
-            ->with('success', 'Tenancy updated successfully.');
+        return ["message" => 'Property Updated'];
     }
 
     /**
      * @param Tenancy $tenancy
-     * @return Redirector
+     * @return array
      * @throws AuthorizationException
      */
     public function destroy(Tenancy $tenancy)
@@ -122,7 +156,6 @@ class TenancyController extends Controller
 
         $tenancy->delete();
 
-        return redirect(route('tenancies.index'))
-            ->with('success', 'Tenancy deleted successfully.');
+        return ["message" => 'Property Updated'];
     }
 }

@@ -10,7 +10,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,6 +25,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
+
 </head>
 <body>
 <div id="app">
@@ -174,8 +177,6 @@
     </footer>
 </div>
 
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <script>
     $(document).ready(function () {
         $('#search').keyup(function () {
@@ -202,6 +203,8 @@
         })
     })
 </script>
+
+@stack('scripts')
 
 </body>
 </html>

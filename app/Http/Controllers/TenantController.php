@@ -6,19 +6,26 @@ use App\Http\Requests\TenantRequest;
 use App\Services\TenantDataPreparer;
 use App\Tenant;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Routing\Redirector;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 
 class TenantController extends Controller
 {
     /**
-     * @return View
+     * @return JsonResponse|View
      */
     public function index()
     {
-        $tenants = Tenant::where('user_id', auth()->id())->paginate(5);
+        $tenants = Tenant::where('user_id', auth()->id())->paginate(3);
 
-        return view('tenant.index', compact('tenants'));
+        if (request()->ajax()) {
+            return Response::json([
+                'tenants' => $tenants,
+            ]);
+        }
+
+        return view('tenant.index');
     }
 
     /**
@@ -34,57 +41,65 @@ class TenantController extends Controller
 
     /**
      * @param TenantRequest $request
-     * @return Redirector
+     * @return array
      */
     public function store(TenantRequest $request)
     {
         Tenant::where('user_id', auth()->id())
             ->create(TenantDataPreparer::prepareDataToSave($request));
 
-        return redirect(route('tenants.index'))
-            ->with('success', 'Tenant saved successfully.');
+        return ["message" => 'Tenant Created'];
     }
 
     /**
      * @param Tenant $tenant
-     * @return View
+     * @return JsonResponse|View
      * @throws AuthorizationException
      */
     public function show(Tenant $tenant)
     {
         $this->authorize('view', $tenant);
 
-        return view('tenant.show', compact('tenant'));
+        if (request()->ajax()) {
+            return Response::json([
+                'tenant' => $tenant,
+            ]);
+        }
+
+        return view('tenant.show');
     }
 
     /**
      * @param Tenant $tenant
-     * @return View
+     * @return JsonResponse|View
      * @throws AuthorizationException
      */
     public function edit(Tenant $tenant)
     {
         $this->authorize('update', $tenant);
 
-        return view('tenant.edit', compact('tenant'));
+        if (request()->ajax()) {
+            return Response::json(["tenant" => $tenant]);
+        }
+
+        return view('tenant.edit');
     }
 
     /**
      * @param TenantRequest $request
      * @param Tenant $tenant
-     * @return Redirector
+     * @return array
      */
     public function update(TenantRequest $request, Tenant $tenant)
     {
         $tenant->update(TenantDataPreparer::prepareDataToSave($request));
 
-        return redirect(route('tenants.index'))
-            ->with('success', 'Tenant updated successfully.');
+        return ["message" => 'Tenant Updated'];
     }
 
     /**
      * @param Tenant $tenant
-     * @return Redirector
+     * @return array
      * @throws AuthorizationException
      */
     public function destroy(Tenant $tenant)
@@ -93,7 +108,6 @@ class TenantController extends Controller
 
         $tenant->delete();
 
-        return redirect(route('tenants.index'))
-            ->with('success', 'Tenant deleted successfully.');
+        return ["message" => 'Tenant Deleted'];
     }
 }

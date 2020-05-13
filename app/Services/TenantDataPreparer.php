@@ -17,7 +17,6 @@ class TenantDataPreparer
 
         if ($request->hasFile('image')) {
             $tenantData['image'] = $request->image->hashName();
-
             if ($request->route()->hasParameter('tenant')) {
                 $currentImage = $request->route('tenant')->image;
 
@@ -25,10 +24,9 @@ class TenantDataPreparer
                     Storage::disk('public')->delete("images/{$currentImage}");
                 }
             }
-
             $request->image->store('public/images');
-            $tenantData += ['user_id' => auth()->id()];
         }
+        $tenantData += ['user_id' => $request->user()->id];
 
         return $tenantData;
     }
