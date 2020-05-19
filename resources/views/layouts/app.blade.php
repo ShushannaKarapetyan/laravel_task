@@ -25,7 +25,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-
 </head>
 <body>
 <div id="app">
@@ -36,7 +35,6 @@
                     aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
@@ -71,7 +69,6 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ auth()->user()->name }} <span class="caret"></span>
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url('/home') }}">@lang('menu.home')</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -79,7 +76,6 @@
                                                      document.getElementById('logout-form').submit();">
                                     @lang('menu.logout')
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                       style="display: none;">
                                     @csrf
@@ -102,19 +98,9 @@
                             </a>
                         </div>
                     </li>
-                    <form action="/search" method="GET">
-                        @csrf
-                        <div class="dropdown">
-                            <div class="dropdown-content">
-                                <input type="text" name="search" id="search" class="form-control"
-                                       placeholder="Search ...">
-                                <button type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <div class="content"></div>
-                            </div>
-                        </div>
-                    </form>
+
+                    <search></search>
+
                 </ul>
             </div>
         </div>
@@ -176,33 +162,6 @@
         </div>
     </footer>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#search').keyup(function () {
-
-            $('.content').empty();
-
-            if (this.value.length >= 3) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/search',
-                    data: {
-                        search: $('#search').val(),
-                    },
-                    success: function (result) {
-                        for (let index = 0; index < result.data.length; index++) {
-                            $('.content').append("<a>" + result.data[index]['name_en'] + "</a>");
-                        }
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            }
-        })
-    })
-</script>
 
 @stack('scripts')
 

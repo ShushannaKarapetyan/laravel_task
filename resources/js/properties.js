@@ -2,6 +2,7 @@ import Properties from "./components/properties/Properties";
 import New from "./components/properties/New";
 import Edit from "./components/properties/Edit";
 import Show from "./components/properties/Show";
+import Search from "./components/Search";
 
 new Vue({
     el: '#app',
@@ -10,6 +11,7 @@ new Vue({
         Properties,
         New,
         Edit,
-        Show
+        Show,
+        Search
     },
 });

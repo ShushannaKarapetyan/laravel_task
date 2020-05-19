@@ -2,6 +2,7 @@ import Tenants from "./components/tenants/Tenants";
 import New from "./components/tenants/New";
 import Edit from "./components/tenants/Edit";
 import Show from "./components/tenants/Show";
+import Search from "./components/Search";
 
 new Vue({
     el: '#app',
@@ -10,6 +11,7 @@ new Vue({
         Tenants,
         New,
         Edit,
-        Show
+        Show,
+        Search
     },
 });

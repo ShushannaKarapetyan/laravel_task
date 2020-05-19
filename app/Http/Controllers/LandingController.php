@@ -36,19 +36,15 @@ class LandingController extends Controller
      */
     public function search()
     {
-        if (request()->ajax()) {
-            $search = request('search');
+        $search = request('search');
 
-            $properties = DB::table('properties')
-                ->join('users', 'properties.user_id', '=', 'users.id')
-                ->where('properties.name_en', 'like', "%$search%")
-                ->orWhere('users.name', 'like', "%$search%")
-                ->get();
+        $properties = DB::table('properties')
+            ->join('users', 'properties.user_id', '=', 'users.id')
+            ->where('properties.name_en', 'like', "%$search%")
+            ->orWhere('users.name', 'like', "%$search%")
+            ->get('name_en');
 
-            return Response::json(['data' => $properties]);
-        }
-
-        return back();
+        return Response::json(['data' => $properties]);
     }
 }
 
