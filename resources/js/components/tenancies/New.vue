@@ -10,23 +10,33 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="property">Select a property</label>
-                                <select name="property_id" class="form-control" v-model="selectedProperty">
-                                    <option v-for="(property,index) in properties"
+                                <select name="property_id"
+                                        class="form-control"
+                                        :class="{'is-invalid': errors.has('property_id')}"
+                                        v-model="selectedProperty">
+                                    <option v-for="(property, index) in properties"
                                             :key="index"
                                             :value="index">
                                         {{ property }}
                                     </option>
                                 </select>
+                                <span v-if="errors.has('property_id')" class="invalid-feedback"
+                                      v-text="errors.get('property_id')"></span>
                             </div>
                             <div class="form-group">
                                 <label for="tenant_id">Select a tenant</label>
-                                <select name="tenant_id" class="form-control" v-model="selectedTenant">
+                                <select name="tenant_id"
+                                        class="form-control"
+                                        :class="{'is-invalid': errors.has('tenant_id')}"
+                                        v-model="selectedTenant">
                                     <option v-for="(tenant,index) in tenants"
                                             :key="index"
                                             :value="index">
                                         {{ tenant }}
                                     </option>
                                 </select>
+                                <span v-if="errors.has('property_id')" class="invalid-feedback"
+                                      v-text="errors.get('property_id')"></span>
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
@@ -64,7 +74,7 @@
                                       v-text="errors.get('monthly_rent')"></span>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="submit" class="btn btn-success">CREATE</button>
                             </div>
                         </div>
                     </form>
@@ -125,3 +135,32 @@
         }
     }
 </script>
+
+<style scoped>
+    .card {
+        margin: 50px 0 50px 0;
+        box-shadow: 0 0 20px 0 #c1c1c1;
+    }
+
+    input {
+        border: none;
+        border-bottom: 1px solid;
+        border-radius: 0;
+    }
+
+    .card-header {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        background: transparent;
+        border-bottom: none;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+    }
+
+    .btn-success {
+        width: 100%;
+    }
+</style>

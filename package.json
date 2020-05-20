@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "momentum": "^4.0.0",
         "vue-rokka-uploader": "github:rokka-io/vue-rokka-uploader",
         "vue-router": "^3.1.6"
     }

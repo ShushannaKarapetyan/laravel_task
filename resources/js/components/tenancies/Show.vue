@@ -2,26 +2,32 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <p>Tenant</p>
-                <h3>
-                    {{ tenancy.tenant.name }}
-                </h3>
-                <p>Property</p>
-                <h3>
-                    {{ tenancy.property['name_' + locale] }}
-                </h3>
-                <p>Start Date</p>
-                <h3>
-                    {{ tenancy.start_date }}
-                </h3>
-                <p>End Date</p>
-                <h3>
-                    {{ tenancy.end_date }}
-                </h3>
-                <p>Monthly Rent</p>
-                <h3>
-                    {{ tenancy.monthly_rent }}
-                </h3>
+                <div class="tenancy-data">
+                    <p>Tenant</p>
+                    <h4>
+                        {{ tenancy.tenant.name }}
+                    </h4>
+                    <hr>
+                    <p>Property</p>
+                    <h4>
+                        {{ tenancy.property['name_' + locale] }}
+                    </h4>
+                    <hr>
+                    <p>Start Date</p>
+                    <h4>
+                        {{ tenancy.start_date }}
+                    </h4>
+                    <hr>
+                    <p>End Date</p>
+                    <h4>
+                        {{ tenancy.end_date}}
+                    </h4>
+                    <hr>
+                    <p>Monthly Rent</p>
+                    <h4>
+                        {{ tenancy.monthly_rent }}
+                    </h4>
+                </div>
             </div>
         </div>
     </div>
@@ -51,3 +57,8 @@
     }
 </script>
 
+<style scoped>
+    .tenancy-data{
+        margin: 50px 0 50px 0
+    }
+</style>

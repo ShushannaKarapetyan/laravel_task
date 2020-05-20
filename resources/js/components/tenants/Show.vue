@@ -2,19 +2,23 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <p>Name</p>
-                <h3>
-                    {{ tenant.name }}
-                </h3>
-                <p>Phone</p>
-                <h3>
-                    {{ tenant.phone }}
-                </h3>
-                <p v-if="tenant.image">Image</p>
-                <div v-if="tenant.image">
-                    <img :src="'storage/images/' + tenant.image"
-                         width="150"
-                         height="70">
+                <div class="tenant-data">
+                    <p>Name</p>
+                    <h4>
+                        {{ tenant.name }}
+                    </h4>
+                    <hr>
+                    <p>Phone</p>
+                    <h4>
+                        {{ tenant.phone }}
+                    </h4>
+                    <hr>
+                    <p v-if="tenant.image">Image</p>
+                    <div v-if="tenant.image">
+                        <img :src="'storage/images/' + tenant.image"
+                             width="150"
+                             height="70">
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,4 +46,9 @@
         }
     }
 </script>
+<style scoped>
+    .tenant-data {
+        margin: 50px 0 50px 0;
+    }
+</style>
 

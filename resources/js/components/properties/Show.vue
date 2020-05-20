@@ -2,22 +2,27 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <p>Name</p>
-                <h3>
-                    {{ property['name_' + locale] }}
-                </h3>
-                <p>Address</p>
-                <h3>
-                    {{ property.address }}
-                </h3>
-                <p>Description</p>
-                <h3>
-                    {{ property['description_' + locale] }}
-                </h3>
-                <p>Price</p>
-                <h3>
-                    {{ property.price }}
-                </h3>
+                <div class="property-data">
+                    <p>Name</p>
+                    <h4>
+                        {{ property['name_' + locale] }}
+                    </h4>
+                    <hr>
+                    <p>Address</p>
+                    <h4>
+                        {{ property.address }}
+                    </h4>
+                    <hr>
+                    <p>Description</p>
+                    <h4>
+                        {{ property['description_' + locale] }}
+                    </h4>
+                    <hr>
+                    <p>Price</p>
+                    <h4>
+                        {{ property.price }}
+                    </h4>
+                </div>
             </div>
         </div>
     </div>
@@ -46,3 +51,9 @@
         }
     }
 </script>
+
+<style scoped>
+    .property-data{
+        margin: 50px 0 50px 0
+    }
+</style>

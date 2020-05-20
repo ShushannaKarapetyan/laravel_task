@@ -75,7 +75,7 @@
                                       v-text="errors.get('price')"></span>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Update</button>
+                                <button type="submit" class="btn btn-success">UPDATE</button>
                             </div>
                         </div>
                     </form>
@@ -140,3 +140,28 @@
         }
     }
 </script>
+
+<style scoped>
+    .card {
+        margin: 50px 0 50px 0;
+        box-shadow: 0 0 20px 0 #c1c1c1;
+    }
+    input {
+        border: none;
+        border-bottom: 1px solid;
+        border-radius: 0;
+    }
+    .card-header {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        background: transparent;
+        border-bottom: none;
+    }
+    .form-control:focus{
+        box-shadow: none;
+    }
+    .btn-success{
+        width: 100%;
+    }
+</style>

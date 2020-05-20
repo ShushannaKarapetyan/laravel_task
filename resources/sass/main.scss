@@ -3,8 +3,12 @@ $darkBlue: #1b3d58;
 $uppercase: uppercase;
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
     overflow-x: hidden;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 .navbar-brand {
@@ -20,9 +24,10 @@ body {
 
         .nav-link {
             color: $tagsColor;
-            font-weight: 700;
+            font-weight: 500;
             font-size: 15px;
             text-transform: $uppercase;
+            letter-spacing: 1px;
         }
     }
 

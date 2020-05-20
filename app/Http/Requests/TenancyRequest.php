@@ -42,6 +42,8 @@ class TenancyRequest extends FormRequest
     public function rules()
     {
         return [
+            'property_id' => 'required',
+            'tenant_id' => 'required',
             'start_date' => 'required',
             'end_date' => 'required|after:start_date',
             'monthly_rent' => 'required|numeric',
