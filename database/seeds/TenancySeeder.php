@@ -1,6 +1,6 @@
 <?php
 
-use App\Tenancy;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,11 +15,15 @@ class TenancySeeder extends Seeder
      */
     public function run()
     {
-        Tenancy::truncate();
+        Schema::disableForeignKeyConstraints();
+        DB::table('tenancies')->truncate();
+        Schema::enableForeignKeyConstraints();
+
+        $id = User::first()->id;
 
         DB::table('tenancies')->insert([
             [
-                'user_id' => 1,
+                'user_id' => $id,
                 'property_id' => 1,
                 'tenant_id' => 2,
                 'start_date' => new Carbon('2020-03-02 00:00:00'),
@@ -29,7 +33,7 @@ class TenancySeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => $id,
                 'property_id' => 2,
                 'tenant_id' => 3,
                 'start_date' => new Carbon('2020-03-08 00:00:00'),
@@ -39,7 +43,7 @@ class TenancySeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => $id,
                 'property_id' => 1,
                 'tenant_id' => 1,
                 'start_date' => new Carbon('2020-05-17 00:00:00'),

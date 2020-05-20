@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
 {
@@ -15,7 +16,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
+        Schema::disableForeignKeyConstraints();
+        DB::table('users')->truncate();
+        Schema::enableForeignKeyConstraints();
+
 
         DB::table('users')->insert([
             'name' => 'User',

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Tenant extends Model
 {
     protected $guarded = [];
+    protected $fillable = ['user_id', 'name', 'phone', 'image'];
 
     /**
      * @return BelongsTo
