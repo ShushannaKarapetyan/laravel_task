@@ -129,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.search.length > 2) {
         axios.get("/search?search=".concat(this.search)).then(function (response) {
           for (var index = 0; index < response.data.data.length; index++) {
-            _this.result += "<a>" + response.data.data[index].name_en + "</a>";
+            _this.result += "<a href='/properties/".concat(response.data.data[index].id, "'>") + response.data.data[index].name_en + "</a>";
           }
         })["catch"](function (error) {
           return console.log(error.response.data.errors);
@@ -423,6 +423,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/pagination */ "./resources/js/helpers/pagination.js");
+//
+//
+//
 //
 //
 //
@@ -1369,7 +1372,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "dropdown" }, [
+  return _c("div", { staticClass: "dropdown search-box" }, [
     _c("div", { staticClass: "dropdown-content" }, [
       _c("input", {
         directives: [
@@ -1798,7 +1801,7 @@ var render = function() {
             ? _c("div", [
                 _c("img", {
                   attrs: {
-                    src: "storage/images/" + _vm.tenant.image,
+                    src: "/storage/images/" + _vm.tenant.image,
                     width: "150",
                     height: "70"
                   }
@@ -1870,7 +1873,7 @@ var render = function() {
                             ? _c("td", [
                                 _c("img", {
                                   attrs: {
-                                    src: "storage/images/" + tenant.image,
+                                    src: "/storage/images/" + tenant.image,
                                     width: "150",
                                     height: "70"
                                   }
@@ -1886,7 +1889,10 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass: "btn",
-                                  attrs: { href: "/tenants/" + tenant.id }
+                                  attrs: {
+                                    href: "/tenants/" + tenant.id,
+                                    title: "Show"
+                                  }
                                 },
                                 [
                                   _c(
@@ -1922,7 +1928,8 @@ var render = function() {
                                 {
                                   staticClass: "btn",
                                   attrs: {
-                                    href: "/tenants/" + tenant.id + "/edit"
+                                    href: "/tenants/" + tenant.id + "/edit",
+                                    title: "Edit"
                                   }
                                 },
                                 [_c("i", { staticClass: "far fa-edit" })]
@@ -1932,6 +1939,7 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass: "btn",
+                                  attrs: { title: "Delete" },
                                   on: {
                                     click: function($event) {
                                       return _vm.deleteTenant(tenant.id)
@@ -1948,7 +1956,7 @@ var render = function() {
                     )
                   ]
                 )
-              : _c("h1", [_vm._v("No tenants yet.")]),
+              : _c("h2", [_vm._v("No tenants yet.")]),
             _vm._v(" "),
             _vm.tenants.length
               ? _c("div", { staticClass: "pagination" }, [

@@ -15,7 +15,7 @@
                     <hr>
                     <p v-if="tenant.image">Image</p>
                     <div v-if="tenant.image">
-                        <img :src="'storage/images/' + tenant.image"
+                        <img :src="'/storage/images/' + tenant.image"
                              width="150"
                              height="70">
                     </div>

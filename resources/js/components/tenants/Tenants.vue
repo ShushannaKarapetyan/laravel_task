@@ -26,13 +26,13 @@
                                 </td>
                                 <td>{{ tenant.phone }}</td>
                                 <td v-if="tenant.image">
-                                    <img :src="'storage/images/' + tenant.image"
+                                    <img :src="'/storage/images/' + tenant.image"
                                          width="150"
                                          height="70">
                                 </td>
                                 <td v-else></td>
                                 <td class="d-flex justify-content-between">
-                                    <a :href="'/tenants/' + tenant.id" class="btn">
+                                    <a :href="'/tenants/' + tenant.id" class="btn" title="Show">
                                         <svg aria-hidden="true" focusable="false" data-prefix="far"
                                              data-icon="info-circle" role="img" xmlns="http://www.w3.org/2000/svg"
                                              viewBox="0 0 512 512" class="svg-inline--fa fa-info-circle fa-w-16 fa-lg">
@@ -42,10 +42,13 @@
                                         </svg>
                                     </a>
                                     <a :href="'/tenants/' + tenant.id + '/edit'"
-                                       class="btn">
+                                       class="btn"
+                                       title="Edit"
+                                    >
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <button class="btn"
+                                            title="Delete"
                                             @click="deleteTenant(tenant.id)"
                                     >
                                         <i class="fas fa-trash-alt"></i>
@@ -54,7 +57,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <h1 v-else>No tenants yet.</h1>
+                        <h2 v-else>No tenants yet.</h2>
                         <div class="pagination" v-if="tenants.length">
                             <ul>
                                 <li :class="[{disabled:!pagination.paginate.prev_page_url}]" class="page-item">

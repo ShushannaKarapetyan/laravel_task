@@ -42,7 +42,7 @@ class LandingController extends Controller
             ->join('users', 'properties.user_id', '=', 'users.id')
             ->where('properties.name_en', 'like', "%$search%")
             ->orWhere('users.name', 'like', "%$search%")
-            ->get('name_en');
+            ->get(['properties.id', 'name_en']);
 
         return Response::json(['data' => $properties]);
     }

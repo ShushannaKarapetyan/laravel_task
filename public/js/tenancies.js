@@ -129,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.search.length > 2) {
         axios.get("/search?search=".concat(this.search)).then(function (response) {
           for (var index = 0; index < response.data.data.length; index++) {
-            _this.result += "<a>" + response.data.data[index].name_en + "</a>";
+            _this.result += "<a href='/properties/".concat(response.data.data[index].id, "'>") + response.data.data[index].name_en + "</a>";
           }
         })["catch"](function (error) {
           return console.log(error.response.data.errors);
@@ -1455,7 +1455,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "dropdown" }, [
+  return _c("div", { staticClass: "dropdown search-box" }, [
     _c("div", { staticClass: "dropdown-content" }, [
       _c("input", {
         directives: [

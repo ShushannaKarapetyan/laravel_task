@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown">
+    <div class="dropdown search-box">
         <div class="dropdown-content">
             <input type="text"
                    @keyup="getSearchResult()"
@@ -33,7 +33,7 @@
                     axios.get(`/search?search=${this.search}`)
                         .then(response => {
                             for (let index = 0; index < response.data.data.length; index++) {
-                                this.result += "<a>" + response.data.data[index].name_en + "</a>";
+                                this.result += `<a href='/properties/${response.data.data[index].id}'>` + response.data.data[index].name_en + "</a>";
                             }
                         })
                         .catch(error => console.log(error.response.data.errors));
