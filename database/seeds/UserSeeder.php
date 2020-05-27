@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
         DB::table('users')->truncate();
         Schema::enableForeignKeyConstraints();
 
-
         DB::table('users')->insert([
             'name' => 'User',
             'email' => 'example@example.com',

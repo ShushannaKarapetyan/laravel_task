@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\MessageSent;
+use App\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,8 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::get('excel/import', 'ExcelController@import');
 
     Route::any('search', 'LandingController@search');
+
+    Route::get('projects/{project}', 'ProjectsController@show');
+    Route::post('projects/{project}/messages', 'ProjectsController@store');
 });
-
-
 
 

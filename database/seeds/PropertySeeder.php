@@ -4,6 +4,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class PropertySeeder extends Seeder
 {
@@ -18,11 +19,11 @@ class PropertySeeder extends Seeder
         DB::table('properties')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        $id = User::first()->id;
+        $user_id = User::first()->id;
 
         DB::table('properties')->insert([
             [
-                'user_id' => $id,
+                'user_id' => $user_id,
                 'name_en' => 'Property 1',
                 'name_ru' => 'Свойство 1',
                 'address' => 'Address 1',
@@ -33,7 +34,7 @@ class PropertySeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'user_id' => $id,
+                'user_id' => $user_id,
                 'name_en' => 'Property 2',
                 'name_ru' => 'Свойство 2',
                 'address' => 'Address 2',
@@ -44,7 +45,7 @@ class PropertySeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'user_id' => $id,
+                'user_id' => $user_id,
                 'name_en' => 'Property 3',
                 'name_ru' => 'Свойство 3',
                 'address' => 'Address 3',
