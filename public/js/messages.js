@@ -28715,13 +28715,7 @@ const optionsMixin = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tui_editor_dist_tui_editor_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tui-editor/dist/tui-editor.css */ "./node_modules/tui-editor/dist/tui-editor.css");
-/* harmony import */ var tui_editor_dist_tui_editor_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(tui_editor_dist_tui_editor_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var tui_editor_dist_tui_editor_contents_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tui-editor/dist/tui-editor-contents.css */ "./node_modules/tui-editor/dist/tui-editor-contents.css");
-/* harmony import */ var tui_editor_dist_tui_editor_contents_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(tui_editor_dist_tui_editor_contents_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var codemirror_lib_codemirror_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! codemirror/lib/codemirror.css */ "./node_modules/codemirror/lib/codemirror.css");
-/* harmony import */ var codemirror_lib_codemirror_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(codemirror_lib_codemirror_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _toast_ui_vue_editor_src_Editor_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @toast-ui/vue-editor/src/Editor.vue */ "./node_modules/@toast-ui/vue-editor/src/Editor.vue");
+/* harmony import */ var _toast_ui_vue_editor_src_Editor_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @toast-ui/vue-editor/src/Editor.vue */ "./node_modules/@toast-ui/vue-editor/src/Editor.vue");
 //
 //
 //
@@ -28749,14 +28743,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
-
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Messages",
   components: {
-    'editor': _toast_ui_vue_editor_src_Editor_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Editor: _toast_ui_vue_editor_src_Editor_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -28764,8 +28757,9 @@ __webpack_require__.r(__webpack_exports__);
       projectId: window.location.pathname.split('/')[2],
       activeParticipant: false,
       typingTimer: false,
-      authUser: '',
-      editorText: ''
+      authUser: {},
+      editorText: '',
+      textError: false
     };
   },
   computed: {
@@ -28798,13 +28792,18 @@ __webpack_require__.r(__webpack_exports__);
       }, 5000);
     },
     tagParticipants: function tagParticipants() {
-      /*return window.Echo.private(`messages.${this.projectId}`)*/
       this.channel.whisper("typing", {
         name: this.authUser.name
       });
+      this.textError = false;
     },
     save: function save() {
       this.editorText = this.$refs.toastuiEditor.invoke('getHtml');
+
+      if (!this.editorText) {
+        this.textError = true;
+      }
+
       axios.post("/projects/".concat(this.project.id, "/messages"), {
         body: this.editorText
       }).then(function (response) {
@@ -39631,7 +39630,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-default btn-send",
-              class: { "m-bottom": _vm.activeParticipant },
+              class: { "m-bottom": _vm.activeParticipant || _vm.textError },
               on: { click: _vm.save }
             },
             [_c("img", { attrs: { src: "/images/send.png", width: "20" } })]
@@ -39647,6 +39646,10 @@ var render = function() {
             ? _c("span", [
                 _vm._v(_vm._s(_vm.activeParticipant.name) + " is typing...")
               ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.textError
+            ? _c("span", [_vm._v("Please, type a message")])
             : _vm._e()
         ],
         1
@@ -40004,6 +40007,15 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Messages */ "./resources/js/components/Messages.vue");
 /* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Search */ "./resources/js/components/Search.vue");
+/* harmony import */ var tui_editor_dist_tui_editor_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tui-editor/dist/tui-editor.css */ "./node_modules/tui-editor/dist/tui-editor.css");
+/* harmony import */ var tui_editor_dist_tui_editor_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(tui_editor_dist_tui_editor_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var tui_editor_dist_tui_editor_contents_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tui-editor/dist/tui-editor-contents.css */ "./node_modules/tui-editor/dist/tui-editor-contents.css");
+/* harmony import */ var tui_editor_dist_tui_editor_contents_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(tui_editor_dist_tui_editor_contents_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var codemirror_lib_codemirror_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! codemirror/lib/codemirror.css */ "./node_modules/codemirror/lib/codemirror.css");
+/* harmony import */ var codemirror_lib_codemirror_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(codemirror_lib_codemirror_css__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
 
 
 new Vue({

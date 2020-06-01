@@ -6,13 +6,13 @@
                 <ul>
                     <li v-for="message in project.messages"
                         class="alert alert-info"
-                        :class="{'right': (message.user_id === authUser.id)}"
+                        :class="{ 'right': (message.user_id === authUser.id) }"
                         v-html="message.body"
                     >
                     </li>
                 </ul>
                 <button class="btn btn-default btn-send"
-                        :class="{'m-bottom':activeParticipant}"
+                        :class="{ 'm-bottom':(activeParticipant || textError) }"
                         @click="save">
                     <img src="/images/send.png" width="20">
                 </button>
@@ -20,22 +20,21 @@
                         @change="tagParticipants"
                         height="150px"/>
                 <span v-if="activeParticipant">{{ activeParticipant.name }} is typing...</span>
+
+                <span v-if="textError">Please, type a message</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import 'tui-editor/dist/tui-editor.css';
-    import 'tui-editor/dist/tui-editor-contents.css';
-    import 'codemirror/lib/codemirror.css';
-    import Editor from '@toast-ui/vue-editor/src/Editor.vue'
+    import Editor from "@toast-ui/vue-editor/src/Editor.vue";
 
     export default {
         name: "Messages",
 
         components: {
-            'editor': Editor
+            Editor
         },
 
         data() {
@@ -44,8 +43,9 @@
                 projectId: window.location.pathname.split('/')[2],
                 activeParticipant: false,
                 typingTimer: false,
-                authUser: '',
-                editorText: ''
+                authUser: {},
+                editorText: '',
+                textError: false
             }
         },
 
@@ -81,14 +81,16 @@
             },
 
             tagParticipants() {
-                /*return window.Echo.private(`messages.${this.projectId}`)*/
                 this.channel
                     .whisper("typing", {name: this.authUser.name});
+                this.textError = false;
             },
 
             save() {
                 this.editorText = this.$refs.toastuiEditor.invoke('getHtml');
-
+                if (!this.editorText) {
+                    this.textError = true;
+                }
                 axios.post(`/projects/${this.project.id}/messages`, {body: this.editorText})
                     .then(response => response.data)
                     .then(this.addMessage)
