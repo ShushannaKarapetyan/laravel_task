@@ -4,8 +4,9 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use TelegramNotifications\Messages\TelegramMessage;
-use TelegramNotifications\TelegramChannel;
+use NotificationChannels\Telegram\TelegramFile;
+use NotificationChannels\Telegram\TelegramChannel;
+
 
 class LaravelTelegramNotification extends Notification
 {
@@ -24,19 +25,23 @@ class LaravelTelegramNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
+     * @param $notifiable
      * @return array
      */
-    public function via()
+    public function via($notifiable)
     {
         return [TelegramChannel::class];
     }
 
     /**
+     * @param $notifiable
      * @return mixed
      */
-    public function toTelegram()
+    public function toTelegram($notifiable)
     {
-        return (new TelegramMessage())
-            ->text('Hello, Telegram!');
+        return TelegramFile::create()
+            ->to($notifiable->telegram_user_id)
+            ->content("I'm pdf file")
+            ->document('message.pdf', 'message.pdf');
     }
 }

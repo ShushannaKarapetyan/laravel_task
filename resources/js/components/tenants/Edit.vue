@@ -109,7 +109,7 @@
 
 <style scoped>
     .card {
-        margin: 50px 0 50px 0;
+        margin: 50px 0;
         box-shadow: 0 0 20px 0 #c1c1c1;
     }
     input {

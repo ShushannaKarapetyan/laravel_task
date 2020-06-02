@@ -54,6 +54,6 @@
 
 <style scoped>
     .property-data{
-        margin: 50px 0 50px 0
+        margin: 50px 0;
     }
 </style>

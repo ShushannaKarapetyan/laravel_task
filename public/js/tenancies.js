@@ -227,6 +227,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Edit",
@@ -660,7 +667,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-1fc1c386] {\n    margin: 50px 0 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-1fc1c386] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-1fc1c386] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-1fc1c386]:focus{\n    box-shadow: none;\n}\n.btn-success[data-v-1fc1c386]{\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-1fc1c386] {\n    margin: 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-1fc1c386] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-1fc1c386] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-1fc1c386]:focus {\n    box-shadow: none;\n}\n.btn-success[data-v-1fc1c386] {\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -679,7 +686,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-29cc47d4] {\n    margin: 50px 0 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-29cc47d4] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-29cc47d4] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-29cc47d4]:focus {\n    box-shadow: none;\n}\n.btn-success[data-v-29cc47d4] {\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-29cc47d4] {\n    margin: 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-29cc47d4] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-29cc47d4] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-29cc47d4]:focus {\n    box-shadow: none;\n}\n.btn-success[data-v-29cc47d4] {\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -698,7 +705,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.tenancy-data[data-v-a7db020e]{\n    margin: 50px 0 50px 0\n}\n", ""]);
+exports.push([module.i, "\n.tenancy-data[data-v-a7db020e]{\n    margin: 50px 0;\n}\n", ""]);
 
 // exports
 
@@ -717,7 +724,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-341af45c] {\n    margin: 50px 0 50px 0;\n    border: none;\n}\n.pagination ul[data-v-341af45c] {\n    list-style: none;\n}\n.pagination ul li[data-v-341af45c] {\n    float: left;\n}\ntable a[data-v-341af45c] {\n    color: black;\n}\n.float-lg-right[data-v-341af45c] {\n    float: right !important;\n    padding: 7px;\n    border: solid 1px;\n    border-radius: 3px;\n    background: #1b3d58;\n    color: white;\n}\n.fa-trash-alt[data-v-341af45c] {\n    color: red;\n}\nsvg[data-v-341af45c] {\n    width: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-341af45c] {\n    margin: 50px 0;\n    border: none;\n}\n.pagination ul[data-v-341af45c] {\n    list-style: none;\n}\n.pagination ul li[data-v-341af45c] {\n    float: left;\n}\ntable a[data-v-341af45c] {\n    color: black;\n}\n.float-lg-right[data-v-341af45c] {\n    float: right !important;\n    padding: 7px;\n    border: solid 1px;\n    border-radius: 3px;\n    background: #1b3d58;\n    color: white;\n}\n.fa-trash-alt[data-v-341af45c] {\n    color: red;\n}\nsvg[data-v-341af45c] {\n    width: 15px;\n}\n", ""]);
 
 // exports
 
@@ -1669,7 +1676,7 @@ var render = function() {
                       "is-invalid":
                         _vm.errors.has("start_date") || _vm.errors.has("period")
                     },
-                    attrs: { type: "date", name: "start_date" },
+                    attrs: { type: "datetime-local", name: "start_date" },
                     domProps: { value: _vm.tenancy.start_date },
                     on: {
                       input: function($event) {
@@ -1678,6 +1685,14 @@ var render = function() {
                         }
                         _vm.$set(_vm.tenancy, "start_date", $event.target.value)
                       }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", {
+                    domProps: {
+                      textContent: _vm._s(
+                        new Date(_vm.tenancy.start_date).toLocaleDateString()
+                      )
                     }
                   }),
                   _vm._v(" "),
@@ -1719,7 +1734,7 @@ var render = function() {
                       "is-invalid":
                         _vm.errors.has("end_date") || _vm.errors.has("period")
                     },
-                    attrs: { type: "date", name: "end_date" },
+                    attrs: { type: "datetime-local", name: "end_date" },
                     domProps: { value: _vm.tenancy.end_date },
                     on: {
                       input: function($event) {
@@ -1728,6 +1743,14 @@ var render = function() {
                         }
                         _vm.$set(_vm.tenancy, "end_date", $event.target.value)
                       }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", {
+                    domProps: {
+                      textContent: _vm._s(
+                        new Date(_vm.tenancy.end_date).toLocaleDateString()
+                      )
                     }
                   }),
                   _vm._v(" "),
@@ -2001,7 +2024,7 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     class: { "is-invalid": _vm.errors.has("start_date") },
-                    attrs: { type: "date", name: "start_date" },
+                    attrs: { type: "datetime-local", name: "start_date" },
                     domProps: { value: _vm.tenancy.start_date },
                     on: {
                       input: function($event) {
@@ -2048,7 +2071,7 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     class: { "is-invalid": _vm.errors.has("end_date") },
-                    attrs: { type: "date", name: "end_date" },
+                    attrs: { type: "datetime-local", name: "end_date" },
                     domProps: { value: _vm.tenancy.end_date },
                     on: {
                       input: function($event) {
@@ -2202,7 +2225,7 @@ var render = function() {
           _c("h4", [
             _vm._v(
               "\n                    " +
-                _vm._s(_vm.tenancy.start_date) +
+                _vm._s(new Date(_vm.tenancy.start_date).toLocaleDateString()) +
                 "\n                "
             )
           ]),
@@ -2214,7 +2237,7 @@ var render = function() {
           _c("h4", [
             _vm._v(
               "\n                    " +
-                _vm._s(_vm.tenancy.end_date) +
+                _vm._s(new Date(_vm.tenancy.end_date).toLocaleDateString()) +
                 "\n                "
             )
           ]),
@@ -2289,9 +2312,23 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(tenancy.start_date))]),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                new Date(
+                                  tenancy.start_date
+                                ).toLocaleDateString()
+                              )
+                            )
+                          ]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(tenancy.end_date))]),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                new Date(tenancy.end_date).toLocaleDateString()
+                              )
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(tenancy.monthly_rent))]),
                           _vm._v(" "),

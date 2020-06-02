@@ -641,7 +641,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-272a01ea] {\n    margin: 50px 0 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-272a01ea] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-272a01ea] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-272a01ea]:focus{\n    box-shadow: none;\n}\n.btn-success[data-v-272a01ea]{\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-272a01ea] {\n    margin: 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-272a01ea] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-272a01ea] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-272a01ea]:focus{\n    box-shadow: none;\n}\n.btn-success[data-v-272a01ea]{\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -660,7 +660,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-fa09f0a2] {\n    margin: 50px 0 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-fa09f0a2] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-fa09f0a2] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-fa09f0a2]:focus{\n    box-shadow: none;\n}\n.btn-success[data-v-fa09f0a2]{\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-fa09f0a2] {\n    margin: 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-fa09f0a2] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-fa09f0a2] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-fa09f0a2]:focus{\n    box-shadow: none;\n}\n.btn-success[data-v-fa09f0a2]{\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -679,7 +679,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-19612218] {\n    margin: 50px 0 50px 0;\n    border: none;\n}\n.pagination ul[data-v-19612218] {\n    list-style: none;\n}\n.pagination ul li[data-v-19612218] {\n    float: left;\n}\ntable a[data-v-19612218] {\n    color: black;\n}\n.float-lg-right[data-v-19612218] {\n    float: right !important;\n    padding: 7px;\n    border: solid 1px;\n    border-radius: 3px;\n    background: #1b3d58;\n    color: white;\n}\n.fa-trash-alt[data-v-19612218] {\n    color: red;\n}\nsvg[data-v-19612218] {\n    width: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-19612218] {\n    margin: 50px 0;\n    border: none;\n}\n.pagination ul[data-v-19612218] {\n    list-style: none;\n}\n.pagination ul li[data-v-19612218] {\n    float: left;\n}\ntable a[data-v-19612218] {\n    color: black;\n}\n.float-lg-right[data-v-19612218] {\n    float: right !important;\n    padding: 7px;\n    border: solid 1px;\n    border-radius: 3px;\n    background: #1b3d58;\n    color: white;\n}\n.fa-trash-alt[data-v-19612218] {\n    color: red;\n}\nsvg[data-v-19612218] {\n    width: 15px;\n}\n", ""]);
 
 // exports
 
@@ -698,7 +698,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.property-data[data-v-78bbba7e]{\n    margin: 50px 0 50px 0\n}\n", ""]);
+exports.push([module.i, "\n.property-data[data-v-78bbba7e]{\n    margin: 50px 0;\n}\n", ""]);
 
 // exports
 

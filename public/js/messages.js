@@ -38764,7 +38764,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.messages[data-v-62dade92] {\n    margin: 50px 0 50px 0\n}\nul[data-v-62dade92] {\n    list-style: none;\n    padding: 0;\n}\n.right[data-v-62dade92] {\n    text-align: right;\n}\n.btn-send[data-v-62dade92] {\n    position: absolute;\n    z-index: 100;\n    bottom: -5px;\n}\n.btn-send[data-v-62dade92]:focus {\n    box-shadow: none;\n}\n.m-bottom[data-v-62dade92] {\n    bottom: 15px;\n}\n.te-mode-switch-section[data-v-62dade92] {\n    height: 25px;\n}\n", ""]);
+exports.push([module.i, "\n.messages[data-v-62dade92] {\n    margin: 50px 0;\n}\nul[data-v-62dade92] {\n    list-style: none;\n    padding: 0;\n}\n.right[data-v-62dade92] {\n    text-align: right;\n}\n.btn-send[data-v-62dade92] {\n    position: absolute;\n    z-index: 100;\n    bottom: -5px;\n}\n.btn-send[data-v-62dade92]:focus {\n    box-shadow: none;\n}\n.m-bottom[data-v-62dade92] {\n    bottom: 15px;\n}\n.te-mode-switch-section[data-v-62dade92] {\n    height: 25px;\n}\n", ""]);
 
 // exports
 

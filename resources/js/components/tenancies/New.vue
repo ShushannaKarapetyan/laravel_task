@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
-                                <input type="date"
+                                <input type="datetime-local"
                                        class="form-control"
                                        :class="{'is-invalid': errors.has('start_date')}"
                                        name="start_date"
@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
-                                <input type="date"
+                                <input type="datetime-local"
                                        class="form-control"
                                        :class="{'is-invalid': errors.has('end_date')}"
                                        name="end_date"
@@ -138,7 +138,7 @@
 
 <style scoped>
     .card {
-        margin: 50px 0 50px 0;
+        margin: 50px 0;
         box-shadow: 0 0 20px 0 #c1c1c1;
     }
 

@@ -25,8 +25,8 @@
                                     {{ tenancy.tenant.name }}
                                 </td>
                                 <td>{{ tenancy.property['name_' + locale] }}</td>
-                                <td>{{ tenancy.start_date}}</td>
-                                <td>{{ tenancy.end_date}}</td>
+                                <td>{{ new Date(tenancy.start_date).toLocaleDateString() }}</td>
+                                <td>{{ new Date(tenancy.end_date).toLocaleDateString() }}</td>
                                 <td>{{ tenancy.monthly_rent }}</td>
                                 <td class="d-flex justify-content-between">
                                     <a :href="'/tenancies/' + tenancy.id" class="btn">
@@ -138,7 +138,7 @@
 
 <style scoped>
     .card {
-        margin: 50px 0 50px 0;
+        margin: 50px 0;
         border: none;
     }
 

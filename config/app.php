@@ -165,6 +165,10 @@ return [
         Barryvdh\TranslationManager\TranslationServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         TelegramNotifications\TelegramServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+
+
 
         /*
          * Package Service Providers...
@@ -230,6 +234,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
     ],
 
 ];

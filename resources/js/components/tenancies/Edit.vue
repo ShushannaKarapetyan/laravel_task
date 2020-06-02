@@ -30,11 +30,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Start Date</label>
-                                <input type="date"
+                                <input type="datetime-local"
                                        class="form-control"
                                        :class="{'is-invalid': (errors.has('start_date') || errors.has('period'))}"
                                        name="start_date"
                                        v-model="tenancy.start_date">
+
+                                <span v-text="new Date(tenancy.start_date).toLocaleDateString()"></span>
+
                                 <span v-if="errors.has('start_date')" class="invalid-feedback"
                                       v-text="errors.get('start_date')"></span>
                                 <span v-if="errors.has('period')" class="invalid-feedback"
@@ -42,11 +45,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="end_date">End Date</label>
-                                <input type="date"
+
+                                <input type="datetime-local"
                                        class="form-control"
-                                       :class="{'is-invalid': (errors.has('end_date') || errors.has('period'))}"
                                        v-model="tenancy.end_date"
+                                       :class="{'is-invalid': (errors.has('end_date') || errors.has('period'))}"
                                        name="end_date">
+
+                                <span v-text="new Date(tenancy.end_date).toLocaleDateString()"></span>
+
                                 <span v-if="errors.has('end_date')" class="invalid-feedback"
                                       v-text="errors.get('end_date')"></span>
                                 <span v-if="errors.has('period')" class="invalid-feedback"
@@ -138,14 +145,16 @@
 
 <style scoped>
     .card {
-        margin: 50px 0 50px 0;
+        margin: 50px 0;
         box-shadow: 0 0 20px 0 #c1c1c1;
     }
+
     input {
         border: none;
         border-bottom: 1px solid;
         border-radius: 0;
     }
+
     .card-header {
         text-align: center;
         font-size: 20px;
@@ -153,10 +162,12 @@
         background: transparent;
         border-bottom: none;
     }
-    .form-control:focus{
+
+    .form-control:focus {
         box-shadow: none;
     }
-    .btn-success{
+
+    .btn-success {
         width: 100%;
     }
 </style>

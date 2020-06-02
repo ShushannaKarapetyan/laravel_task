@@ -48,7 +48,7 @@
 </script>
 <style scoped>
     .tenant-data {
-        margin: 50px 0 50px 0;
+        margin: 50px 0;
     }
 </style>
 

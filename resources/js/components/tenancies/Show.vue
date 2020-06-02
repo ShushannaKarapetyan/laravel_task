@@ -15,12 +15,12 @@
                     <hr>
                     <p>Start Date</p>
                     <h4>
-                        {{ tenancy.start_date }}
+                        {{ new Date(tenancy.start_date).toLocaleDateString() }}
                     </h4>
                     <hr>
                     <p>End Date</p>
                     <h4>
-                        {{ tenancy.end_date}}
+                        {{ new Date(tenancy.end_date).toLocaleDateString() }}
                     </h4>
                     <hr>
                     <p>Monthly Rent</p>
@@ -59,6 +59,6 @@
 
 <style scoped>
     .tenancy-data{
-        margin: 50px 0 50px 0
+        margin: 50px 0;
     }
 </style>

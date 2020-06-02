@@ -577,7 +577,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-5b02898a] {\n    margin: 50px 0 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-5b02898a] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-5b02898a] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-5b02898a]:focus{\n    box-shadow: none;\n}\n.btn-success[data-v-5b02898a]{\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-5b02898a] {\n    margin: 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-5b02898a] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-5b02898a] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-5b02898a]:focus{\n    box-shadow: none;\n}\n.btn-success[data-v-5b02898a]{\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -596,7 +596,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-eb31f502] {\n    margin: 50px 0 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-eb31f502] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-eb31f502] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-eb31f502]:focus {\n    box-shadow: none;\n}\n.btn-success[data-v-eb31f502] {\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-eb31f502] {\n    margin: 50px 0;\n    box-shadow: 0 0 20px 0 #c1c1c1;\n}\ninput[data-v-eb31f502] {\n    border: none;\n    border-bottom: 1px solid;\n    border-radius: 0;\n}\n.card-header[data-v-eb31f502] {\n    text-align: center;\n    font-size: 20px;\n    font-weight: 700;\n    background: transparent;\n    border-bottom: none;\n}\n.form-control[data-v-eb31f502]:focus {\n    box-shadow: none;\n}\n.btn-success[data-v-eb31f502] {\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -615,7 +615,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.tenant-data[data-v-5ecf76ae] {\n    margin: 50px 0 50px 0;\n}\n", ""]);
+exports.push([module.i, "\n.tenant-data[data-v-5ecf76ae] {\n    margin: 50px 0;\n}\n", ""]);
 
 // exports
 
@@ -634,7 +634,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-c5c09e30] {\n    margin: 50px 0 50px 0;\n    border: none;\n}\n.pagination ul[data-v-c5c09e30] {\n    list-style: none;\n}\n.pagination ul li[data-v-c5c09e30] {\n    float: left;\n}\ntable a[data-v-c5c09e30] {\n    color: black;\n}\n.float-lg-right[data-v-c5c09e30] {\n    float: right !important;\n    padding: 7px;\n    border: solid 1px;\n    border-radius: 3px;\n    background: #1b3d58;\n    color: white;\n}\n.fa-trash-alt[data-v-c5c09e30] {\n    color: red;\n}\nsvg[data-v-c5c09e30] {\n    width: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-c5c09e30] {\n    margin: 50px 0;\n    border: none;\n}\n.pagination ul[data-v-c5c09e30] {\n    list-style: none;\n}\n.pagination ul li[data-v-c5c09e30] {\n    float: left;\n}\ntable a[data-v-c5c09e30] {\n    color: black;\n}\n.float-lg-right[data-v-c5c09e30] {\n    float: right !important;\n    padding: 7px;\n    border: solid 1px;\n    border-radius: 3px;\n    background: #1b3d58;\n    color: white;\n}\n.fa-trash-alt[data-v-c5c09e30] {\n    color: red;\n}\nsvg[data-v-c5c09e30] {\n    width: 15px;\n}\n", ""]);
 
 // exports
 

@@ -11,7 +11,14 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Barryvdh\DomPDF\Facade as PDF;
+use Telegram\Bot\FileUpload\InputFile;
+use Telegram\Bot\Laravel\Facades\Telegram;
+use TelegramNotifications\Messages\TelegramDocument;
+use TelegramNotifications\Messages\TelegramLocation;
+
 
 class PropertyController extends Controller
 {
@@ -61,12 +68,15 @@ class PropertyController extends Controller
 
         Property::create($propertyData);
 
-        if (Property::count() % 10 === 0) {
+        $pdf = PDF::loadView('pdf');
+        $pdf->save('message.pdf');
+
+        //if (Property::count() % 10 === 0) {
 
             StoredTenProperties::dispatch(config('mails.mails'));
 
             $request->user()->notify(new LaravelTelegramNotification());
-        }
+        //}
 
         return ["message" => 'Property Created'];
     }

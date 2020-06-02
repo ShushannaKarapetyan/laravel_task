@@ -83,14 +83,17 @@
             tagParticipants() {
                 this.channel
                     .whisper("typing", {name: this.authUser.name});
+
                 this.textError = false;
             },
 
             save() {
                 this.editorText = this.$refs.toastuiEditor.invoke('getHtml');
+
                 if (!this.editorText) {
                     this.textError = true;
                 }
+
                 axios.post(`/projects/${this.project.id}/messages`, {body: this.editorText})
                     .then(response => response.data)
                     .then(this.addMessage)
@@ -107,7 +110,7 @@
 
 <style scoped>
     .messages {
-        margin: 50px 0 50px 0
+        margin: 50px 0;
     }
 
     ul {

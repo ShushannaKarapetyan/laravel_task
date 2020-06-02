@@ -135,7 +135,7 @@
 
 <style scoped>
     .card {
-        margin: 50px 0 50px 0;
+        margin: 50px 0;
         border: none;
     }
 

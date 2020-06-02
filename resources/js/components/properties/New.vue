@@ -109,7 +109,7 @@
         methods: {
             add() {
                 axios.post('/properties', this.$data.property)
-                    .then((response) => {
+                    .then(response => {
                         alert('Property Created');
                         window.location.href = 'http://laravel-task.com/properties';
                     })
@@ -121,7 +121,7 @@
 
 <style scoped>
     .card {
-        margin: 50px 0 50px 0;
+        margin: 50px 0;
         box-shadow: 0 0 20px 0 #c1c1c1;
     }
     input {
