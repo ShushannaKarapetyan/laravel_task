@@ -7,7 +7,6 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramFile;
 use NotificationChannels\Telegram\TelegramChannel;
 
-
 class LaravelTelegramNotification extends Notification
 {
     use Queueable;
