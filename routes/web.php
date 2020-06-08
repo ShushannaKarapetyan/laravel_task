@@ -42,11 +42,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('excel/export', 'ExcelController@export');
     Route::get('excel/import', 'ExcelController@import');
+    Route::get('excel/import-zip-codes', 'ExcelController@importZipCodes');
 
     Route::any('search', 'LandingController@search');
 
     Route::get('projects/{project}', 'ProjectsController@show');
     Route::post('projects/{project}/messages', 'ProjectsController@store');
+
+    Route::get('zip-codes', 'ZipCodesController@index');
+    Route::post('towns', 'ZipCodesController@getTowns');
+    Route::post('districtState', 'ZipCodesController@getDistrictState');
 });
 
 
