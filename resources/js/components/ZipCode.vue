@@ -93,9 +93,6 @@
                             this.district = district;
                             this.state = response.data.districtState[district];
                         }
-
-                        /*this.state = response.data.districtState[0].country;
-                        this.district = response.data.districtState[0].district*/
                     })
                     .catch(error => console.log(error));
             }

@@ -248,9 +248,6 @@ __webpack_require__.r(__webpack_exports__);
           _this3.district = district;
           _this3.state = response.data.districtState[district];
         }
-        /*this.state = response.data.districtState[0].country;
-        this.district = response.data.districtState[0].district*/
-
       })["catch"](function (error) {
         return console.log(error);
       });

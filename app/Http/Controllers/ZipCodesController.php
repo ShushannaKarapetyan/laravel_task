@@ -53,11 +53,6 @@ class ZipCodesController extends Controller
                 ['town', request()->selectedTown],
             ])->pluck('country', 'district');
 
-            /* $districtState = ZipCode::where([
-                 ['zip', request()->zipCodeValue],
-                 ['town', request()->selectedTown],
-             ])->get(['district', 'country']);*/
-
             return Response::json([
                 'districtState' => $districtState
             ]);
