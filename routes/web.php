@@ -1,7 +1,5 @@
 <?php
 
-use App\Events\MessageSent;
-use App\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::get('zip-codes', 'ZipCodesController@index');
     Route::post('towns', 'ZipCodesController@getTowns');
     Route::post('districtState', 'ZipCodesController@getDistrictState');
+
+    Route::get('visits', 'PropertiesVisitsController@index');
 });
 
 

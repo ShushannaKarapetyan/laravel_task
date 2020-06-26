@@ -6,10 +6,12 @@ use App\Events\StoredTenProperties;
 use App\Http\Requests\PropertyRequest;
 use App\Notifications\LaravelTelegramNotification;
 use App\Property;
+use App\Visit;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -30,6 +32,10 @@ class PropertyController extends Controller
                 'properties' => $properties,
             ]);
         }
+
+        $visit = new Visit();
+        $visit->ip = Request::getClientIp();
+        $visit->save();
 
         return view('property.index');
     }
