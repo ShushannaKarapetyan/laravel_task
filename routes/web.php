@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::post('districtState', 'ZipCodesController@getDistrictState');
 
     Route::get('visits', 'PropertiesVisitsController@index');
+    Route::post('visits/period','PropertiesVisitsController@period');
 });
 
 

@@ -10,7 +10,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Property extends Model
 {
     protected $guarded = [];
-    protected $fillable = ['user_id', 'name_en', 'name_ru', 'address', 'description_en', 'description_ru', 'price'];
+    protected array $fillable = [
+        'user_id',
+        'name_en',
+        'name_ru',
+        'address',
+        'description_en',
+        'description_ru',
+        'price',
+    ];
 
     /**
      * @return BelongsTo

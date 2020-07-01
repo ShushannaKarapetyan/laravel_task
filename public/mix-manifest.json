@@ -1,0 +1,11 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/main.css": "/css/main.css",
+    "/css/app.css": "/css/app.css",
+    "/js/messages.js": "/js/messages.js",
+    "/js/properties.js": "/js/properties.js",
+    "/js/tenancies.js": "/js/tenancies.js",
+    "/js/tenants.js": "/js/tenants.js",
+    "/js/visits.js": "/js/visits.js",
+    "/js/zip-code.js": "/js/zip-code.js"
+}

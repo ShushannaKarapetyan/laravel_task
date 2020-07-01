@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <visits></visits>
+    <period-selection></period-selection>
 @endsection
 
 @push('scripts')
