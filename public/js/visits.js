@@ -147,6 +147,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PeriodSelection",
@@ -157,7 +162,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       period: '',
       datePeriod: '',
-      changePeriod: ''
+      changePeriod: '',
+      disabledDaily: true,
+      disabledWeekly: true,
+      disabledMonthly: true
     };
   },
   methods: {
@@ -165,6 +173,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.period = event.target.value;
+      this.disabledDaily = this.period === 'lastYearDays' || this.period === 'lastYear';
+      this.disabledWeekly = false;
+      this.disabledMonthly = this.period === 'lastSevenDays' || this.period === 'lastWeek';
+
+      if (this.period === 'lastYearDays' || this.period === 'lastYear') {
+        this.changePeriod = 'weekly';
+      } else {
+        this.changePeriod = 'daily';
+      }
+
       axios.post('/visits/period', {
         period: this.period
       }).then(function (response) {
@@ -174,10 +192,10 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
-      this.$refs.child.getVisits(this.period);
+      this.$refs.child.callVisits(this.period);
     },
     selectCustomPeriod: function selectCustomPeriod(event) {
-      this.$refs.child.getCustomPeriodVisits(event[0], event[1]);
+      this.$refs.child.callCustomPeriodVisits(event[0], event[1]);
     },
     selectChangePeriod: function selectChangePeriod(event) {
       this.$refs.child.getChangePeriodVisits(event.target.value);
@@ -276,16 +294,6 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    chunkArray: function chunkArray(array, chunk_size) {
-      var tempArray = [];
-
-      for (var index = 0; index < array.length; index += chunk_size) {
-        var chunk = array.slice(index, index + chunk_size);
-        tempArray.push(chunk);
-      }
-
-      return tempArray;
-    },
     chartRender: function chartRender(labels, visits, uniqueVisits) {
       this.renderChart({
         labels: labels,
@@ -315,7 +323,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray);
     },
-    getVisits: function getVisits(period) {
+    callVisits: function callVisits(period) {
       var _this2 = this;
 
       axios.post('/visits/period', {
@@ -328,59 +336,78 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error);
       });
     },
-    getCustomPeriodVisits: function getCustomPeriodVisits(customPeriodStart, customPeriodEnd) {
+    callCustomPeriodVisits: function callCustomPeriodVisits(customPeriodStart, customPeriodEnd) {
       var _this3 = this;
 
       axios.post('/visits/period', {
-        customPeriodStart: customPeriodStart,
-        customPeriodEnd: customPeriodEnd
+        customPeriod: {
+          customPeriodStart: customPeriodStart,
+          customPeriodEnd: customPeriodEnd
+        }
       }).then(function (response) {
         _this3.getVisitData(response);
       })["catch"](function (error) {
         return console.log(error);
       });
     },
+    callChangePeriod: function callChangePeriod(interval) {
+      var _this4 = this;
+
+      axios.post('/visits/interval', {
+        period: this.period,
+        interval: interval
+      }).then(function (response) {
+        _this4.visits = response.data.visits;
+        _this4.uniqueVisits = response.data.uniqueVisits;
+        _this4.labels = [];
+
+        for (var index = 1; index <= _this4.visits.length; index++) {
+          _this4.labels.push(index);
+        }
+
+        _this4.chartRender(_this4.labels, _this4.visits, _this4.uniqueVisits);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
     getChangePeriodVisits: function getChangePeriodVisits(interval) {
       if (interval === 'daily') {
-        this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray);
+        this.callChangePeriod(interval);
       }
 
       if (interval === 'weekly') {
-        var labelsArray = [];
-        var sumVisits = [];
-        var sumUniqueVisits = [];
-
-        for (var index = 0; index < Math.ceil(this.labels.length / 7); index++) {
-          labelsArray.push(index + 1);
-          sumVisits.push(this.chunkArray(this.visits, 7)[index].reduce(function (partial_sum, a) {
+        if (this.period === 'lastWeek') {
+          var sumVisits = [];
+          var sumUniqueVisits = [];
+          sumVisits.push(this.visits.reduce(function (partial_sum, a) {
             return partial_sum + a;
           }, 0));
-          sumUniqueVisits.push(this.chunkArray(this.uniqueVisits, 7)[index].reduce(function (partial_sum, a) {
+          sumUniqueVisits.push(this.uniqueVisits.reduce(function (partial_sum, a) {
             return partial_sum + a;
           }, 0));
+          this.chartRender([1], sumVisits, sumUniqueVisits);
         }
 
-        this.chartRender(labelsArray, sumVisits, sumUniqueVisits);
+        this.callChangePeriod(interval);
       }
 
       if (interval === 'monthly') {
-        var _labelsArray = [];
-        var _sumVisits = [];
-        var _sumUniqueVisits = [];
+        if (this.period === 'lastMonth') {
+          var _sumVisits = [];
+          var _sumUniqueVisits = [];
 
-        for (var _index = 0; _index < Math.ceil(this.labels.length / 30); _index++) {
-          _labelsArray.push(_index + 1);
-
-          _sumVisits.push(this.chunkArray(this.visits, 30)[_index].reduce(function (partial_sum, a) {
+          _sumVisits.push(this.visits.reduce(function (partial_sum, a) {
             return partial_sum + a;
           }, 0));
 
-          _sumUniqueVisits.push(this.chunkArray(this.uniqueVisits, 30)[_index].reduce(function (partial_sum, a) {
+          _sumUniqueVisits.push(this.uniqueVisits.reduce(function (partial_sum, a) {
             return partial_sum + a;
           }, 0));
+
+          this.chartRender([1], _sumVisits, _sumUniqueVisits);
         }
 
-        this.chartRender(_labelsArray, _sumVisits, _sumUniqueVisits);
+        this.callChangePeriod(interval);
       }
     }
   }
@@ -16580,7 +16607,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nselect[data-v-465fb3b0] {\n    width: 100%;\n    height: 40px\n}\n", ""]);
+exports.push([module.i, "\nselect[data-v-465fb3b0] {\n    width: 100%;\n    height: 40px;\n}\n.mx-input[data-v-465fb3b0] {\n    height: 40px !important;\n}\np[data-v-465fb3b0] {\n    margin-bottom: 13px;\n}\n", ""]);
 
 // exports
 
@@ -16599,7 +16626,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n[data-v-0d6f86b3][data-v-0d6f86b3] {\n    /*width: 800px;*/\n}\ncanvas[data-v-0d6f86b3] {\n    height: 600px !important;\n}\n", ""]);
+exports.push([module.i, "\n[data-v-0d6f86b3][data-v-0d6f86b3] {\n    width: 1000px;\n}\ncanvas[data-v-0d6f86b3] {\n    height: 600px !important;\n}\n", ""]);
 
 // exports
 
@@ -56486,6 +56513,10 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "period" } }, [
+              _vm._v("Select Period")
+            ]),
+            _vm._v(" "),
             _c(
               "select",
               {
@@ -56497,7 +56528,7 @@ var render = function() {
                     expression: "period"
                   }
                 ],
-                attrs: { name: "period" },
+                attrs: { name: "period", id: "period" },
                 on: {
                   change: [
                     function($event) {
@@ -56552,6 +56583,8 @@ var render = function() {
           "div",
           { staticClass: "col-md-4" },
           [
+            _c("p", [_vm._v("Custom Period")]),
+            _vm._v(" "),
             _c("date-picker", {
               attrs: {
                 name: "customRange",
@@ -56577,6 +56610,10 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [
+          _c("label", { attrs: { for: "changePeriod" } }, [
+            _vm._v("Change Period")
+          ]),
+          _vm._v(" "),
           _c(
             "select",
             {
@@ -56588,7 +56625,7 @@ var render = function() {
                   expression: "changePeriod"
                 }
               ],
-              attrs: { name: "changePeriod" },
+              attrs: { name: "changePeriod", id: "changePeriod" },
               on: {
                 change: [
                   function($event) {
@@ -56611,11 +56648,23 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { value: "daily" } }, [_vm._v("Daily")]),
+              _c(
+                "option",
+                { attrs: { value: "daily", disabled: _vm.disabledDaily } },
+                [_vm._v("Daily")]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "weekly" } }, [_vm._v("Weekly")]),
+              _c(
+                "option",
+                { attrs: { value: "weekly", disabled: _vm.disabledWeekly } },
+                [_vm._v("Weekly")]
+              ),
               _vm._v(" "),
-              _c("option", { attrs: { value: "monthly" } }, [_vm._v("Monthly")])
+              _c(
+                "option",
+                { attrs: { value: "monthly", disabled: _vm.disabledMonthly } },
+                [_vm._v("Monthly")]
+              )
             ]
           )
         ])

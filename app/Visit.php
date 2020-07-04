@@ -14,9 +14,11 @@ class Visit extends Model
     /**
      * @param $firstDay
      * @param $lastDay
+     * @param $start
+     * @param $end
      * @return JsonResponse
      */
-    public static function getPropertiesVisits($firstDay, $lastDay)
+    public static function getPropertiesVisits($firstDay, $lastDay, $start, $end)
     {
         $dates = [];
         $visits = [];
@@ -27,9 +29,30 @@ class Visit extends Model
         foreach ($period as $date) {
             array_push($dates,
                 [
-                    'start' => $date->startOfDay()->format('Y-m-d H:i:s'),
-                    'end' => $date->endOfDay()->format('Y-m-d H:i:s'),
+                    'start' => $date->$start()->format('Y-m-d H:i:s'),
+                    'end' => $date->$end()->format('Y-m-d H:i:s'),
                 ]);
+        }
+
+        $dates = array_unique($dates, SORT_REGULAR);
+
+        /*
+         * if $firstDay of the period isn't the start of the week (f.e. wednesday),
+         * take $firstDay instead the first day of the week (monday), the same for monthly.
+         */
+        if ($start === 'startOfWeek' || $start === 'startOfMonth') {
+            $dates[0]['start'] = $firstDay->startOfDay()->format('Y-m-d H:i:s');
+        }
+
+        /*
+         * if $lastDay of the period isn't the end of the week (f.e. wednesday),
+         * take $lastDay instead the last day of the week (sunday), the same for monthly.
+         */
+        if ($end === 'endOfWeek' || $end === 'endOfMonth') {
+            $endOfDates = end($dates);
+            $endOfDates['end'] = $lastDay->endOfDay()->format('Y-m-d H:i:s');
+            array_pop($dates);
+            array_push($dates, $endOfDates);
         }
 
         foreach ($dates as $date) {
@@ -50,6 +73,7 @@ class Visit extends Model
             'period' => $period,
             'visits' => $visits,
             'uniqueVisits' => $uniqueVisits,
+            'dates' => $dates,
         ]);
     }
 }

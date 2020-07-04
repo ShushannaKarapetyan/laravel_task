@@ -26,17 +26,6 @@
         },
 
         methods: {
-            chunkArray(array, chunk_size) {
-                let tempArray = [];
-
-                for (let index = 0; index < array.length; index += chunk_size) {
-                    let chunk = array.slice(index, index + chunk_size);
-                    tempArray.push(chunk);
-                }
-
-                return tempArray;
-            },
-
             chartRender(labels, visits, uniqueVisits) {
                 this.renderChart({
                     labels: labels,
@@ -71,7 +60,7 @@
                 this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray)
             },
 
-            getVisits(period) {
+            callVisits(period) {
                 axios.post('/visits/period', {period: period})
                     .then(response => {
                         this.period = period;
@@ -81,10 +70,12 @@
                     .catch(error => console.log(error));
             },
 
-            getCustomPeriodVisits(customPeriodStart, customPeriodEnd) {
+            callCustomPeriodVisits(customPeriodStart, customPeriodEnd) {
                 axios.post('/visits/period', {
-                    customPeriodStart: customPeriodStart,
-                    customPeriodEnd: customPeriodEnd
+                    customPeriod: {
+                        customPeriodStart: customPeriodStart,
+                        customPeriodEnd: customPeriodEnd,
+                    }
                 })
                     .then(response => {
                         this.getVisitData(response);
@@ -92,37 +83,51 @@
                     .catch(error => console.log(error));
             },
 
+            callChangePeriod(interval) {
+                axios.post('/visits/interval', {period: this.period, interval: interval})
+                    .then(response => {
+                        this.visits = response.data.visits;
+                        this.uniqueVisits = response.data.uniqueVisits;
+                        this.labels = [];
+
+                        for (let index = 1; index <= this.visits.length; index++) {
+                            this.labels.push(index);
+                        }
+
+                        this.chartRender(this.labels, this.visits, this.uniqueVisits)
+                    })
+                    .catch(error => console.log(error))
+            },
+
             getChangePeriodVisits(interval) {
                 if (interval === 'daily') {
-                    this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray)
+                    this.callChangePeriod(interval)
                 }
 
                 if (interval === 'weekly') {
-                    let labelsArray = [];
-                    let sumVisits = [];
-                    let sumUniqueVisits = [];
+                    if (this.period === 'lastWeek') {
+                        let sumVisits = [];
+                        let sumUniqueVisits = [];
+                        sumVisits.push(this.visits.reduce((partial_sum, a) => partial_sum + a, 0));
+                        sumUniqueVisits.push(this.uniqueVisits.reduce((partial_sum, a) => partial_sum + a, 0));
 
-                    for (let index = 0; index < Math.ceil((this.labels.length) / 7); index++) {
-                        labelsArray.push(index + 1);
-                        sumVisits.push(this.chunkArray(this.visits, 7)[index].reduce((partial_sum, a) => partial_sum + a, 0))
-                        sumUniqueVisits.push(this.chunkArray(this.uniqueVisits, 7)[index].reduce((partial_sum, a) => partial_sum + a, 0))
+                        this.chartRender([1], sumVisits, sumUniqueVisits)
                     }
 
-                    this.chartRender(labelsArray, sumVisits, sumUniqueVisits)
+                    this.callChangePeriod(interval)
                 }
 
                 if (interval === 'monthly') {
-                    let labelsArray = [];
-                    let sumVisits = [];
-                    let sumUniqueVisits = [];
+                    if (this.period === 'lastMonth') {
+                        let sumVisits = [];
+                        let sumUniqueVisits = [];
+                        sumVisits.push(this.visits.reduce((partial_sum, a) => partial_sum + a, 0));
+                        sumUniqueVisits.push(this.uniqueVisits.reduce((partial_sum, a) => partial_sum + a, 0));
 
-                    for (let index = 0; index < Math.ceil((this.labels.length) / 30); index++) {
-                        labelsArray.push(index + 1);
-                        sumVisits.push(this.chunkArray(this.visits, 30)[index].reduce((partial_sum, a) => partial_sum + a, 0))
-                        sumUniqueVisits.push(this.chunkArray(this.uniqueVisits, 30)[index].reduce((partial_sum, a) => partial_sum + a, 0))
+                        this.chartRender([1], sumVisits, sumUniqueVisits)
                     }
 
-                    this.chartRender(labelsArray, sumVisits, sumUniqueVisits)
+                    this.callChangePeriod(interval)
                 }
             }
         },
@@ -131,7 +136,7 @@
 
 <style scoped>
     [data-v-0d6f86b3] {
-        /*width: 800px;*/
+        width: 1000px;
     }
 
     canvas {
