@@ -318,13 +318,10 @@ __webpack_require__.r(__webpack_exports__);
       this.visits = response.data.visits;
       this.uniqueVisits = response.data.uniqueVisits;
 
-      for (var index = 0; index < response.data.dates.length; index++) {
+      for (var index = 0; index < this.visits.length; index++) {
         this.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[index]['start']).format("YYYY/MM/DD"));
-      }
-
-      for (var _index = 0; _index < this.visits.length; _index++) {
-        this.visitsCountArray.push(this.visits[_index]);
-        this.uniqueVisitsCountArray.push(this.uniqueVisits[_index]);
+        this.visitsCountArray.push(this.visits[index]);
+        this.uniqueVisitsCountArray.push(this.uniqueVisits[index]);
       }
 
       this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray);
@@ -367,13 +364,15 @@ __webpack_require__.r(__webpack_exports__);
         _this4.uniqueVisits = response.data.uniqueVisits;
         _this4.labels = [];
 
+        for (var index = 0; index < response.data.dates.length; index++) {
+          _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[index]['start']).format("YYYY/MM/DD"));
+        }
+
         if (interval === 'monthly') {
-          for (var index = 0; index < response.data.dates.length; index++) {
-            _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[index]['start']).format("MMMM"));
-          }
-        } else {
-          for (var _index2 = 0; _index2 < response.data.dates.length; _index2++) {
-            _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[_index2]['start']).format("YYYY/MM/DD"));
+          _this4.labels = [];
+
+          for (var _index = 0; _index < response.data.dates.length; _index++) {
+            _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[_index]['start']).format("MMMM"));
           }
         }
 
