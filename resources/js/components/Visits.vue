@@ -1,5 +1,6 @@
 <script>
     import {Bar} from 'vue-chartjs';
+    import moment from "moment";
 
     export default {
         name: "Visits",
@@ -51,8 +52,11 @@
                 this.visits = response.data.visits;
                 this.uniqueVisits = response.data.uniqueVisits;
 
+                for (let index = 0; index < response.data.dates.length; index++) {
+                    this.labels.push(moment(response.data.dates[index]['start']).format("YYYY/MM/DD"));
+                }
+
                 for (let index = 0; index < this.visits.length; index++) {
-                    this.labels.push(index + 1);
                     this.visitsCountArray.push(this.visits[index]);
                     this.uniqueVisitsCountArray.push(this.uniqueVisits[index])
                 }
@@ -90,8 +94,14 @@
                         this.uniqueVisits = response.data.uniqueVisits;
                         this.labels = [];
 
-                        for (let index = 1; index <= this.visits.length; index++) {
-                            this.labels.push(index);
+                        if(interval === 'monthly'){
+                            for (let index = 0; index < response.data.dates.length; index++) {
+                                this.labels.push(moment(response.data.dates[index]['start']).format("MMMM"));
+                            }
+                        } else{
+                            for (let index = 0; index < response.data.dates.length; index++) {
+                                this.labels.push(moment(response.data.dates[index]['start']).format("YYYY/MM/DD"));
+                            }
                         }
 
                         this.chartRender(this.labels, this.visits, this.uniqueVisits)
@@ -124,7 +134,7 @@
                         sumVisits.push(this.visits.reduce((partial_sum, a) => partial_sum + a, 0));
                         sumUniqueVisits.push(this.uniqueVisits.reduce((partial_sum, a) => partial_sum + a, 0));
 
-                        this.chartRender([1], sumVisits, sumUniqueVisits)
+                        this.chartRender([moment().subtract(1,'months').format('MMMM')], sumVisits, sumUniqueVisits)
                     }
 
                     this.callChangePeriod(interval)

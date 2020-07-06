@@ -270,6 +270,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Visits",
@@ -315,10 +318,13 @@ __webpack_require__.r(__webpack_exports__);
       this.visits = response.data.visits;
       this.uniqueVisits = response.data.uniqueVisits;
 
-      for (var index = 0; index < this.visits.length; index++) {
-        this.labels.push(index + 1);
-        this.visitsCountArray.push(this.visits[index]);
-        this.uniqueVisitsCountArray.push(this.uniqueVisits[index]);
+      for (var index = 0; index < response.data.dates.length; index++) {
+        this.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[index]['start']).format("YYYY/MM/DD"));
+      }
+
+      for (var _index = 0; _index < this.visits.length; _index++) {
+        this.visitsCountArray.push(this.visits[_index]);
+        this.uniqueVisitsCountArray.push(this.uniqueVisits[_index]);
       }
 
       this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray);
@@ -361,8 +367,14 @@ __webpack_require__.r(__webpack_exports__);
         _this4.uniqueVisits = response.data.uniqueVisits;
         _this4.labels = [];
 
-        for (var index = 1; index <= _this4.visits.length; index++) {
-          _this4.labels.push(index);
+        if (interval === 'monthly') {
+          for (var index = 0; index < response.data.dates.length; index++) {
+            _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[index]['start']).format("MMMM"));
+          }
+        } else {
+          for (var _index2 = 0; _index2 < response.data.dates.length; _index2++) {
+            _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[_index2]['start']).format("YYYY/MM/DD"));
+          }
         }
 
         _this4.chartRender(_this4.labels, _this4.visits, _this4.uniqueVisits);
@@ -404,7 +416,7 @@ __webpack_require__.r(__webpack_exports__);
             return partial_sum + a;
           }, 0));
 
-          this.chartRender([1], _sumVisits, _sumUniqueVisits);
+          this.chartRender([moment__WEBPACK_IMPORTED_MODULE_1___default()().subtract(1, 'months').format('MMMM')], _sumVisits, _sumUniqueVisits);
         }
 
         this.callChangePeriod(interval);
