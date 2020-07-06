@@ -19,10 +19,9 @@ class PropertiesVisitsController extends Controller
         if (request()->ajax()) {
             $firstDay = Carbon::now()->firstOfMonth();
             $lastDay = Carbon::now()->lastOfMonth();
-            $start = 'startOfDay';
-            $end = 'endOfDay';
+            $datePoint = 'day';
 
-            return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
+            return Visit::getPropertiesVisits($firstDay, $lastDay, $datePoint);
         }
 
         return view('property.visits');
@@ -35,66 +34,56 @@ class PropertiesVisitsController extends Controller
     public function period()
     {
         if (request()->ajax()) {
-            $start = 'startOfDay';
-            $end = 'endOfDay';
+
+            $datePoint = 'day';
 
             switch (request('period')) {
                 case 'lastSevenDays':
                     $firstDay = Carbon::now()->subDays(6);
                     $lastDay = Carbon::now();
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
 
                 case 'lastWeek':
                     $firstDay = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->startOfWeek();
                     $lastDay = Carbon::now()->subDays(Carbon::now()->dayOfWeek)->endOfWeek();
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
 
                 case 'lastThirtyDays':
                     $firstDay = Carbon::now()->subDays(29);
                     $lastDay = Carbon::now();
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
 
                 case 'lastMonth':
                     $firstDay = Carbon::now()->subMonth()->startOfMonth();
                     $lastDay = Carbon::now()->subMonth()->endOfMonth();
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
 
                 case 'lastYearDays':
                     $firstDay = Carbon::now()->subDays(364);
                     $lastDay = Carbon::now();
-                    $start = 'startOfWeek';
-                    $end = 'endOfWeek';
+                    $datePoint = 'week';
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
 
                 case 'lastYear':
                     $firstDay = Carbon::now()->subYear()->startOfYear();
                     $lastDay = Carbon::now()->subYear()->endOfYear();
-                    $start = 'startOfWeek';
-                    $end = 'endOfWeek';
+                    $datePoint = 'week';
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
             }
 
             if (request('customPeriod')) {
                 $firstDay = (new Carbon(request('customPeriod')['customPeriodStart']))->copy()->addDays(1);
                 $lastDay = (new Carbon(request('customPeriod')['customPeriodEnd']))->copy()->addDays(1);
-
-                return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
             }
-        }
 
-        return $this->period();
+            return Visit::getPropertiesVisits($firstDay, $lastDay, $datePoint);
+        }
     }
 
     /**
@@ -103,6 +92,7 @@ class PropertiesVisitsController extends Controller
     public function changeInterval()
     {
         if (request()->ajax()) {
+
             switch (request('period')) {
                 case 'lastSevenDays':
                     $firstDay = Carbon::now()->subDays(6);
@@ -143,28 +133,22 @@ class PropertiesVisitsController extends Controller
 
             switch (request('interval')) {
                 case 'daily':
-                    $start = 'startOfDay';
-                    $end = 'endOfDay';
+                    $datePoint = 'day';
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
 
                 case 'weekly':
-                    $start = 'startOfWeek';
-                    $end = 'endOfWeek';
+                    $datePoint = 'week';
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
 
                 case 'monthly':
-                    $start = 'startOfMonth';
-                    $end = 'endOfMonth';
+                    $datePoint = 'month';
 
-                    return Visit::getPropertiesVisits($firstDay, $lastDay, $start, $end);
                     break;
             }
-        }
 
-        return $this->interval();
+            return Visit::getPropertiesVisits($firstDay, $lastDay, $datePoint);
+        }
     }
 }
