@@ -4,7 +4,11 @@
 
     export default {
         name: "Visits",
-
+        props: [
+            'period',
+            'customPeriod',
+            'changePeriod',
+        ],
         extends: Bar,
 
         data() {
@@ -12,10 +16,55 @@
                 visits: [],
                 uniqueVisits: [],
                 labels: [],
-                period: '',
                 visitsCountArray: [],
                 uniqueVisitsCountArray: [],
             }
+        },
+
+        watch: {
+            period: function (newPeriod) {
+                axios.post('/visits/period', {period: newPeriod})
+                    .then(response => {
+                        this.getVisitData(response);
+                    })
+                    .catch(error => console.log(error));
+            },
+
+            customPeriod: function (newCustomPeriod) {
+                axios.post('/visits/period', {
+                    customPeriod: {
+                        customPeriodStart: newCustomPeriod[0],
+                        customPeriodEnd: newCustomPeriod[1],
+                    }
+                })
+                    .then(response => {
+                        this.getVisitData(response);
+                    })
+                    .catch(error => console.log(error));
+            },
+
+            changePeriod: function (interval) {
+                axios.post('/visits/interval', {period: this.period, interval: interval})
+                    .then(response => {
+                        this.visits = response.data.visits;
+                        this.uniqueVisits = response.data.uniqueVisits;
+                        this.labels = [];
+
+                        for (let index = 0; index < response.data.dates.length; index++) {
+                            this.labels.push(moment(response.data.dates[index]['start']).format("YYYY/MM/DD"));
+                        }
+
+                        if (interval === 'monthly') {
+                            this.labels = [];
+                            for (let index = 0; index < response.data.dates.length; index++) {
+                                this.labels.push(moment(response.data.dates[index]['start']).format("MMMM"));
+                            }
+                        }
+
+                        this.chartRender(this.labels, this.visits, this.uniqueVisits)
+                    })
+                    .catch(error => console.log(error))
+            },
         },
 
         mounted() {
@@ -59,52 +108,6 @@
                 }
 
                 this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray)
-            },
-
-            callVisits(period) {
-                axios.post('/visits/period', {period: period})
-                    .then(response => {
-                        this.period = period;
-
-                        this.getVisitData(response);
-                    })
-                    .catch(error => console.log(error));
-            },
-
-            callCustomPeriodVisits(customPeriodStart, customPeriodEnd) {
-                axios.post('/visits/period', {
-                    customPeriod: {
-                        customPeriodStart: customPeriodStart,
-                        customPeriodEnd: customPeriodEnd,
-                    }
-                })
-                    .then(response => {
-                        this.getVisitData(response);
-                    })
-                    .catch(error => console.log(error));
-            },
-
-            callChangePeriod(interval) {
-                axios.post('/visits/interval', {period: this.period, interval: interval})
-                    .then(response => {
-                        this.visits = response.data.visits;
-                        this.uniqueVisits = response.data.uniqueVisits;
-                        this.labels = [];
-
-                        for (let index = 0; index < response.data.dates.length; index++) {
-                            this.labels.push(moment(response.data.dates[index]['start']).format("YYYY/MM/DD"));
-                        }
-
-                        if (interval === 'monthly') {
-                            this.labels = [];
-                            for (let index = 0; index < response.data.dates.length; index++) {
-                                this.labels.push(moment(response.data.dates[index]['start']).format("MMMM"));
-                            }
-                        }
-
-                        this.chartRender(this.labels, this.visits, this.uniqueVisits)
-                    })
-                    .catch(error => console.log(error))
             },
 
             getChangePeriodVisits(interval) {

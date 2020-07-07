@@ -152,6 +152,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PeriodSelection",
@@ -165,7 +169,8 @@ __webpack_require__.r(__webpack_exports__);
       changePeriod: '',
       disabledDaily: true,
       disabledWeekly: true,
-      disabledMonthly: true
+      disabledMonthly: true,
+      customPeriod: []
     };
   },
   methods: {
@@ -192,13 +197,13 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
-      this.$refs.child.callVisits(this.period);
     },
     selectCustomPeriod: function selectCustomPeriod(event) {
-      this.$refs.child.callCustomPeriodVisits(event[0], event[1]);
+      this.customPeriod = [event[0], event[1]];
     },
     selectChangePeriod: function selectChangePeriod(event) {
-      this.$refs.child.getChangePeriodVisits(event.target.value);
+      console.log(event);
+      this.changePeriod = event.target.value;
     }
   }
 });
@@ -276,22 +281,77 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Visits",
+  props: ['period', 'customPeriod', 'changePeriod'],
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Bar"],
   data: function data() {
     return {
       visits: [],
       uniqueVisits: [],
       labels: [],
-      period: '',
       visitsCountArray: [],
       uniqueVisitsCountArray: []
     };
   },
+  watch: {
+    period: function period(newPeriod) {
+      var _this = this;
+
+      axios.post('/visits/period', {
+        period: newPeriod
+      }).then(function (response) {
+        _this.getVisitData(response);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    customPeriod: function customPeriod(newCustomPeriod) {
+      var _this2 = this;
+
+      axios.post('/visits/period', {
+        customPeriod: {
+          customPeriodStart: newCustomPeriod[0],
+          customPeriodEnd: newCustomPeriod[1]
+        }
+      }).then(function (response) {
+        _this2.getVisitData(response);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    changePeriod: function changePeriod(interval) {
+      var _this3 = this;
+
+      axios.post('/visits/interval', {
+        period: this.period,
+        interval: interval
+      }).then(function (response) {
+        _this3.visits = response.data.visits;
+        _this3.uniqueVisits = response.data.uniqueVisits;
+        _this3.labels = [];
+
+        for (var index = 0; index < response.data.dates.length; index++) {
+          _this3.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[index]['start']).format("YYYY/MM/DD"));
+        }
+
+        if (interval === 'monthly') {
+          _this3.labels = [];
+
+          for (var _index = 0; _index < response.data.dates.length; _index++) {
+            _this3.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[_index]['start']).format("MMMM"));
+          }
+        }
+
+        _this3.chartRender(_this3.labels, _this3.visits, _this3.uniqueVisits);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
+    var _this4 = this;
 
     axios.get('/visits').then(function (response) {
-      _this.getVisitData(response);
+      _this4.getVisitData(response);
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -325,61 +385,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray);
-    },
-    callVisits: function callVisits(period) {
-      var _this2 = this;
-
-      axios.post('/visits/period', {
-        period: period
-      }).then(function (response) {
-        _this2.period = period;
-
-        _this2.getVisitData(response);
-      })["catch"](function (error) {
-        return console.log(error);
-      });
-    },
-    callCustomPeriodVisits: function callCustomPeriodVisits(customPeriodStart, customPeriodEnd) {
-      var _this3 = this;
-
-      axios.post('/visits/period', {
-        customPeriod: {
-          customPeriodStart: customPeriodStart,
-          customPeriodEnd: customPeriodEnd
-        }
-      }).then(function (response) {
-        _this3.getVisitData(response);
-      })["catch"](function (error) {
-        return console.log(error);
-      });
-    },
-    callChangePeriod: function callChangePeriod(interval) {
-      var _this4 = this;
-
-      axios.post('/visits/interval', {
-        period: this.period,
-        interval: interval
-      }).then(function (response) {
-        _this4.visits = response.data.visits;
-        _this4.uniqueVisits = response.data.uniqueVisits;
-        _this4.labels = [];
-
-        for (var index = 0; index < response.data.dates.length; index++) {
-          _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[index]['start']).format("YYYY/MM/DD"));
-        }
-
-        if (interval === 'monthly') {
-          _this4.labels = [];
-
-          for (var _index = 0; _index < response.data.dates.length; _index++) {
-            _this4.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(response.data.dates[_index]['start']).format("MMMM"));
-          }
-        }
-
-        _this4.chartRender(_this4.labels, _this4.visits, _this4.uniqueVisits);
-      })["catch"](function (error) {
-        return console.log(error);
-      });
     },
     getChangePeriodVisits: function getChangePeriodVisits(interval) {
       if (interval === 'daily') {
@@ -56681,7 +56686,13 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("visits", { ref: "child" })
+      _c("visits", {
+        attrs: {
+          period: _vm.period,
+          customPeriod: _vm.customPeriod,
+          changePeriod: _vm.changePeriod
+        }
+      })
     ],
     1
   )

@@ -50,7 +50,11 @@
             </div>
         </div>
 
-        <visits ref="child"></visits>
+        <visits :period="period"
+                :customPeriod="customPeriod"
+                :changePeriod="changePeriod"
+        >
+        </visits>
     </div>
 </template>
 
@@ -72,6 +76,7 @@
                 disabledDaily: true,
                 disabledWeekly: true,
                 disabledMonthly: true,
+                customPeriod: [],
             }
         },
 
@@ -96,17 +101,16 @@
                         this.datePeriod = [firstDateObj, lastDateObj];
                     })
                     .catch(error => console.log(error));
-
-                this.$refs.child.callVisits(this.period);
             },
 
             selectCustomPeriod(event) {
-                this.$refs.child.callCustomPeriodVisits(event[0], event[1]);
+                this.customPeriod = [event[0], event[1]];
             },
 
             selectChangePeriod(event) {
-                this.$refs.child.getChangePeriodVisits(event.target.value);
-            }
+                console.log(event);
+                this.changePeriod = event.target.value;
+            },
         },
     }
 </script>
