@@ -109,38 +109,6 @@
 
                 this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray)
             },
-
-            getChangePeriodVisits(interval) {
-                if (interval === 'daily') {
-                    this.callChangePeriod(interval)
-                }
-
-                if (interval === 'weekly') {
-                    if (this.period === 'lastWeek') {
-                        let sumVisits = [];
-                        let sumUniqueVisits = [];
-                        sumVisits.push(this.visits.reduce((partial_sum, a) => partial_sum + a, 0));
-                        sumUniqueVisits.push(this.uniqueVisits.reduce((partial_sum, a) => partial_sum + a, 0));
-
-                        this.chartRender([1], sumVisits, sumUniqueVisits)
-                    }
-
-                    this.callChangePeriod(interval)
-                }
-
-                if (interval === 'monthly') {
-                    if (this.period === 'lastMonth') {
-                        let sumVisits = [];
-                        let sumUniqueVisits = [];
-                        sumVisits.push(this.visits.reduce((partial_sum, a) => partial_sum + a, 0));
-                        sumUniqueVisits.push(this.uniqueVisits.reduce((partial_sum, a) => partial_sum + a, 0));
-
-                        this.chartRender([moment().subtract(1, 'months').format('MMMM')], sumVisits, sumUniqueVisits)
-                    }
-
-                    this.callChangePeriod(interval)
-                }
-            }
         },
     }
 </script>

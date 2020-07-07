@@ -202,7 +202,6 @@ __webpack_require__.r(__webpack_exports__);
       this.customPeriod = [event[0], event[1]];
     },
     selectChangePeriod: function selectChangePeriod(event) {
-      console.log(event);
       this.changePeriod = event.target.value;
     }
   }
@@ -385,46 +384,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.chartRender(this.labels, this.visitsCountArray, this.uniqueVisitsCountArray);
-    },
-    getChangePeriodVisits: function getChangePeriodVisits(interval) {
-      if (interval === 'daily') {
-        this.callChangePeriod(interval);
-      }
-
-      if (interval === 'weekly') {
-        if (this.period === 'lastWeek') {
-          var sumVisits = [];
-          var sumUniqueVisits = [];
-          sumVisits.push(this.visits.reduce(function (partial_sum, a) {
-            return partial_sum + a;
-          }, 0));
-          sumUniqueVisits.push(this.uniqueVisits.reduce(function (partial_sum, a) {
-            return partial_sum + a;
-          }, 0));
-          this.chartRender([1], sumVisits, sumUniqueVisits);
-        }
-
-        this.callChangePeriod(interval);
-      }
-
-      if (interval === 'monthly') {
-        if (this.period === 'lastMonth') {
-          var _sumVisits = [];
-          var _sumUniqueVisits = [];
-
-          _sumVisits.push(this.visits.reduce(function (partial_sum, a) {
-            return partial_sum + a;
-          }, 0));
-
-          _sumUniqueVisits.push(this.uniqueVisits.reduce(function (partial_sum, a) {
-            return partial_sum + a;
-          }, 0));
-
-          this.chartRender([moment__WEBPACK_IMPORTED_MODULE_1___default()().subtract(1, 'months').format('MMMM')], _sumVisits, _sumUniqueVisits);
-        }
-
-        this.callChangePeriod(interval);
-      }
     }
   }
 });

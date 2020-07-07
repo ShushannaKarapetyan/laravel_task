@@ -108,7 +108,6 @@
             },
 
             selectChangePeriod(event) {
-                console.log(event);
                 this.changePeriod = event.target.value;
             },
         },
