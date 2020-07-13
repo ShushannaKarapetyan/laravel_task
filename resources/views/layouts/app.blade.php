@@ -7,6 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{--<meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}">--}}
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->

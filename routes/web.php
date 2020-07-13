@@ -9,6 +9,9 @@ Route::get('/', 'LandingController@index');
 
 Auth::routes();
 
+Route::get('login/google', 'Auth\LoginController@redirectToProvider');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::middleware('auth')->group(function () {
     Route::get('home', 'HomeController@index')->name('home');
 
@@ -52,8 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::post('districtState', 'ZipCodesController@getDistrictState');
 
     Route::get('visits', 'PropertiesVisitsController@index');
-    Route::post('visits/period','PropertiesVisitsController@period');
-    Route::post('visits/interval','PropertiesVisitsController@changeInterval');
+    Route::post('visits/period', 'PropertiesVisitsController@period');
+    Route::post('visits/interval', 'PropertiesVisitsController@changeInterval');
 });
 
 

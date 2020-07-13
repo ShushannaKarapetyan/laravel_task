@@ -6,6 +6,7 @@
             <div class="col-md-8">
                 <div class="card" style="margin: 50px 0 50px 0;">
                     <div class="card-header">{{ __('Login') }}</div>
+
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
@@ -71,6 +72,14 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+
+                    <div class="google-login" style="margin-bottom: 20px">
+                        <div class="col-md-8 offset-md-2">
+                            <a href="{{ url('login/google') }}" class="btn btn-md btn-primary btn-block">
+                                <strong>Login With Google</strong>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
