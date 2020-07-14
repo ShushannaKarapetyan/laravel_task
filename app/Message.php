@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Message extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'project_id',
+        'user_id',
+        'body',
+    ];
 
     /**
      * @return BelongsTo

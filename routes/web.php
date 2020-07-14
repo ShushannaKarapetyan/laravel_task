@@ -58,5 +58,3 @@ Route::middleware('auth')->group(function () {
     Route::post('visits/period', 'PropertiesVisitsController@period');
     Route::post('visits/interval', 'PropertiesVisitsController@changeInterval');
 });
-
-

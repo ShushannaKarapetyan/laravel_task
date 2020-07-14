@@ -15,8 +15,11 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected array $fillable = [
-        'name', 'email', 'password',
+    protected $fillable = [
+        'name',
+        'is_admin',
+        'email',
+        'password',
     ];
 
     /**
@@ -68,6 +71,6 @@ class User extends Authenticatable
      */
     public function routeNotificationForTelegram()
     {
-        return 669738190;
+        return config('services.telegram-bot-api.chat_id');
     }
 }

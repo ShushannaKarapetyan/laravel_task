@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'cover_image',
+        'release_date',
+        'release_date_country',
+        'rating',
+        'category',
+    ];
 }

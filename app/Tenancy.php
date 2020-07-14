@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Tenancy extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'property_id',
+        'tenant_id',
+        'start_date',
+        'end_date',
+        'monthly_rent',
+    ];
 
     /**
      * @return BelongsTo

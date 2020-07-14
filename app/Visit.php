@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class Visit extends Model
 {
-    protected array $fillable = ['ip'];
+    protected $fillable = [
+        'ip',
+    ];
 
     /**
      * @param $firstDay

@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Property extends Model
 {
-    protected $guarded = [];
-    protected array $fillable = [
+    protected $fillable = [
         'user_id',
         'name_en',
         'name_ru',

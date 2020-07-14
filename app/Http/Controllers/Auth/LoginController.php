@@ -13,17 +13,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
     /**
@@ -70,6 +59,14 @@ class LoginController extends Controller
 
         if ($existingUser) {
             auth()->login($existingUser, true);
+        } else {
+            $newUser = User::create([
+                'name' => $user->name,
+                'is_admin' => false,
+                'email' => $user->email,
+            ]);
+
+            auth()->login($newUser, true);
         }
 
         return redirect()->to('/home');
