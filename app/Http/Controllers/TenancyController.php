@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TenancyRequest;
 use App\Property;
+use App\Services\PdfDataLoader;
 use App\Tenancy;
 use App\Tenant;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -21,7 +23,8 @@ class TenancyController extends Controller
     public function index()
     {
         $locale = Cookie::get('locale', 'en');
-        $tenancies = Tenancy::where('user_id', auth()->id())->with('tenant', 'property')->paginate(3);
+        $tenancies = Tenancy::where('user_id', auth()->id())
+            ->with('tenant', 'property')->paginate(3);
 
         if (request()->ajax()) {
             return Response::json([
@@ -69,11 +72,17 @@ class TenancyController extends Controller
                 'start_date',
                 'end_date',
                 'monthly_rent',
-            ]) + ['user_id' => $request->user()->id];
+            ]) + [
+                'user_id' => $request->user()->id,
+                'invoice' => 'invoice_' . time(),
+            ];
 
         Tenancy::create($tenancyData);
 
-        return ["message" => 'Property Created'];
+        Storage::put("invoices/invoice_" . time() . ".pdf",
+            PdfDataLoader::loadPdf($request)->output());
+
+        return ["message" => 'Tenancy Created'];
     }
 
     /**
@@ -142,7 +151,7 @@ class TenancyController extends Controller
 
         $tenancy->update($tenancyData);
 
-        return ["message" => 'Property Updated'];
+        return ["message" => 'Tenancy Updated'];
     }
 
     /**
@@ -156,6 +165,21 @@ class TenancyController extends Controller
 
         $tenancy->delete();
 
-        return ["message" => 'Property Updated'];
+        return ["message" => 'Tenancy Deleted'];
+    }
+
+    /**
+     * @param $invoice
+     * @return mixed
+     * //@throws AuthorizationException
+     */
+    public function pdfStream($invoice)
+    {
+        $tenancy = Tenancy::where('invoice', $invoice)->first();
+
+        $this->authorize('view', $tenancy);
+
+        return PdfDataLoader::loadPdf($tenancy)
+            ->stream("invoices/invoice_" . time() . ".pdf");
     }
 }

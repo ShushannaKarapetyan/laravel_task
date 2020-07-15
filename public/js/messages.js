@@ -31874,7 +31874,7 @@ if(false) {}
     var x, y, space = display.lineSpace.getBoundingClientRect();
     // Fails unpredictably on IE[67] when mouse is dragged around quickly.
     try { x = e.clientX - space.left; y = e.clientY - space.top; }
-    catch (e) { return null }
+    catch (e$1) { return null }
     var coords = coordsChar(cm, x, y), line;
     if (forRect && coords.xRel > 0 && (line = getLine(cm.doc, coords.line).text).length == coords.ch) {
       var colDiff = countColumn(line, line.length, cm.options.tabSize) - line.length;
@@ -35459,7 +35459,7 @@ if(false) {}
           cm.display.input.focus();
         }
       }
-      catch(e){}
+      catch(e$1){}
     }
   }
 
@@ -36511,7 +36511,7 @@ if(false) {}
       mY = e.touches[0].clientY;
     } else {
       try { mX = e.clientX; mY = e.clientY; }
-      catch(e) { return false }
+      catch(e$1) { return false }
     }
     if (mX >= Math.floor(cm.display.gutters.getBoundingClientRect().right)) { return false }
     if (prevent) { e_preventDefault(e); }
@@ -36611,7 +36611,7 @@ if(false) {}
       for (var i = newBreaks.length - 1; i >= 0; i--)
         { replaceRange(cm.doc, val, newBreaks[i], Pos(newBreaks[i].line, newBreaks[i].ch + val.length)); }
     });
-    option("specialChars", /[\u0000-\u001f\u007f-\u009f\u00ad\u061c\u200b-\u200f\u2028\u2029\ufeff\ufff9-\ufffc]/g, function (cm, val, old) {
+    option("specialChars", /[\u0000-\u001f\u007f-\u009f\u00ad\u061c\u200b-\u200c\u200e\u200f\u2028\u2029\ufeff\ufff9-\ufffc]/g, function (cm, val, old) {
       cm.state.specialChars = new RegExp(val.source + (val.test("\t") ? "" : "|\t"), "g");
       if (old != Init) { cm.refresh(); }
     });
@@ -38685,7 +38685,7 @@ if(false) {}
 
   addLegacyProps(CodeMirror);
 
-  CodeMirror.version = "5.54.0";
+  CodeMirror.version = "5.55.0";
 
   return CodeMirror;
 

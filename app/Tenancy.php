@@ -15,6 +15,7 @@ class Tenancy extends Model
         'start_date',
         'end_date',
         'monthly_rent',
+        'invoice',
     ];
 
     /**

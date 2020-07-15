@@ -601,6 +601,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Tenancies",
@@ -2332,6 +2338,24 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(tenancy.monthly_rent))]),
                           _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "/invoices/" + tenancy.invoice,
+                                  target: "_blank"
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-file-pdf",
+                                  staticStyle: { "font-size": "20px" }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
                           _c(
                             "td",
                             { staticClass: "d-flex justify-content-between" },
@@ -2526,6 +2550,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("End Date")]),
         _vm._v(" "),
         _c("th", [_vm._v("Monthly Rent")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Invoice")]),
         _vm._v(" "),
         _c("th", [_vm._v("Actions")])
       ])

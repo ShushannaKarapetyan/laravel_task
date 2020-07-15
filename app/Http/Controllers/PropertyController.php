@@ -68,8 +68,7 @@ class PropertyController extends Controller
 
         Property::create($propertyData);
 
-        $pdf = PDF::loadView('pdf');
-        $pdf->save('message.pdf');
+        PDF::loadView('pdf')->save('message.pdf');
 
         if (Property::count() % 10 === 0) {
             StoredTenProperties::dispatch(config('mails.mails'));

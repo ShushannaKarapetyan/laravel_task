@@ -21,6 +21,7 @@ class CreateTenanciesTable extends Migration
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->double('monthly_rent');
+            $table->string('invoice')->nullable();
             $table->timestamps();
 
 

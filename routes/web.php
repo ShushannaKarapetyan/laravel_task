@@ -57,4 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::get('visits', 'PropertiesVisitsController@index');
     Route::post('visits/period', 'PropertiesVisitsController@period');
     Route::post('visits/interval', 'PropertiesVisitsController@changeInterval');
+
+    Route::get('/invoices/{invoice}', 'TenancyController@pdfStream')->name('pdfStream');
 });
