@@ -74,7 +74,7 @@ class TenancyController extends Controller
                 'monthly_rent',
             ]) + [
                 'user_id' => $request->user()->id,
-                'invoice' => 'invoice_' . time(),
+                'invoice' => 'invoice_' . time() . '.pdf',
             ];
 
         Tenancy::create($tenancyData);
@@ -169,17 +169,25 @@ class TenancyController extends Controller
     }
 
     /**
-     * @param $invoice
+     * @param $tenancyId
      * @return mixed
-     * //@throws AuthorizationException
+     * @throws AuthorizationException
      */
-    public function pdfStream($invoice)
+    public function showPdf($tenancyId)
     {
-        $tenancy = Tenancy::where('invoice', $invoice)->first();
+        $tenancy = Tenancy::where('id', $tenancyId)->first();
 
         $this->authorize('view', $tenancy);
 
-        return PdfDataLoader::loadPdf($tenancy)
-            ->stream("invoices/invoice_" . time() . ".pdf");
+        $filePath = storage_path('app/invoices/' . $tenancy->invoice);
+
+        if (!file_exists($filePath)) {
+            return back();
+        }
+
+        return response()->file($filePath, [
+                'Content-Disposition' => 'inline; filename="' . $tenancy->invoice . '"'
+            ]
+        );
     }
 }

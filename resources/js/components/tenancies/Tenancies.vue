@@ -30,7 +30,7 @@
                                 <td>{{ new Date(tenancy.end_date).toLocaleDateString() }}</td>
                                 <td>{{ tenancy.monthly_rent }}</td>
                                 <td>
-                                    <a :href="'/invoices/' + tenancy.invoice" target="_blank">
+                                    <a :href="'/tenancies/' + tenancy.id + '/invoice'" target="_blank">
                                         <i class="far fa-file-pdf" style="font-size: 20px"></i>
                                     </a>
                                 </td>

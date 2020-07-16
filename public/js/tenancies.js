@@ -2343,7 +2343,7 @@ var render = function() {
                               "a",
                               {
                                 attrs: {
-                                  href: "/invoices/" + tenancy.invoice,
+                                  href: "/tenancies/" + tenancy.id + "/invoice",
                                   target: "_blank"
                                 }
                               },
